@@ -1,0 +1,29 @@
+.login {
+  padding: 1em;
+  font-size: 2rem;
+}
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+.login__email,
+.login__password,
+.login__submit {
+  width: 80%;
+  margin: 0 auto;
+}
+.login__email input,
+.login__password input {
+  display: block;
+  width: 100%;
+  padding: 0.25em;
+  font-size: 2rem;
+}
+.login__submit {
+  padding: 0.25em;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+.login__form > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
