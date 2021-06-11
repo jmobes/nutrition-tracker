@@ -1,5 +1,7 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
+const users = require("./routes/users");
 require("dotenv").config();
 
 mongoose
@@ -10,3 +12,10 @@ mongoose
   })
   .then(() => console.log("Connected to nutrition-tracker db..."))
   .catch(() => console.log("Could not connect to database"));
+
+app.use(express.json());
+
+app.use("/api/users", users);
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`Listening on port ${port}`));

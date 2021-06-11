@@ -1,6 +1,7 @@
 .login {
   padding: 1em;
   font-size: 2rem;
+  margin-top: 5rem;
 }
 .login__form {
   display: flex;
