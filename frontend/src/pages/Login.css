@@ -19,7 +19,7 @@
 .login__submit {
   padding: 0.25em;
   font-size: 2rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 .login__form > *:not(:last-child) {
   margin-bottom: 1rem;
