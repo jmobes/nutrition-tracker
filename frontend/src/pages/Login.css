@@ -6,10 +6,6 @@
 .login__form {
   display: flex;
   flex-direction: column;
-}
-.login__email,
-.login__password,
-.login__submit {
   width: 80%;
   margin: 0 auto;
 }
@@ -41,4 +37,20 @@
 .login__extras p span {
   display: block;
   color: var(--color-primary);
+}
+
+@media (min-width: 600px) {
+  .login__form {
+    width: 60%;
+  }
+}
+@media (min-width: 950px) {
+  .login__form {
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .login__form {
+    width: 40%;
+  }
 }
