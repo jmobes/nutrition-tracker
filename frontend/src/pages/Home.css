@@ -1,0 +1,37 @@
+.home__title {
+  font-weight: bold;
+  font-size: 4rem;
+  padding: 2rem;
+}
+.home__message {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  padding: 0rem 2rem;
+}
+.home__button__ctn {
+  padding: 0rem 2rem;
+}
+.home__button {
+  width: 100%;
+  padding: 0.5em 1em;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+}
+.home__footer {
+  margin-top: 3rem;
+  background: #4caf50;
+}
+.home__image {
+  max-width: 100%;
+  display: block;
+}
+.home__caption {
+  color: #000;
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 2rem;
+}
