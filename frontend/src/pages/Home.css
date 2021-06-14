@@ -1,0 +1,60 @@
+.home__title {
+  font-weight: bold;
+  font-size: 4rem;
+  padding: 2rem;
+}
+.home__message {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  padding: 0rem 2rem;
+}
+.home__button__ctn {
+  padding: 0rem 2rem;
+  margin-bottom: 3rem;
+}
+.home__button {
+  width: 100%;
+  padding: 0.5em 1em;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 5px;
+}
+.home__button:hover {
+  cursor: pointer;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4) 0 0);
+}
+.home__footer {
+  margin-top: 3rem;
+}
+.home__image {
+  max-width: 100%;
+  display: block;
+}
+.home__caption {
+  color: #000;
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 2rem;
+}
+
+@media (min-width: 500px) {
+  .home {
+    max-width: 500px;
+    margin: auto;
+  }
+}
+@media (min-width: 700px) {
+  .home__title {
+    font-size: 6rem;
+  }
+  .home__message {
+    font-size: 3rem;
+  }
+  .home__caption {
+    font-size: 3.5rem;
+  }
+}

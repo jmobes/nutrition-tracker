@@ -1,0 +1,56 @@
+.login {
+  padding: 1em;
+  font-size: 2rem;
+  margin-top: 5rem;
+}
+.login__form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+.login__email input,
+.login__password input {
+  display: block;
+  width: 100%;
+  padding: 0.25em;
+  font-size: 2rem;
+}
+.login__submit {
+  padding: 0.25em;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+.login__form > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.login__extras {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  text-align: center;
+}
+.login__extras p:first-child {
+  margin-bottom: 3rem;
+  color: var(--color-primary);
+}
+.login__extras p span {
+  display: block;
+  color: var(--color-primary);
+}
+
+@media (min-width: 600px) {
+  .login__form {
+    width: 60%;
+  }
+}
+@media (min-width: 950px) {
+  .login__form {
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .login__form {
+    width: 40%;
+  }
+}

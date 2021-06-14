@@ -1,0 +1,15 @@
+.logInOut__nav {
+  display: flex;
+  list-style: none;
+  justify-content: flex-end;
+}
+.logInOut__nav__item:first-child {
+  margin-right: 1rem;
+}
+.logInOut__nav__item:first-child::after {
+  content: "|";
+  color: #fff;
+  opacity: 0.5;
+  width: 1px;
+  margin-left: 1rem;
+}
