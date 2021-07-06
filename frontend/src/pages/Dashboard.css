@@ -2,6 +2,7 @@
   padding-top: 2rem;
 }
 .dashboard__summary {
+  background-color: rgb(246, 246, 246);
 }
 .dashboard__summary__title {
   background-color: rgb(10, 82, 130);

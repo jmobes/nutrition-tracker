@@ -12,6 +12,11 @@
   justify-content: space-between;
   padding: 1rem;
 }
+
+.invert {
+  background: #0072bc;
+  color: #fff;
+}
 @media (min-width: 700px) {
   .header__top {
     padding: 1rem 30%;
