@@ -2,17 +2,21 @@
   display: flex;
   justify-content: space-between;
   background: var(--color-primary);
-  padding: 1rem 2rem;
+  padding: 1rem;
 }
 ul {
   list-style: none;
 }
 .navigation__list li {
   color: #fff;
+  font-size: 1.5rem;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 700px) {
   .navigation__list {
     padding: 1rem 30%;
+  }
+  .navigation__list li {
+    font-size: 2rem;
   }
 }

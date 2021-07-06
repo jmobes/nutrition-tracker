@@ -4,12 +4,12 @@
   justify-content: flex-end;
 }
 .logInOut__nav__item:first-child {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 .logInOut__nav__item:first-child::after {
   content: "|";
-  color: #fff;
+  color: rgba(0, 114, 188, 0.6);
   opacity: 0.5;
   width: 1px;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }

@@ -1,0 +1,11 @@
+.dashboard {
+  padding-top: 2rem;
+}
+.dashboard__summary {
+}
+.dashboard__summary__title {
+  background-color: rgb(10, 82, 130);
+  font-size: 1.4rem;
+  color: #fff;
+  padding: 1rem;
+}
