@@ -2,12 +2,14 @@
   font-size: 2rem;
   color: #fff;
   background: var(--color-primary);
-  padding: 1rem 2rem;
   font-family: "Staatliches", cursive;
   text-align: center;
+}
+.header__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem 30%;
 }
 @media (min-width: 900px) {
   .header {

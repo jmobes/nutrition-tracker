@@ -4,13 +4,11 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import Navigation from "./components/Navigation";
 
 const App = () => {
   return (
     <Router>
       <Header />
-      <Navigation />
       <Switch>
         <Route exact path="/">
           <Home />
