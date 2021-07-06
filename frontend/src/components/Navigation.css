@@ -1,13 +1,18 @@
 .navigation__list {
   display: flex;
-  justify-content: flex-start;
-  background: #fff;
-  padding: 1rem 30%;
+  justify-content: space-between;
+  background: var(--color-primary);
+  padding: 1rem 2rem;
 }
 ul {
   list-style: none;
 }
 .navigation__list li {
-  color: var(--color-primary);
-  padding-right: 5rem;
+  color: #fff;
+}
+
+@media (min-width: 900px) {
+  .navigation__list {
+    padding: 1rem 30%;
+  }
 }
