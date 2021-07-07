@@ -45,3 +45,15 @@
   padding: 1rem 2rem;
   margin-top: 0.5rem;
 }
+.dashboard__summary__content__bottom__calculation {
+  padding: 0rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  text-align: center;
+}
+.dashboard__summary__content__bottom__calculation span {
+  display: block;
+  color: rgb(153, 153, 153);
+  font-size: 1.25rem;
+}

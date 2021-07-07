@@ -14,7 +14,7 @@ const Home = () => {
         </div>
       </div>
       <div className="home__col--2">
-        <img className="home__image" src="images/home.jpeg" />
+        <img className="home__image" src="images/home.jpeg" alt="pic" />
       </div>
       <p className="home__caption">
         Searching foods is easy with the Food Data Central Database.

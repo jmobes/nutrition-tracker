@@ -36,8 +36,14 @@ const Dashboard = (props) => {
             <p className="dashboard__summary__content__bottom__calculation__food">
               0 <span>FOOD</span>
             </p>
+            <p className="dashboard__summary__content__bottom__calculation__operator">
+              -
+            </p>
             <p className="dashboard__summary__content__bottom__calculation__exercise">
               0 <span>EXERCISE</span>
+            </p>
+            <p className="dashboard__summary__content__bottom__calculation__operator">
+              =
             </p>
             <p className="dashboard__summary__content__bottom__calculation__net">
               0 <span>NET</span>
