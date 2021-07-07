@@ -13,3 +13,35 @@
 .dashboard__summary__content__top {
   display: flex;
 }
+.dashboard__summary__content__top__picture {
+  padding: 1rem;
+}
+.dashboard__summary__content__top__info {
+  padding: 1rem;
+}
+.dashboard__summary__content__top__info__remaining {
+  font-size: 1.25rem;
+  text-align: center;
+}
+.dashboard__summary__content__top__info__remaining span {
+  color: rgb(10, 82, 130);
+  font-weight: 700;
+}
+.dashboard__summary__content__top__info__main {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard__summary__content__top__info__main__calories {
+  font-size: 3rem;
+  color: #85c400;
+  font-weight: 700;
+  align-self: center;
+}
+.dashboard__btn {
+  background-color: rgb(235, 235, 235);
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 5px;
+  font-size: 1.3rem;
+  padding: 1rem 2rem;
+  margin-top: 0.5rem;
+}

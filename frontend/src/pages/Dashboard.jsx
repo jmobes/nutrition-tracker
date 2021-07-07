@@ -20,28 +20,28 @@ const Dashboard = (props) => {
                 <p className="dashboard__summary__content__top__info__main__calories">
                   1800
                 </p>
-                <button className="dashboard__summary__content__top__info__main__exercise">
+                <button className="dashboard__btn dashboard__summary__content__top__info__main__exercise">
                   Add Exercise
                 </button>
-                <button className="dashboard__summary__content__top__info__main__food">
+                <button className="dashboard__btn dashboard__summary__content__top__info__main__food">
                   Add Food
                 </button>
               </div>
             </div>
-            <div className="dashboard__summary__content__top__calculation">
-              <p className="dashboard__summary__content__top__calculation__total">
-                1800 <span>GOAL</span>
-              </p>
-              <p className="dashboard__summary__content__top__calculation__food">
-                0 <span>FOOD</span>
-              </p>
-              <p className="dashboard__summary__content__top__calculation__exercise">
-                0 <span>EXERCISE</span>
-              </p>
-              <p className="dashboard__summary__content__top__calculation__net">
-                0 <span>NET</span>
-              </p>
-            </div>
+          </div>
+          <div className="dashboard__summary__content__bottom__calculation">
+            <p className="dashboard__summary__content__bottom__calculation__total">
+              1800 <span>GOAL</span>
+            </p>
+            <p className="dashboard__summary__content__bottom__calculation__food">
+              0 <span>FOOD</span>
+            </p>
+            <p className="dashboard__summary__content__bottom__calculation__exercise">
+              0 <span>EXERCISE</span>
+            </p>
+            <p className="dashboard__summary__content__bottom__calculation__net">
+              0 <span>NET</span>
+            </p>
           </div>
         </div>
       </div>
