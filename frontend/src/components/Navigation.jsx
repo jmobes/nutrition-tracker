@@ -4,10 +4,10 @@ const Navigation = () => {
   return (
     <nav className="navigation">
       <ul className="navigation__list">
-        <li className="navigation__item">dashboard</li>
-        <li className="navigation__item">goals</li>
-        <li className="navigation__item">diary</li>
-        <li className="navigation__item">progress</li>
+        <li className="navigation__item">Dashboard</li>
+        <li className="navigation__item">Goals</li>
+        <li className="navigation__item">Diary</li>
+        <li className="navigation__item">Progress</li>
       </ul>
     </nav>
   );

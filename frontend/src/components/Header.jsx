@@ -2,11 +2,9 @@ import "./Header.css";
 import Navigation from "./Navigation";
 import LogInOut from "./LogInOut";
 
-const Header = (props) => {
-  const styles = props.styles;
-
+const Header = () => {
   return (
-    <header className={`header ${props.styles}`}>
+    <header className="header">
       <div className="header__top">
         <h1>Count It</h1>
         <LogInOut />

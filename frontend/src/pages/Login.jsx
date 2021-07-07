@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import "./Login.css";
 
 const Login = (props) => {
-  useEffect(() => {
-    props.setHeaderStyle("invert");
-  }, []);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
