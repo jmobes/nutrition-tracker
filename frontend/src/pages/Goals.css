@@ -4,5 +4,34 @@
 .goals__title {
   color: rgb(10, 82, 130);
   border-bottom: 2px solid rgba(10, 82, 130, 0.15);
-  padding-bottom: 0.5rem;
+  margin-left: 1rem;
+  font-size: 1.75rem;
+}
+.goals__description {
+  padding: 1rem;
+  font-size: 1.25rem;
+}
+.goals__tdee {
+  padding-left: 1rem;
+  font-size: 1.25rem;
+}
+.goals__tables {
+  padding: 2rem 0;
+}
+.goals__tables__calories__header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(3, 81, 132);
+  padding: 1rem;
+}
+.goals__tables__calories__header__title {
+  color: #fff;
+  font-size: 1.5rem;
+}
+.goals__tables__button {
+  background-color: rgb(81, 163, 81);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
 }
