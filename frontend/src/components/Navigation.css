@@ -1,8 +1,12 @@
+.navigation {
+  background: var(--color-primary);
+}
 .navigation__list {
   display: flex;
   justify-content: space-between;
-  background: var(--color-primary);
   padding: 1rem;
+  max-width: 100rem;
+  margin: 0 auto;
 }
 ul {
   list-style: none;
@@ -14,7 +18,7 @@ ul {
 
 @media (min-width: 700px) {
   .navigation__list {
-    padding: 1rem 30%;
+    padding: 1rem 10rem;
   }
   .navigation__list li {
     font-size: 1.75rem;
