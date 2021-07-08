@@ -49,6 +49,29 @@ const Dashboard = (props) => {
               0 <span>NET</span>
             </p>
           </div>
+          <div className="dashboard__summary__content__bar">
+            <div className="dashboard__summary__content__bar__value"></div>
+          </div>
+          <p className="dashboard__summary__content__calorie__value">
+            1000 calories
+          </p>
+        </div>
+      </div>
+
+      <div className="dashboard__feed">
+        <div className="dashboard__feed__post">
+          <h4 className="dashboard__feed__post__title">News Feed</h4>
+          <div className="dashboard__feed__post__content">
+            <textarea
+              className="dashboard__feed__post__content__text"
+              name=""
+              id=""
+              placeholder="What's on your mind?"
+            ></textarea>
+            <button className="dashboard__feed__post__content__btn">
+              Share
+            </button>
+          </div>
         </div>
       </div>
     </section>
