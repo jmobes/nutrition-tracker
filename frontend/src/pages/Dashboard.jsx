@@ -59,18 +59,35 @@ const Dashboard = (props) => {
       </div>
 
       <div className="dashboard__feed">
-        <div className="dashboard__feed__post">
-          <h4 className="dashboard__feed__post__title">News Feed</h4>
-          <div className="dashboard__feed__post__content">
+        <div className="dashboard__feed__create">
+          <h4 className="dashboard__feed__create__title">News Feed</h4>
+          <div className="dashboard__feed__create__content">
             <textarea
-              className="dashboard__feed__post__content__text"
+              className="dashboard__feed__create__content__text"
               name=""
               id=""
               placeholder="What's on your mind?"
             ></textarea>
-            <button className="dashboard__feed__post__content__btn">
+            <button className="dashboard__feed__create__content__btn">
               Share
             </button>
+          </div>
+        </div>
+
+        <div className="dashboard__feed__post">
+          <div className="dashboard__feed__post__header">
+            <img
+              src="https://dakd0cjsv8wfa.cloudfront.net/images/photos/user/0450/856b/3705/583e/8e43/848f/26b1/089bce314a00aed223a49440dafe4788268d_thumb.jpg"
+              alt="profile pic"
+              className="dashboard__feed__post__picture"
+            />
+            <div className="dashboard__feed__post__info">
+              <div className="dashboard__feed__post__info__top">
+                <p className="dashboard__feed__post__user">jmoberly15</p>
+                <p className="dashboard__feed__post__delete">X</p>
+              </div>
+              <p className="dashboard__feed__post__date">1 day ago</p>
+            </div>
           </div>
         </div>
       </div>
