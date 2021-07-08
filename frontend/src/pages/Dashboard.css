@@ -65,18 +65,57 @@
   margin: 1rem;
   background-color: rgb(230, 230, 230);
   height: 2rem;
+  display: flex;
 }
-.dashboard__summary__content__bar__value {
+/* .dashboard__summary__content__bar__value {
   background-color: #85c400;
   width: 60%;
   height: 100%;
+} */
+.dashboard__bar {
+  height: 100%;
+}
+.dashboard__summary__content__bar__carbs {
+  width: 50%;
+  background-color: green;
+}
+.dashboard__summary__content__bar__protein {
+  width: 30%;
+  background-color: blue;
+}
+.dashboard__summary__content__bar__fat {
+  width: 10%;
+  background-color: red;
+}
+.dashboard__summary__content__bar__fat {
 }
 .dashboard__summary__content__calorie__value {
   text-align: center;
   font-size: 1.5rem;
   padding-bottom: 1rem;
 }
-
+.dashboard__summary__content__macros {
+  display: flex;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+.dashboard__summary__content__macros > div {
+  padding: 1rem;
+}
+.dashboard__square {
+  width: 10px;
+  height: 10px;
+  margin: 0 auto;
+}
+.dashboard__summary__content__macros__carbs__square {
+  background-color: green;
+}
+.dashboard__summary__content__macros__protein__square {
+  background-color: blue;
+}
+.dashboard__summary__content__macros__fat__square {
+  background-color: red;
+}
 .dashboard__feed {
   padding-top: 2rem;
 }
