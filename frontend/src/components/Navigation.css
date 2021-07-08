@@ -1,0 +1,26 @@
+.navigation {
+  background: var(--color-primary);
+}
+.navigation__list {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+ul {
+  list-style: none;
+}
+.navigation__list li {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .navigation__list {
+    padding: 1rem 10rem;
+  }
+  .navigation__list li {
+    font-size: 1.75rem;
+  }
+}

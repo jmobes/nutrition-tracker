@@ -1,0 +1,190 @@
+.dashboard {
+  padding-top: 2rem;
+}
+.dashboard__summary {
+  background-color: rgb(246, 246, 246);
+}
+.dashboard__summary__title {
+  background-color: rgb(10, 82, 130);
+  font-size: 1.4rem;
+  color: #fff;
+  padding: 1rem;
+}
+.dashboard__summary__content__top {
+  display: flex;
+}
+.dashboard__summary__content__top__picture {
+  padding: 1rem;
+}
+.dashboard__summary__content__top__info {
+  padding: 1rem;
+}
+.dashboard__summary__content__top__info__remaining {
+  font-size: 1.25rem;
+  text-align: center;
+}
+.dashboard__summary__content__top__info__remaining span {
+  color: rgb(10, 82, 130);
+  font-weight: 700;
+}
+.dashboard__summary__content__top__info__main {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard__summary__content__top__info__main__calories {
+  font-size: 3rem;
+  color: #85c400;
+  font-weight: 700;
+  align-self: center;
+}
+.dashboard__summary__content__top__info__main__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard__btn {
+  background-color: rgb(235, 235, 235);
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 5px;
+  font-size: 1.3rem;
+  padding: 1rem 2rem;
+  margin-top: 0.5rem;
+}
+.dashboard__summary__content__bottom__calculation {
+  padding: 0rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  text-align: center;
+}
+.dashboard__summary__content__bottom__calculation span {
+  display: block;
+  color: rgb(153, 153, 153);
+  font-size: 1.25rem;
+}
+.dashboard__summary__content__bar {
+  margin: 1rem;
+  background-color: rgb(230, 230, 230);
+  height: 2rem;
+}
+.dashboard__summary__content__bar__value {
+  background-color: #85c400;
+  width: 60%;
+  height: 100%;
+}
+.dashboard__summary__content__calorie__value {
+  text-align: center;
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.dashboard__feed {
+  padding-top: 2rem;
+}
+.dashboard__feed__create__title {
+  background-color: rgb(10, 82, 130);
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+.dashboard__feed__create__content {
+  padding: 1rem;
+  background-color: rgb(246, 246, 246);
+}
+.dashboard__feed__create__content__text {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 10rem;
+  display: block;
+  padding: 0.25rem;
+  border-radius: 5px;
+}
+.dashboard__feed__create__content__btn {
+  margin-top: 0.5rem;
+  display: block;
+  background-color: rgb(0, 112, 191);
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 1rem 2rem;
+  margin-left: auto;
+  border-radius: 5px;
+}
+.dashboard__feed__post {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid rgb(242, 242, 242);
+  border-radius: 3px;
+  background-color: rgb(246, 246, 246);
+}
+.dashboard__feed__post__header {
+  display: flex;
+  font-size: 1.5rem;
+}
+.dashboard__feed__post__picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.dashboard__feed__post__info {
+  width: 100%;
+  padding-left: 1rem;
+}
+.dashboard__feed__post__info__top {
+  display: flex;
+  justify-content: space-between;
+}
+.dashboard__feed__post__delete {
+  font-weight: 600;
+  border: none;
+  background: none;
+}
+.dashboard__feed__post__date {
+  font-size: 1rem;
+  color: rgb(137, 137, 137);
+}
+.dashboard__feed__post__text {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 320px) {
+  .dashboard__summary__content__top__info {
+    width: 100%;
+  }
+  .dashboard__summary__content__top__info__main {
+    justify-content: center;
+  }
+}
+@media (min-width: 400px) {
+  .dashboard__summary__content__top__info__main button {
+    max-width: 30rem;
+  }
+}
+@media (min-width: 465px) {
+  .dashboard__summary__content__top__info__main__buttons {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}
+@media (min-width: 700px) {
+  .dashboard {
+    padding: 2rem 10rem;
+  }
+  .dashboard__summary__content__bottom__calculation {
+    justify-content: center;
+  }
+  .dashboard__summary__content__bottom__calculation p {
+    padding: 0 3rem;
+  }
+  .dashboard__summary__content__bar {
+    max-width: 46.2rem;
+    margin: 1rem auto;
+  }
+}
+@media (min-width: 800px) {
+  .dashboard {
+    max-width: 100rem;
+    margin: 0 auto;
+  }
+}
