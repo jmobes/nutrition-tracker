@@ -84,11 +84,14 @@ const Dashboard = (props) => {
             <div className="dashboard__feed__post__info">
               <div className="dashboard__feed__post__info__top">
                 <p className="dashboard__feed__post__user">jmoberly15</p>
-                <p className="dashboard__feed__post__delete">X</p>
+                <button className="dashboard__feed__post__delete">X</button>
               </div>
               <p className="dashboard__feed__post__date">1 day ago</p>
             </div>
           </div>
+          <p className="dashboard__feed__post__text">
+            Follow my journey as I try and get in shape.
+          </p>
         </div>
       </div>
     </section>
