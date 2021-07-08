@@ -1,0 +1,8 @@
+.goals {
+  padding-top: 2rem;
+}
+.goals__title {
+  color: rgb(10, 82, 130);
+  border-bottom: 2px solid rgba(10, 82, 130, 0.15);
+  padding-bottom: 0.5rem;
+}

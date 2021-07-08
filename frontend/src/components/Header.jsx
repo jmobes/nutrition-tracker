@@ -1,5 +1,4 @@
 import "./Header.css";
-import Navigation from "./Navigation";
 import LogInOut from "./LogInOut";
 
 const Header = () => {

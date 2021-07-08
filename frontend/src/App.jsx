@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Goals from "./pages/Goals";
 
 const App = () => {
   return (
@@ -20,6 +21,9 @@ const App = () => {
         </Route>
         <Route path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route path="/goals">
+          <Goals />
         </Route>
       </Switch>
     </Router>
