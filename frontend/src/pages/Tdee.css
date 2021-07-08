@@ -21,9 +21,41 @@
   display: flex;
   align-items: center;
 }
-.tdee__form__gender strong {
-  padding-right: 3rem;
+.form__caption {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
 }
-.tdee__form__gender > *:not(:first-child) {
-  padding: 0 1rem;
+.form__caption strong {
+  flex-basis: 25%;
+}
+.tdee__form__gender__genders {
+  display: flex;
+  align-items: center;
+}
+.tdee__form__gender__genders > * {
+  margin-right: 1rem;
+}
+.form__caption label {
+  flex-basis: 75px;
+}
+.form__caption label input {
+  width: 100%;
+  padding: 0.5rem;
+}
+.tdee__form__height label {
+  margin-right: 0.5rem;
+}
+.tdee__form__activity {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+.tdee__form__activity strong {
+  flex-basis: 25%;
+}
+.tdee__form__activity select {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
