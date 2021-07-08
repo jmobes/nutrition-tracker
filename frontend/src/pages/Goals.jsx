@@ -6,10 +6,14 @@ const Goals = () => {
       <h2 className="goals__title">Your Fitness Goals</h2>
       <p className="goals__description">
         In order to achieve your goals, you need to know your{" "}
-        <strong>Total Daily Energy Expenditure</strong>.
+        <strong>Total Daily Energy Expenditure</strong>. This number tells you
+        how many calories your body needs to maintain its current weight. A good
+        rule of thumb to follow when losing or gaining weight is to eat 500
+        calories less or more than your <strong>TDEE</strong>. Over the span of
+        a week, you will either lose a pound or gain a pound.
       </p>
       <p className="goals__tdee">
-        Calculate your TDEE <a href="#">HERE</a>
+        Calculate your <strong>TDEE</strong> <a href="#">HERE</a>
       </p>
       <div className="goals__tables">
         <div className="goals__tables__calories">

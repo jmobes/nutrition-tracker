@@ -10,6 +10,7 @@
 .goals__description {
   padding: 1rem;
   font-size: 1.25rem;
+  line-height: 1.75;
 }
 .goals__tdee {
   padding-left: 1rem;
@@ -51,4 +52,31 @@
 }
 .goals__tables__micros {
   padding-top: 2rem;
+}
+
+@media (min-width: 500px) {
+  .goals__tables {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 700px) {
+  .goals {
+    padding: 2rem 10rem;
+  }
+  .goals__title {
+    margin: 0;
+  }
+  .goals__description {
+    padding: 1rem 0;
+  }
+  .goals__tdee {
+    padding: 0;
+  }
+}
+@media (min-width: 1000px) {
+  .goals {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
 }
