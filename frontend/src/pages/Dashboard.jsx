@@ -52,11 +52,33 @@ const Dashboard = (props) => {
             </p>
           </div>
           <div className="dashboard__summary__content__bar">
-            <div className="dashboard__summary__content__bar__value"></div>
+            <div className="dashboard__summary__content__bar__carbs dashboard__bar"></div>
+            <div className="dashboard__summary__content__bar__protein dashboard__bar"></div>
+            <div className="dashboard__summary__content__bar__fat dashboard__bar"></div>
           </div>
           <p className="dashboard__summary__content__calorie__value">
             1000 calories
           </p>
+          <div className="dashboard__summary__content__macros">
+            <div className="dashboard__summary__content__macros__carbs">
+              <p className="dashboard__summary__content__macros__carbs__square dashboard__square"></p>
+              <p className="dashboard__summary__content__macros__carbs__text">
+                Carbs
+              </p>
+            </div>
+            <div className="dashboard__summary__content__macros__protein">
+              <p className="dashboard__summary__content__macros__protein__square dashboard__square"></p>
+              <p className="dashboard__summary__content__macros__protein__text">
+                Protein
+              </p>
+            </div>
+            <div className="dashboard__summary__content__macros__fat">
+              <p className="dashboard__summary__content__macros__fat__square dashboard__square"></p>
+              <p className="dashboard__summary__content__macros__fat__text">
+                Fat
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,0 +1,82 @@
+.goals {
+  padding-top: 2rem;
+}
+.goals__title {
+  color: rgb(10, 82, 130);
+  border-bottom: 2px solid rgba(10, 82, 130, 0.15);
+  margin-left: 1rem;
+  font-size: 1.75rem;
+}
+.goals__description {
+  padding: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75;
+}
+.goals__tdee {
+  padding-left: 1rem;
+  font-size: 1.25rem;
+}
+.goals__tables {
+  padding: 2rem 0;
+}
+.goals__tables__calories__header,
+.goals__tables__micros__header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(3, 81, 132);
+  padding: 1rem;
+}
+.goals__tables__calories__header__title,
+.goals__tables__micros__header__title {
+  color: #fff;
+  font-size: 1.5rem;
+}
+.goals__tables__button {
+  background-color: rgb(81, 163, 81);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.goals__tables__calories__row,
+.goals__tables__micros__row {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(246, 246, 246);
+  font-size: 1.25rem;
+  border-bottom: 1px solid rgb(190, 190, 190);
+  border-left: 1px solid rgb(190, 190, 190);
+  border-right: 1px solid rgb(190, 190, 190);
+}
+.goals__tables__micros {
+  padding-top: 2rem;
+}
+
+@media (min-width: 500px) {
+  .goals__tables {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 700px) {
+  .goals {
+    padding: 2rem 10rem;
+  }
+  .goals__title {
+    margin: 0;
+  }
+  .goals__description {
+    padding: 1rem 0;
+  }
+  .goals__tdee {
+    padding: 0;
+  }
+}
+@media (min-width: 1000px) {
+  .goals {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}

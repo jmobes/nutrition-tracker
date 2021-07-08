@@ -5,6 +5,8 @@ import Navigation from "./components/Navigation";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Goals from "./pages/Goals";
+import Tdee from "./pages/Tdee";
 
 const App = () => {
   return (
@@ -20,6 +22,12 @@ const App = () => {
         </Route>
         <Route path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route path="/goals">
+          <Goals />
+        </Route>
+        <Route path="/tdee-calculator">
+          <Tdee />
         </Route>
       </Switch>
     </Router>
