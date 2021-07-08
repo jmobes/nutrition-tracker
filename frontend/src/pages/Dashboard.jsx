@@ -20,12 +20,14 @@ const Dashboard = (props) => {
                 <p className="dashboard__summary__content__top__info__main__calories">
                   1800
                 </p>
-                <button className="dashboard__btn dashboard__summary__content__top__info__main__exercise">
-                  Add Exercise
-                </button>
-                <button className="dashboard__btn dashboard__summary__content__top__info__main__food">
-                  Add Food
-                </button>
+                <div className="dashboard__summary__content__top__info__main__buttons">
+                  <button className="dashboard__btn dashboard__summary__content__top__info__main__exercise">
+                    Add Exercise
+                  </button>
+                  <button className="dashboard__btn dashboard__summary__content__top__info__main__food">
+                    Add Food
+                  </button>
+                </div>
               </div>
             </div>
           </div>

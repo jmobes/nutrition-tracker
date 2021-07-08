@@ -37,6 +37,10 @@
   font-weight: 700;
   align-self: center;
 }
+.dashboard__summary__content__top__info__main__buttons {
+  display: flex;
+  flex-direction: column;
+}
 .dashboard__btn {
   background-color: rgb(235, 235, 235);
   border: 1px solid rgb(210, 210, 210);
@@ -90,7 +94,7 @@
   width: 100%;
   min-width: 100%;
   max-width: 100%;
-  min-height: 5rem;
+  min-height: 10rem;
   display: block;
   padding: 0.25rem;
   border-radius: 5px;
@@ -111,6 +115,7 @@
   padding: 1rem;
   border: 1px solid rgb(242, 242, 242);
   border-radius: 3px;
+  background-color: rgb(246, 246, 246);
 }
 .dashboard__feed__post__header {
   display: flex;
@@ -141,4 +146,45 @@
 .dashboard__feed__post__text {
   padding-top: 1rem;
   font-size: 1.5rem;
+}
+
+@media (min-width: 320px) {
+  .dashboard__summary__content__top__info {
+    width: 100%;
+  }
+  .dashboard__summary__content__top__info__main {
+    justify-content: center;
+  }
+}
+@media (min-width: 400px) {
+  .dashboard__summary__content__top__info__main button {
+    max-width: 30rem;
+  }
+}
+@media (min-width: 465px) {
+  .dashboard__summary__content__top__info__main__buttons {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}
+@media (min-width: 700px) {
+  .dashboard {
+    padding: 2rem 10rem;
+  }
+  .dashboard__summary__content__bottom__calculation {
+    justify-content: center;
+  }
+  .dashboard__summary__content__bottom__calculation p {
+    padding: 0 3rem;
+  }
+  .dashboard__summary__content__bar {
+    max-width: 46.2rem;
+    margin: 1rem auto;
+  }
+}
+@media (min-width: 800px) {
+  .dashboard {
+    max-width: 70rem;
+    margin: 0 auto;
+  }
 }
