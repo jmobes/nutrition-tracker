@@ -56,7 +56,7 @@
 }
 .tdee__form__activity select {
   flex: 1;
-  padding: 0.5rem;
+  padding: 0.75rem 0.5rem;
   font-size: 0.9rem;
   max-width: 450px;
 }
@@ -109,6 +109,7 @@
 @media (min-width: 400px) {
   .tdee__form__activity select {
     font-size: 1.5rem;
+    padding: 0.5rem;
   }
 }
 @media (min-width: 450px) {

@@ -1,0 +1,36 @@
+.diary {
+  padding: 1rem;
+}
+.diary__header {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+}
+.diary__title {
+  font-size: 2rem;
+}
+.diary__header__calendar__buttons {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+.diary__header__calendar__button {
+  background-color: rgb(3, 81, 132);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+}
+.diary__header__calendar__button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+.diary__header__calendar__icon {
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calendar__icon {
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
