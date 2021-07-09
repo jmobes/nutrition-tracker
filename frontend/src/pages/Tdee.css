@@ -58,6 +58,7 @@
   flex: 1;
   padding: 0.5rem;
   font-size: 0.9rem;
+  max-width: 450px;
 }
 .tdee__results {
   padding-top: 2rem;
@@ -88,4 +89,15 @@
 .divider {
   width: 2px;
   background-color: rgba(190, 190, 190, 0.3);
+}
+
+@media (min-width: 300px) {
+  .tdee__form__activity select {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 400px) {
+  .tdee__form__activity select {
+    font-size: 1.5rem;
+  }
 }
