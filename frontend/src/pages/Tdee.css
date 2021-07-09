@@ -90,7 +90,17 @@
   width: 2px;
   background-color: rgba(190, 190, 190, 0.3);
 }
-
+.tdee__form__submit {
+  background-color: rgb(81, 163, 81);
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  display: block;
+  margin: 1rem auto;
+  cursor: pointer;
+}
 @media (min-width: 300px) {
   .tdee__form__activity select {
     font-size: 1rem;

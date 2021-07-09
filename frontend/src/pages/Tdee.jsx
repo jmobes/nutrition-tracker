@@ -57,6 +57,7 @@ const Tdee = () => {
             <option value="athlete">Athlete (2x per day)</option>
           </select>
         </div>
+        <button className="tdee__form__submit">Calculate</button>
       </form>
       <div className="tdee__results">
         <div className="tdee__results__maintenance">
