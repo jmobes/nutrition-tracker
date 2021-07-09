@@ -21,9 +21,95 @@
   display: flex;
   align-items: center;
 }
-.tdee__form__gender strong {
-  padding-right: 3rem;
+.form__caption {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
 }
-.tdee__form__gender > *:not(:first-child) {
-  padding: 0 1rem;
+.form__caption strong {
+  flex-basis: 25%;
+}
+.tdee__form__gender__genders {
+  display: flex;
+  align-items: center;
+}
+.tdee__form__gender__genders > * {
+  margin-right: 1rem;
+}
+.form__caption label {
+  flex-basis: 75px;
+}
+.form__caption label input {
+  width: 100%;
+  padding: 0.5rem;
+}
+.tdee__form__height label {
+  margin-right: 0.5rem;
+}
+.tdee__form__activity {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+.tdee__form__activity strong {
+  flex-basis: 25%;
+}
+.tdee__form__activity select {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  max-width: 450px;
+}
+.tdee__results {
+  padding-top: 2rem;
+}
+.tdee__results__maintenance {
+  border: 1px solid rgb(190, 190, 190);
+  background-color: rgb(246, 246, 246);
+}
+.tdee__results__maintenance__title {
+  background-color: rgb(10, 82, 130);
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+.tdee__results__maintenance__calories {
+  display: flex;
+  text-align: center;
+  justify-content: space-evenly;
+}
+.tdee__results__maintenance__calories p {
+  font-size: 3rem;
+}
+.tdee__results__maintenance__calories span {
+  display: block;
+  font-size: 1.5rem;
+}
+.divider {
+  width: 2px;
+  background-color: rgba(190, 190, 190, 0.3);
+}
+
+@media (min-width: 300px) {
+  .tdee__form__activity select {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 400px) {
+  .tdee__form__activity select {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 450px) {
+  .form__caption strong,
+  .tdee__form__activity strong {
+    flex-basis: 15%;
+  }
+}
+@media (min-width: 700px) {
+  .tdee {
+    max-width: 700px;
+    margin: 0 auto;
+  }
 }

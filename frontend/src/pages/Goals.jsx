@@ -16,6 +16,18 @@ const Goals = () => {
         Calculate your <strong>TDEE</strong> <a href="#">HERE</a>
       </p>
       <div className="goals__tables">
+        <div className="goals__tables__weight">
+          <div className="goals__tables__weight__header">
+            <h3 className="goals__tables__weight__header__title">Weight</h3>
+            <button className="goals__tables__button">Edit</button>
+          </div>
+          <div className="goals__tables__weight__row">
+            <p className="goals__tables__weight__key">
+              <strong>Goal Weight</strong>
+            </p>
+            <p className="goals__tables__weight__value">160 lbs</p>
+          </div>
+        </div>
         <div className="goals__tables__calories">
           <div className="goals__tables__calories__header">
             <h3 className="goals__tables__calories__header__title">

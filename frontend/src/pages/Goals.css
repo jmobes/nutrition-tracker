@@ -20,14 +20,16 @@
   padding: 2rem 0;
 }
 .goals__tables__calories__header,
-.goals__tables__micros__header {
+.goals__tables__micros__header,
+.goals__tables__weight__header {
   display: flex;
   justify-content: space-between;
   background-color: rgb(3, 81, 132);
   padding: 1rem;
 }
 .goals__tables__calories__header__title,
-.goals__tables__micros__header__title {
+.goals__tables__micros__header__title,
+.goals__tables__weight__header__title {
   color: #fff;
   font-size: 1.5rem;
 }
@@ -40,7 +42,8 @@
   font-weight: 600;
 }
 .goals__tables__calories__row,
-.goals__tables__micros__row {
+.goals__tables__micros__row,
+.goals__tables__weight__row {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -50,6 +53,7 @@
   border-left: 1px solid rgb(190, 190, 190);
   border-right: 1px solid rgb(190, 190, 190);
 }
+.goals__tables__calories,
 .goals__tables__micros {
   padding-top: 2rem;
 }
