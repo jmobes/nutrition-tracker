@@ -6,21 +6,15 @@ const Diary = () => {
   return (
     <section className="diary">
       {/* <Calendar /> */}
-      <h3 className="diary__title">Food Diary:</h3>
+      <h3 className="diary__title">Food Diary</h3>
       <div className="diary__header">
         <div className="diary__header__calendar__buttons">
-          <p className="diary__header__calendar__button">&larr;</p>
-          <p className="diary__header__calendar__button">
-            Thursday, July 8, 2021
-          </p>
-          <p className="diary__header__calendar__button">&rarr;</p>
+          <i class="diary__header__calendar__button fas fa-long-arrow-alt-left"></i>
+          <p className="calendar__day">Thursday, July 8, 2021</p>
+          <i class="diary__header__calendar__button fas fa-long-arrow-alt-right"></i>
         </div>
         <div className="diary__header__calendar__icon">
-          <img
-            className="calendar__icon"
-            src="images/icon-calendar.png"
-            alt="calendar icon"
-          />
+          <i class="far fa-calendar-alt"></i>
         </div>
       </div>
     </section>

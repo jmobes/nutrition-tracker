@@ -11,26 +11,35 @@
 }
 .diary__header__calendar__buttons {
   display: flex;
-  align-items: center;
   font-size: 1.5rem;
 }
 .diary__header__calendar__button {
   background-color: rgb(3, 81, 132);
   color: #fff;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
 }
-.diary__header__calendar__button:not(:last-child) {
-  margin-right: 0.5rem;
+i.diary__header__calendar__button {
+  border-radius: 50%;
+}
+.calendar__day {
+  background-color: none;
+  color: rgb(3, 81, 132);
+  padding: 0.25rem;
+  font-weight: 800;
+}
+.diary__header__calendar__buttons > * {
+  margin: 0 0.2rem;
 }
 .diary__header__calendar__icon {
   margin-left: 1rem;
+  font-size: 2.5rem;
+  color: rgba(3, 81, 132, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-.calendar__icon {
-  width: 25px;
-  display: flex;
   justify-content: center;
+}
+i.fas {
+  display: flex;
   align-items: center;
 }
