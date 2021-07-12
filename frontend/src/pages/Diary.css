@@ -89,3 +89,21 @@ td button {
 .fa-minus {
   font-size: 1rem;
 }
+.diary__summary {
+  padding-top: 2rem;
+}
+.diary__summary__totals,
+.diary__summary__goals,
+.diary__summary__remaining,
+.diary__summary__units {
+  display: flex;
+}
+.diary__summary {
+  font-size: 1.3rem;
+}
+.diary__summary table {
+  width: 100%;
+}
+.diary__summary td {
+  background-color: #f6f6f6;
+}

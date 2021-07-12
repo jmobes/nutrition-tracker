@@ -200,6 +200,40 @@ const Diary = () => {
           </table>
         </div>
       </div>
+      <div className="diary__summary">
+        <table>
+          <tr>
+            <td>Totals</td>
+            <td>905</td>
+            <td>93</td>
+            <td>63</td>
+            <td>32</td>
+          </tr>
+          <tr>
+            <td>Your Daily Goal</td>
+            <td>1800</td>
+            <td>225</td>
+            <td>90</td>
+            <td>60</td>
+          </tr>
+          <tr>
+            <td>Remaining</td>
+            <td>895</td>
+            <td>132</td>
+            <td>27</td>
+            <td>28</td>
+          </tr>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td>Calories</td>
+              <td>Carbs</td>
+              <td>Protein</td>
+              <td>Fat</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </section>
   );
 };
