@@ -35,20 +35,26 @@ const Dashboard = (props) => {
             <p className="dashboard__summary__content__bottom__calculation__total">
               1800 <span>GOAL</span>
             </p>
-            <p className="dashboard__summary__content__bottom__calculation__food">
-              0 <span>FOOD</span>
+            <p className="dashboard__summary__content__bottom__calculation__carbs">
+              500 <span>Carbs</span>
             </p>
             <p className="dashboard__summary__content__bottom__calculation__operator">
-              -
+              +
             </p>
-            <p className="dashboard__summary__content__bottom__calculation__exercise">
-              0 <span>EXERCISE</span>
+            <p className="dashboard__summary__content__bottom__calculation__protein">
+              400 <span>Protein</span>
+            </p>
+            <p className="dashboard__summary__content__bottom__calculation__operator">
+              +
+            </p>
+            <p className="dashboard__summary__content__bottom__calculation__fat">
+              100 <span>Fat</span>
             </p>
             <p className="dashboard__summary__content__bottom__calculation__operator">
               =
             </p>
-            <p className="dashboard__summary__content__bottom__calculation__net">
-              0 <span>NET</span>
+            <p className="dashboard__summary__content__bottom__calculation__total">
+              1000 <span>Total</span>
             </p>
           </div>
           <div className="dashboard__summary__content__bar">
