@@ -14,6 +14,7 @@ ul {
 .navigation__list li {
   color: #fff;
   font-size: 1.5rem;
+  font-weight: 700;
 }
 
 @media (min-width: 700px) {

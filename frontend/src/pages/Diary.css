@@ -2,15 +2,20 @@
   padding: 1rem;
 }
 .diary__header {
-  display: flex;
-  align-items: center;
-  padding-top: 1rem;
+  padding-top: 2rem;
 }
 .diary__title {
   font-size: 2rem;
+  color: rgb(10, 82, 130);
+}
+.diary__description {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  padding-top: 1rem;
 }
 .diary__header__calendar__buttons {
   display: flex;
+  justify-content: center;
   font-size: 1.5rem;
 }
 .diary__header__calendar__button {
@@ -31,6 +36,9 @@ i.diary__header__calendar__button {
 .diary__header__calendar__buttons > * {
   margin: 0 0.2rem;
 }
+.diary__header__calendar__button {
+  cursor: pointer;
+}
 .diary__header__calendar__icon {
   margin-left: 1rem;
   font-size: 2.5rem;
@@ -39,7 +47,126 @@ i.diary__header__calendar__button {
   align-items: center;
   justify-content: center;
 }
+.fa-calendar-alt {
+  cursor: pointer;
+}
 i.fas {
   display: flex;
   align-items: center;
+}
+.diary__meal {
+  padding-top: 2rem;
+}
+.diary__meal__title {
+  font-size: 1.5rem;
+  color: rgb(10, 82, 130);
+}
+.diary__meal__table {
+  text-align: left;
+  width: 100%;
+  font-size: 1.3rem;
+}
+.diary__meal__table__header {
+  background-color: rgb(3, 81, 132);
+  color: #fff;
+}
+.diary__meal__table__row {
+  background-color: #f6f6f6;
+}
+.empty__col {
+  background-color: #fff;
+  color: red;
+}
+th,
+td {
+  padding: 0.5rem 0.25rem;
+}
+tfoot tr {
+  color: #0072bf;
+  font-weight: 700;
+}
+td button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: #0072bf;
+  font-weight: 700;
+  border-bottom: 2px solid #0072bf;
+  cursor: pointer;
+}
+.fa-minus {
+  font-size: 1rem;
+  cursor: pointer;
+}
+.diary__summary {
+  padding-top: 2rem;
+}
+.diary__summary__totals,
+.diary__summary__goals,
+.diary__summary__remaining,
+.diary__summary__units {
+  display: flex;
+}
+.diary__summary {
+  font-size: 1.3rem;
+}
+.diary__summary table {
+  width: 100%;
+}
+.diary__summary td {
+  background-color: #f6f6f6;
+}
+td.empty__col {
+  background-color: #fff;
+}
+td.diary__summary__footer {
+  background-color: rgb(3, 81, 132);
+  color: #fff;
+  font-weight: 700;
+}
+.diary__summary table td {
+  padding: 0.5rem 0.25rem;
+}
+.diary span {
+  display: block;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .diary span {
+    display: inline;
+  }
+}
+@media (min-width: 700px) {
+  .diary {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .diary__title {
+    font-size: 3rem;
+    color: rgb(10, 82, 130);
+  }
+  .diary__header__calendar__buttons {
+    font-size: 2rem;
+  }
+  .diary__meal__title {
+    font-size: 2.2rem;
+  }
+  .diary__description {
+    font-size: 2rem;
+    line-height: 1.5;
+    padding-top: 1rem;
+  }
+  .diary__meal__table,
+  table {
+    font-size: 2rem;
+  }
+  td button {
+    font-size: 2rem;
+  }
+  .diary span {
+    font-size: 1.25rem;
+  }
 }
