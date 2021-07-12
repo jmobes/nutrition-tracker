@@ -48,3 +48,41 @@ i.fas {
   display: flex;
   align-items: center;
 }
+.diary__meals {
+  margin-top: 2rem;
+}
+.diary__meal__title {
+  font-size: 1.5rem;
+  color: rgb(10, 82, 130);
+}
+.diary__meal__table {
+  text-align: left;
+  width: 100%;
+  font-size: 1.3rem;
+}
+.diary__meal__table__header {
+  background-color: rgb(3, 81, 132);
+  color: #fff;
+}
+.diary__meal__table__row {
+  background-color: #f6f6f6;
+}
+.empty__col {
+  background-color: #fff;
+  color: red;
+}
+th,
+td {
+  padding: 0.5rem 0.25rem;
+}
+tfoot tr {
+  color: #0072bf;
+  font-weight: 700;
+}
+td button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: #0072bf;
+  font-weight: 700;
+}
