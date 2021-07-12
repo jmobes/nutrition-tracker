@@ -2,15 +2,20 @@
   padding: 1rem;
 }
 .diary__header {
-  display: flex;
-  align-items: center;
   padding-top: 1rem;
 }
 .diary__title {
   font-size: 2rem;
+  color: rgb(10, 82, 130);
+}
+.diary__description {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  padding-top: 1rem;
 }
 .diary__header__calendar__buttons {
   display: flex;
+  justify-content: center;
   font-size: 1.5rem;
 }
 .diary__header__calendar__button {
