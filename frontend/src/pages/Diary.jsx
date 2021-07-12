@@ -31,10 +31,18 @@ const Diary = () => {
             <thead>
               <tr className="diary__meal__table__header">
                 <th>Name</th>
-                <th>Calories</th>
-                <th>Carbs</th>
-                <th>Protein</th>
-                <th>Fat</th>
+                <th>
+                  Calories <span>kcal</span>
+                </th>
+                <th>
+                  Carbs <span>g</span>
+                </th>
+                <th>
+                  Protein <span>g</span>
+                </th>
+                <th>
+                  Fat <span>g</span>
+                </th>
                 <th className="empty__col"></th>
               </tr>
             </thead>
@@ -89,10 +97,18 @@ const Diary = () => {
             <thead>
               <tr className="diary__meal__table__header">
                 <th>Name</th>
-                <th>Calories</th>
-                <th>Carbs</th>
-                <th>Protein</th>
-                <th>Fat</th>
+                <th>
+                  Calories <span>kcal</span>
+                </th>
+                <th>
+                  Carbs <span>g</span>
+                </th>
+                <th>
+                  Protein <span>g</span>
+                </th>
+                <th>
+                  Fat <span>g</span>
+                </th>
                 <th className="empty__col"></th>
               </tr>
             </thead>
@@ -147,10 +163,18 @@ const Diary = () => {
             <thead>
               <tr className="diary__meal__table__header">
                 <th>Name</th>
-                <th>Calories</th>
-                <th>Carbs</th>
-                <th>Protein</th>
-                <th>Fat</th>
+                <th>
+                  Calories <span>kcal</span>
+                </th>
+                <th>
+                  Carbs <span>g</span>
+                </th>
+                <th>
+                  Protein <span>g</span>
+                </th>
+                <th>
+                  Fat <span>g</span>
+                </th>
                 <th className="empty__col"></th>
               </tr>
             </thead>
@@ -232,10 +256,18 @@ const Diary = () => {
           <tfoot>
             <tr>
               <td className="empty__col"></td>
-              <td className="diary__summary__footer">Calories</td>
-              <td className="diary__summary__footer">Carbs</td>
-              <td className="diary__summary__footer">Protein</td>
-              <td className="diary__summary__footer">Fat</td>
+              <td className="diary__summary__footer">
+                Calories <span>kcal</span>
+              </td>
+              <td className="diary__summary__footer">
+                Carbs <span>g</span>
+              </td>
+              <td className="diary__summary__footer">
+                Protein <span>g</span>
+              </td>
+              <td className="diary__summary__footer">
+                Fat <span>g</span>
+              </td>
             </tr>
           </tfoot>
         </table>

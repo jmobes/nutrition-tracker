@@ -36,6 +36,9 @@ i.diary__header__calendar__button {
 .diary__header__calendar__buttons > * {
   margin: 0 0.2rem;
 }
+.diary__header__calendar__button {
+  cursor: pointer;
+}
 .diary__header__calendar__icon {
   margin-left: 1rem;
   font-size: 2.5rem;
@@ -43,6 +46,9 @@ i.diary__header__calendar__button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.fa-calendar-alt {
+  cursor: pointer;
 }
 i.fas {
   display: flex;
@@ -85,9 +91,12 @@ td button {
   font-size: 1.3rem;
   color: #0072bf;
   font-weight: 700;
+  border-bottom: 2px solid #0072bf;
+  cursor: pointer;
 }
 .fa-minus {
   font-size: 1rem;
+  cursor: pointer;
 }
 .diary__summary {
   padding-top: 2rem;
@@ -117,4 +126,47 @@ td.diary__summary__footer {
 }
 .diary__summary table td {
   padding: 0.5rem 0.25rem;
+}
+.diary span {
+  display: block;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .diary span {
+    display: inline;
+  }
+}
+@media (min-width: 700px) {
+  .diary {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .diary__title {
+    font-size: 3rem;
+    color: rgb(10, 82, 130);
+  }
+  .diary__header__calendar__buttons {
+    font-size: 2rem;
+  }
+  .diary__meal__title {
+    font-size: 2.2rem;
+  }
+  .diary__description {
+    font-size: 2rem;
+    line-height: 1.5;
+    padding-top: 1rem;
+  }
+  .diary__meal__table,
+  table {
+    font-size: 2rem;
+  }
+  td button {
+    font-size: 2rem;
+  }
+  .diary span {
+    font-size: 1.25rem;
+  }
 }
