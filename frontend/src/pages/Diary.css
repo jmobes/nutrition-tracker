@@ -107,3 +107,14 @@ td button {
 .diary__summary td {
   background-color: #f6f6f6;
 }
+td.empty__col {
+  background-color: #fff;
+}
+td.diary__summary__footer {
+  background-color: rgb(3, 81, 132);
+  color: #fff;
+  font-weight: 700;
+}
+.diary__summary table td {
+  padding: 0.5rem 0.25rem;
+}

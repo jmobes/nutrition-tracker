@@ -203,21 +203,27 @@ const Diary = () => {
       <div className="diary__summary">
         <table>
           <tr>
-            <td>Totals</td>
+            <td>
+              <strong>Totals</strong>
+            </td>
             <td>905</td>
             <td>93</td>
             <td>63</td>
             <td>32</td>
           </tr>
           <tr>
-            <td>Your Daily Goal</td>
+            <td>
+              <strong>Your Daily Goal</strong>
+            </td>
             <td>1800</td>
             <td>225</td>
             <td>90</td>
             <td>60</td>
           </tr>
           <tr>
-            <td>Remaining</td>
+            <td>
+              <strong>Remaining</strong>
+            </td>
             <td>895</td>
             <td>132</td>
             <td>27</td>
@@ -225,11 +231,11 @@ const Diary = () => {
           </tr>
           <tfoot>
             <tr>
-              <td></td>
-              <td>Calories</td>
-              <td>Carbs</td>
-              <td>Protein</td>
-              <td>Fat</td>
+              <td className="empty__col"></td>
+              <td className="diary__summary__footer">Calories</td>
+              <td className="diary__summary__footer">Carbs</td>
+              <td className="diary__summary__footer">Protein</td>
+              <td className="diary__summary__footer">Fat</td>
             </tr>
           </tfoot>
         </table>
