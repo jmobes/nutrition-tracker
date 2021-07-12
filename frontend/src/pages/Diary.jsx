@@ -24,6 +24,32 @@ const Diary = () => {
           <Calendar />
         </div> */}
       </div>
+      <div className="diary__meals">
+        <div className="diary__meal">
+          <h4 className="diary__meal__title">Breakfast</h4>
+          <div className="diary__meal__table">
+            <div className="diary__meal__table__header">
+              <p className="diary__meal__table__header__item">Name</p>
+              <p className="diary__meal__table__header__item">Calories</p>
+              <p className="diary__meal__table__header__item">Carbs</p>
+              <p className="diary__meal__table__header__item">Protein</p>
+              <p className="diary__meal__table__header__item">Fat</p>
+            </div>
+            <div className="diary__meal__table__food">
+              <div className="diary__meal__table__food__row">
+                <p className="diary__meal__table__food__row">
+                  Skippy Peanut Butter
+                </p>
+                <p className="diary__meal__table__food__row">190</p>
+                <p className="diary__meal__table__food__row">7</p>
+                <p className="diary__meal__table__food__row">7</p>
+                <p className="diary__meal__table__food__row">16</p>
+                <button>Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
