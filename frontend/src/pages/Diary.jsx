@@ -45,7 +45,9 @@ const Diary = () => {
                 <td>7</td>
                 <td>7</td>
                 <td>16</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
               <tr className="diary__meal__table__row">
                 <td>Celery</td>
@@ -53,7 +55,9 @@ const Diary = () => {
                 <td>6</td>
                 <td>1</td>
                 <td>0</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
               <tr className="diary__meal__table__row">
                 <td>Mashed Potatoes</td>
@@ -61,7 +65,9 @@ const Diary = () => {
                 <td>50</td>
                 <td>10</td>
                 <td>8</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
             </tbody>
             <tfoot>
@@ -97,7 +103,9 @@ const Diary = () => {
                 <td>7</td>
                 <td>7</td>
                 <td>16</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
               <tr className="diary__meal__table__row">
                 <td>Celery</td>
@@ -105,7 +113,9 @@ const Diary = () => {
                 <td>6</td>
                 <td>1</td>
                 <td>0</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
               <tr className="diary__meal__table__row">
                 <td>Mashed Potatoes</td>
@@ -113,7 +123,9 @@ const Diary = () => {
                 <td>50</td>
                 <td>10</td>
                 <td>8</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
             </tbody>
             <tfoot>
@@ -149,7 +161,9 @@ const Diary = () => {
                 <td>7</td>
                 <td>7</td>
                 <td>16</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
               <tr className="diary__meal__table__row">
                 <td>Celery</td>
@@ -157,7 +171,9 @@ const Diary = () => {
                 <td>6</td>
                 <td>1</td>
                 <td>0</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
               <tr className="diary__meal__table__row">
                 <td>Mashed Potatoes</td>
@@ -165,7 +181,9 @@ const Diary = () => {
                 <td>50</td>
                 <td>10</td>
                 <td>8</td>
-                <td className="empty__col">-</td>
+                <td className="empty__col">
+                  <i class="fas fa-minus"></i>
+                </td>
               </tr>
             </tbody>
             <tfoot>

@@ -2,7 +2,7 @@
   padding: 1rem;
 }
 .diary__header {
-  padding-top: 1rem;
+  padding-top: 2rem;
 }
 .diary__title {
   font-size: 2rem;
@@ -48,8 +48,8 @@ i.fas {
   display: flex;
   align-items: center;
 }
-.diary__meals {
-  margin-top: 2rem;
+.diary__meal {
+  padding-top: 2rem;
 }
 .diary__meal__title {
   font-size: 1.5rem;
@@ -85,4 +85,7 @@ td button {
   font-size: 1.3rem;
   color: #0072bf;
   font-weight: 700;
+}
+.fa-minus {
+  font-size: 1rem;
 }
