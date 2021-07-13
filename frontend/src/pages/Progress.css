@@ -1,0 +1,59 @@
+.progress {
+  padding: 1rem;
+}
+.progress__title {
+  font-size: 2rem;
+  color: rgb(10, 82, 130);
+}
+.progress__select {
+  padding-top: 2rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.progress__select__prompt {
+  padding-right: 1rem;
+}
+.progress__dates {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+}
+.progress__dates__list {
+  padding-top: 0.5rem;
+  display: flex;
+  font-size: 1.25rem;
+}
+.progress__dates__list__item {
+  padding-right: 1rem;
+  color: rgb(10, 82, 130);
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+}
+.progress__dates__list__item:hover {
+  border-bottom: 1px solid rgb(10, 82, 130);
+}
+.progress__bar {
+  padding-top: 2.5rem;
+  height: 50vh;
+}
+
+@media (min-width: 500px) {
+  .progress__title {
+    font-size: 3rem;
+  }
+  .progress__select {
+    font-size: 2rem;
+  }
+  .progress__dates {
+    font-size: 2rem;
+  }
+  .progress__dates__list__item {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 500px) {
+  .progress {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}

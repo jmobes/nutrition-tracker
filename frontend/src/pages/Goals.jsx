@@ -23,6 +23,12 @@ const Goals = () => {
           </div>
           <div className="goals__tables__weight__row">
             <p className="goals__tables__weight__key">
+              <strong>Current Weight</strong>
+            </p>
+            <p className="goals__tables__weight__value">170 lbs</p>
+          </div>
+          <div className="goals__tables__weight__row">
+            <p className="goals__tables__weight__key">
               <strong>Goal Weight</strong>
             </p>
             <p className="goals__tables__weight__value">160 lbs</p>
