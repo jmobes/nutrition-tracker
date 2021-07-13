@@ -1,0 +1,31 @@
+.progress {
+  padding: 1rem;
+}
+.progress__title {
+  font-size: 2rem;
+  color: rgb(10, 82, 130);
+}
+.progress__select {
+  padding-top: 2rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.progress__select__prompt {
+  padding-right: 1rem;
+}
+.progress__dates {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+}
+.progress__dates__list {
+  display: flex;
+  font-size: 1.25rem;
+}
+.progress__dates__list__item {
+  padding-right: 1rem;
+  color: rgb(10, 82, 130);
+}
+.progress__bar {
+  padding-top: 2.5rem;
+}
