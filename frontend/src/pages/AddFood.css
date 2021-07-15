@@ -34,15 +34,26 @@
   font-size: 1.75rem;
   color: rgb(10, 82, 130);
 }
+.add__matching__foods {
+  padding-top: 1rem;
+}
 .add__matching__food {
   border-bottom: 1px solid rgba(68, 68, 68, 0.2);
   padding-bottom: 0.5rem;
   padding-top: 0.25rem;
+  transition: all 0.2s;
+  cursor: pointer;
 }
-.add__matching__food,
+.add__matching__food:hover {
+  background: #f6f6f6;
+  padding-left: 0.5rem;
+}
 .add__matching__food__name {
   font-size: 1.5rem;
+  color: #0072bc;
+  font-weight: 600;
 }
 .add__matching__food__description {
   color: rgb(68, 68, 68);
+  font-size: 1.3rem;
 }
