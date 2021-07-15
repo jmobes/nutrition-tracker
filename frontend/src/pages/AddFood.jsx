@@ -74,7 +74,7 @@ const AddFood = () => {
           <div className="add__selected__form__servings">
             <strong>How many servings?</strong>
             <label>
-              <input type="number" value="1" />
+              <input name="servings" type="number" value="1" />
             </label>
           </div>
           <div className="add__selected__form__meal">
