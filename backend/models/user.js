@@ -19,6 +19,21 @@ const User = mongoose.model(
       minlength: 8,
       maxlength: 1024,
     },
+    username: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 100,
+      unique: true,
+    },
+    goals: {
+      currentWeight: Number,
+      goalWeight: Number,
+      calories: Number,
+      carbs: { type: Number, min: 0, max: 100 },
+      protein: { type: Number, min: 0, max: 100 },
+      fat: { type: Number, min: 0, max: 100 },
+    },
   })
 );
 
