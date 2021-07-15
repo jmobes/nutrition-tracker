@@ -9,6 +9,7 @@ import Goals from "./pages/Goals";
 import Tdee from "./pages/Tdee";
 import Diary from "./pages/Diary";
 import Progress from "./pages/Progress";
+import AddFood from "./pages/AddFood";
 
 const App = () => {
   return (
@@ -36,6 +37,9 @@ const App = () => {
         </Route>
         <Route path="/progress">
           <Progress />
+        </Route>
+        <Route path="/add-food">
+          <AddFood />
         </Route>
       </Switch>
     </Router>
