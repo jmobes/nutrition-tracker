@@ -88,7 +88,7 @@ tfoot tr {
 td button {
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #0072bf;
   font-weight: 700;
   border-bottom: 2px solid #0072bf;
@@ -137,6 +137,9 @@ td.diary__summary__footer {
 @media (min-width: 500px) {
   .diary span {
     display: inline;
+  }
+  td button {
+    font-size: 1.3rem;
   }
 }
 @media (min-width: 700px) {
