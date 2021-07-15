@@ -1,0 +1,48 @@
+.add {
+  padding: 1rem;
+}
+.add__title {
+  color: rgb(10, 82, 130);
+  font-size: 2rem;
+}
+.add__input {
+  padding-top: 2rem;
+}
+.add__input strong {
+  font-size: 1.5rem;
+  color: rgb(68, 68, 68);
+}
+.add__input input,
+.add__input button {
+  padding: 0.25rem 0.5rem;
+}
+.add__input input {
+  width: 100%;
+}
+.add__input button {
+  margin-top: 0.5rem;
+  margin-left: auto;
+  display: block;
+  background-color: #51a351;
+  color: #fff;
+  border: 1px solid #408140;
+}
+.add__matching {
+  padding-top: 2rem;
+}
+.add__matching__title {
+  font-size: 1.75rem;
+  color: rgb(10, 82, 130);
+}
+.add__matching__food {
+  border-bottom: 1px solid rgba(68, 68, 68, 0.2);
+  padding-bottom: 0.5rem;
+  padding-top: 0.25rem;
+}
+.add__matching__food,
+.add__matching__food__name {
+  font-size: 1.5rem;
+}
+.add__matching__food__description {
+  color: rgb(68, 68, 68);
+}
