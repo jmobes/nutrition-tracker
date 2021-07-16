@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const users = require("./routes/users");
+const goals = require("./routes/goals");
 require("dotenv").config();
 
 mongoose
@@ -16,6 +17,7 @@ mongoose
 app.use(express.json());
 
 app.use("/api/users", users);
+app.use("/api/goals", goals);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
