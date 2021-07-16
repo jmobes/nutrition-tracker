@@ -21,11 +21,12 @@ const createUser = async (req, res, next) => {
     return res
       .status(400)
       .json({ status: "fail", message: error.details[0].message });
-  const { email, password } = req.body;
+  const { email, password, username } = req.body;
   try {
     let user = new User({
       email,
       password,
+      username,
     });
     user = await user.save();
     return res.status(201).json(user);
