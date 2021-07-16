@@ -35,7 +35,7 @@ const User = mongoose.model(
         {
           date: {
             type: Date,
-            default: null,
+            default: Date.now,
           },
           weight: {
             type: Number,
