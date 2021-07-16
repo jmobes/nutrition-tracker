@@ -23,24 +23,42 @@ const User = mongoose.model(
       type: String,
       required: true,
       minlength: 3,
-      maxlength: 100,
+      maxlength: 255,
       unique: true,
     },
-    picture: String,
+    picture: {
+      type: String,
+      default: null,
+    },
     goals: {
       currentWeight: [
         {
-          date: Date.now,
-          weight: Number,
+          date: {
+            type: Date,
+            default: null,
+          },
+          weight: {
+            type: Number,
+            default: null,
+          },
         },
       ],
-      goalWeight: Number,
-      calories: Number,
-      carbs: { type: Number, min: 0, max: 100 },
-      protein: { type: Number, min: 0, max: 100 },
-      fat: { type: Number, min: 0, max: 100 },
+      goalWeight: {
+        type: Number,
+        default: null,
+      },
+      calories: {
+        type: Number,
+        default: null,
+      },
+      carbs: { type: Number, min: 0, max: 100, default: null },
+      protein: { type: Number, min: 0, max: 100, default: null },
+      fat: { type: Number, min: 0, max: 100, default: null },
     },
-    tdee: Number,
+    tdee: {
+      type: Number,
+      default: null,
+    },
     posts: [
       {
         date: {
@@ -105,6 +123,7 @@ function validateUser(user) {
   let schema = Joi.object({
     email: Joi.string().min(5).max(255).email().required(),
     password: passwordComplexity().required(),
+    username: Joi.string().min(3).max(255).required(),
   });
 
   return schema.validate(user);
