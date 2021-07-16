@@ -16,8 +16,12 @@ const setWeight = async (req, res, next) => {
   const { currentWeight, goalWeight } = req.body;
   try {
     let user = await User.findById(userId);
-    user.goals.currentWeight.push({ weight: currentWeight });
-    user.goals.goalWeight = goalWeight;
+    if (currentWeight) {
+      user.goals.currentWeight.push({ weight: currentWeight });
+    }
+    if (goalWeight) {
+      user.goals.goalWeight = goalWeight;
+    }
     await user.save();
     res.json({ status: "success", user: user });
   } catch (ex) {
@@ -25,15 +29,26 @@ const setWeight = async (req, res, next) => {
   }
 };
 
-const setMacros = async (req, res, next) => {};
-
 function validateWeight(weight) {
   let schema = Joi.object({
-    currentWeight: Joi.number().min(0).required(),
-    goalWeight: Joi.number().min(0).required(),
+    currentWeight: Joi.number().min(0),
+    goalWeight: Joi.number().min(0),
   });
 
   return schema.validate(weight);
+}
+
+const setMacros = async (req, res, next) => {};
+
+function validateMacros(macros) {
+  let schema = Joi.object({
+    calories: Joi.number().min(1200),
+    carbs: Joi.number().min(0),
+    protein: Joi.number().min(0),
+    fat: Joi.number().min(0),
+  });
+
+  return schema.validate(macros);
 }
 
 module.exports.setWeight = setWeight;
