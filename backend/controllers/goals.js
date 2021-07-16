@@ -6,14 +6,12 @@ const mongoose = require("mongoose");
 const setWeight = async (req, res, next) => {
   const userId = req.params.uid;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
-    res.json({ status: "fail", message: "Invalid user id" });
+    return next(new HttpError("Invalid user id", 400));
   }
 
   const { error } = validateWeight(req.body);
   if (error) {
-    return res
-      .status(400)
-      .json({ status: "fail", message: error.details[0].message });
+    return next(new HttpError(error.details[0].message, 400));
   }
   const { currentWeight, goalWeight } = req.body;
   try {
@@ -23,7 +21,7 @@ const setWeight = async (req, res, next) => {
     await user.save();
     res.json({ status: "success", user: user });
   } catch (ex) {
-    res.status(500).json({ status: "fail", message: ex.message });
+    return next(new HttpError(ex.message, 500));
   }
 };
 
