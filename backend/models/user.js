@@ -26,14 +26,78 @@ const User = mongoose.model(
       maxlength: 100,
       unique: true,
     },
+    picture: String,
     goals: {
-      currentWeight: Number,
+      currentWeight: [
+        {
+          date: Date.now,
+          weight: Number,
+        },
+      ],
       goalWeight: Number,
       calories: Number,
       carbs: { type: Number, min: 0, max: 100 },
       protein: { type: Number, min: 0, max: 100 },
       fat: { type: Number, min: 0, max: 100 },
     },
+    tdee: Number,
+    posts: [
+      {
+        date: {
+          type: Date,
+          default: Date.now,
+          required: true,
+        },
+        body: {
+          type: String,
+          minlength: 1,
+          maxlength: 1000,
+          required: true,
+        },
+      },
+    ],
+    diary: [
+      {
+        date: {
+          type: Date,
+          required: true,
+        },
+        meal: {
+          type: String,
+          required: true,
+        },
+        foods: [
+          {
+            name: {
+              type: String,
+              minlength: 2,
+              maxLength: 1000,
+              required: true,
+            },
+            calories: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            carbs: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            protein: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            fat: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+          },
+        ],
+      },
+    ],
   })
 );
 

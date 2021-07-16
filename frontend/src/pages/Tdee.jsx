@@ -27,13 +27,13 @@ const Tdee = () => {
         <div className="tdee__form__age form__caption">
           <strong>Age</strong>
           <label>
-            <input type="number" />
+            <input type="number" placeholder="years" />
           </label>
         </div>
         <div className="tdee__form__weight form__caption">
           <strong>Weight</strong>
           <label>
-            <input type="number" />
+            <input type="number" placeholder="lbs" />
           </label>
         </div>
         <div className="tdee__form__height form__caption">
