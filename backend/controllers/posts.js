@@ -3,7 +3,7 @@ const HttpError = require("../models/HttpError");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
-const createPost = () => {
+const createPost = async (req, res, next) => {
   const userId = req.params.uid;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     return next(new HttpError("Invalid user id", 400));
@@ -20,6 +20,10 @@ const createPost = () => {
     if (!user) {
       return next(new HttpError("User not found", 404));
     }
+
+    user.posts.push({ body: body });
+    await user.save();
+    res.status(201).json({ status: "success", post: user.posts });
   } catch (ex) {
     return next(new HttpError(ex.message, 500));
   }
