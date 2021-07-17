@@ -16,11 +16,21 @@ const createPost = () => {
 
   const { body } = req.body;
   try {
+    let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
   } catch (ex) {
     return next(new HttpError(ex.message, 500));
   }
 };
 
-function validatePost() {}
+function validatePost(post) {
+  let schema = Joi.object({
+    body: Joi.string().min(1).max(1000).required(),
+  });
+
+  return schema.validate(post);
+}
 
 module.exports.createPost = createPost;

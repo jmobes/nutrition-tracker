@@ -17,6 +17,10 @@ const setWeight = async (req, res, next) => {
   const { currentWeight, goalWeight } = req.body;
   try {
     let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
+
     if (currentWeight) {
       user.goals.currentWeight.push({ weight: currentWeight });
     }
@@ -53,6 +57,10 @@ const setMacros = async (req, res, next) => {
   const { calories, carbs, protein, fat } = req.body;
   try {
     let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
+
     if (calories) {
       user.goals.calories = calories;
     }
