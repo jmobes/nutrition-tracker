@@ -67,7 +67,7 @@ const setMacros = async (req, res, next) => {
     }
 
     await user.save();
-    res.status(201).json({ status: "success", user: user });
+    res.status(200).json({ status: "success", user: user });
   } catch (ex) {
     return next(new HttpError(ex.message, 500));
   }
