@@ -37,4 +37,21 @@ function validatePost(post) {
   return schema.validate(post);
 }
 
+const deletePost = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid Id", 400));
+  }
+
+  try {
+    let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
+  } catch (ex) {
+    return next(new HttpError(ex.message, 500));
+  }
+};
+
 module.exports.createPost = createPost;
+module.exports.deletePost = deletePost;
