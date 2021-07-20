@@ -9,14 +9,22 @@ const updateTdee = async (req, res, next) => {
     return next(new HttpError("invalid user id", 400));
   }
 
-  const { error } = validateTdee;
+  const { error } = validateTdee(req.body);
+  if (error) {
+    return next(new HttpError(error.details[0].message, 400));
+  }
 
   const tdee = req.body.tdee;
+  let user = await User.findById(userId);
+  user.tdee = tdee;
+  await user.save();
+
+  res.status(200).json({ status: "success", tdee: user.tdee });
 };
 
 function validateTdee(tdee) {
   let schema = Joi.object({
-    tdee: Joi.number().min(0).max(1200).required(),
+    tdee: Joi.number().min(1200).required(),
   });
 
   return schema.validate(tdee);
