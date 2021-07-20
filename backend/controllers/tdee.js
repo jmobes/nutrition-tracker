@@ -15,11 +15,14 @@ const updateTdee = async (req, res, next) => {
   }
 
   const tdee = req.body.tdee;
-  let user = await User.findById(userId);
-  user.tdee = tdee;
-  await user.save();
-
-  res.status(200).json({ status: "success", tdee: user.tdee });
+  try {
+    let user = await User.findById(userId);
+    user.tdee = tdee;
+    await user.save();
+    res.status(200).json({ status: "success", tdee: user.tdee });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error", 500));
+  }
 };
 
 function validateTdee(tdee) {

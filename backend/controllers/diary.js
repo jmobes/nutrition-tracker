@@ -13,10 +13,21 @@ const addFood = async (req, res, next) => {
   if (error) {
     return next(new HttpError(error.details[0].message, 400));
   }
+  const { name, calories, carbs, protein, fat } = req.body;
+  try {
+    let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
+    user.diary.push();
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error", 500));
+  }
 };
 
 function validateFood(food) {
   let schema = Joi.object({
+    meal: Joi.string().min(1).required(),
     name: Joi.string().min(1).required(),
     calories: Joi.number().min(0).required(),
     carbs: Joi.number().min(0).required(),

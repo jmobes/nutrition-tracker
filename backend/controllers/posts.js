@@ -52,7 +52,9 @@ const deletePost = async (req, res, next) => {
       _id: userId,
       posts: { $elemMatch: { _id: mongoose.Types.ObjectId(postId) } },
     });
-    if (!user) return next(new HttpError("user or post not found", 404));
+    if (!user) {
+      return next(new HttpError("user or post not found", 404));
+    }
     user.posts.pull(postId);
     await user.save();
     res.json({ status: "success", userPosts: user.posts });
