@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {} = require("../controllers/tdee");
+const { updateTdee } = require("../controllers/tdee");
+
+router.put("/uid", updateTdee);
 
 module.exports = router;
