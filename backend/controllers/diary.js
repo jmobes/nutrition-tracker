@@ -3,7 +3,17 @@ const HttpError = require("../models/HttpError");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
-const addFood = async (req, res, next) => {};
+const addFood = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid user id", 400));
+  }
+
+  const { error } = validateFood(req.body);
+  if (error) {
+    return next(new HttpError(error.details[0].message, 400));
+  }
+};
 
 function validateFood(food) {
   let schema = Joi.object({
