@@ -39,15 +39,23 @@ function validatePost(post) {
 
 const deletePost = async (req, res, next) => {
   const userId = req.params.uid;
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  const postId = req.params.pid;
+  if (
+    !mongoose.Types.ObjectId.isValid(userId) ||
+    !mongoose.Types.ObjectId.isValid(postId)
+  ) {
     return next(new HttpError("Invalid Id", 400));
   }
 
   try {
-    let user = await User.findById(userId);
-    if (!user) {
-      return next(new HttpError("User not found", 404));
-    }
+    let user = await User.findOne({
+      _id: userId,
+      posts: { $elemMatch: { _id: mongoose.Types.ObjectId(postId) } },
+    });
+    if (!user) return next(new HttpError("user or post not found", 404));
+    user.posts.pull(postId);
+    await user.save();
+    res.json({ status: "success", userPosts: user.posts });
   } catch (ex) {
     return next(new HttpError(ex.message, 500));
   }
