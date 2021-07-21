@@ -27,13 +27,13 @@ const getFoodOnDate = async (req, res, next) => {
     return next(new HttpError("Invalid user id", 400));
   }
 
-  const date = req.params.date;
+  const date = new Date(req.params.date);
   try {
     let user = await User.findOne({
       _id: mongoose.Types.ObjectId(userId),
       diary: {
         $elemMatch: {
-          date: new Date(date),
+          date: date,
         },
       },
     });
@@ -187,5 +187,6 @@ function validateRemoval(food) {
 }
 
 module.exports.getFoodDiary = getFoodDiary;
+module.exports.getFoodOnDate = getFoodOnDate;
 module.exports.addFood = addFood;
 module.exports.deleteFood = deleteFood;

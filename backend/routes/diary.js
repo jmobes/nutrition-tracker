@@ -8,6 +8,7 @@ const {
 } = require("../controllers/diary");
 
 router.get("/:uid", getFoodDiary);
+router.get("/:uid/:date", getFoodOnDate);
 router.post("/:uid", addFood);
 router.put("/:uid/:fid", deleteFood);
 
