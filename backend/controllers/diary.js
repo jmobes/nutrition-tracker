@@ -13,21 +13,31 @@ const editFood = async (req, res, next) => {
   if (error) {
     return next(new HttpError(error.details[0].message, 400));
   }
-  const { meal, name, calories, carbs, protein, fat } = req.body;
+  const { date, meal, name, calories, carbs, protein, fat } = req.body;
   try {
     let user = await User.findOne({
       _id: mongoose.Types.ObjectId(userId),
       diary: {
         $elemMatch: {
-          meal: meal.toLowerCase(),
-          date: new Date().toDateString(),
+          meal: meal,
+          date: new Date(date),
         },
       },
     });
-    console.log({ user });
     if (!user) {
       return next(new HttpError("User not found", 404));
     }
+    console.log({ user });
+
+    const index = user.diary.findIndex((entry) => {
+      console.log(new Date(entry.date).getTime() == new Date(date).getTime());
+      console.log(entry.meal);
+      return (
+        entry.meal === meal &&
+        new Date(entry.date).getTime() === new Date(date).getTime()
+      );
+    });
+    console.log({ index });
 
     // user = await User.findById(userId);
     // if (!user) {
@@ -35,6 +45,7 @@ const editFood = async (req, res, next) => {
     // }
 
     // user.diary.push({
+    //   date: date,
     //   meal: meal,
     //   foods: {
     //     name: name,
@@ -46,7 +57,7 @@ const editFood = async (req, res, next) => {
     // });
 
     // await user.save();
-    res.status(200).json({ status: "success", food: user.diary });
+    res.status(200).json({ status: "success", message: "food added" });
   } catch (ex) {
     return next(new HttpError(ex.message || "Internal server error", 500));
   }
