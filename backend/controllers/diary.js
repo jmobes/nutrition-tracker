@@ -71,4 +71,42 @@ function getIndex(diary, date) {
   );
 }
 
+const deleteFood = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid user id", 400));
+  }
+
+  const foodId = req.params.fid;
+  const { meal, date } = req.body;
+  try {
+    let user = await User.findOne({
+      _id: mongoose.Types.ObjectId(userId),
+      diary: {
+        $elemMatch: {
+          _id: mongoose.Types.ObjectId("60f788d097ecf744a42145e5"),
+        },
+      },
+    });
+    if (!user) {
+      return next(new HttpError("Invalid user or food id", 404));
+    }
+    const index = getIndex(user.diary, date);
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error", 500));
+  }
+};
+
+function validateRemoval(food) {
+  let schema = Joi.object({
+    date: Joi.date().required(),
+    meal: Joi.string()
+      .valid("breakfast", "lunch", "dinner", "snack")
+      .required(),
+  });
+
+  return schema.validate(food);
+}
+
 module.exports.addFood = addFood;
+module.exports.deleteFood = deleteFood;
