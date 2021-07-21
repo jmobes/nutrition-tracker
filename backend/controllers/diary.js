@@ -3,6 +3,59 @@ const HttpError = require("../models/HttpError");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
+const getFoodDiary = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid user id", 400));
+  }
+
+  try {
+    let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("User not found with given ID", 404));
+    }
+
+    res.status(200).json({ status: "success", diary: user.diary });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error.", 500));
+  }
+};
+
+const getFoodOnDate = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid user id", 400));
+  }
+
+  const date = req.params.date;
+  try {
+    let user = await User.findOne({
+      _id: mongoose.Types.ObjectId(userId),
+      diary: {
+        $elemMatch: {
+          date: new Date(date),
+        },
+      },
+    });
+    if (!user) {
+      return next(
+        new HttpError("User not found with the given id and date", 404)
+      );
+    }
+
+    const index = getIndex(user.diary, date);
+    if (index < 0) {
+      return next(
+        new HttpError("Could not find element with the given index", 404)
+      );
+    }
+
+    res.status(200).json({ status: "success", diary: user.diary[index] });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error.", 500));
+  }
+};
+
 const addFood = async (req, res, next) => {
   const userId = req.params.uid;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -130,9 +183,9 @@ function validateRemoval(food) {
       .valid("breakfast", "lunch", "dinner", "snack")
       .required(),
   });
-
   return schema.validate(food);
 }
 
+module.exports.getFoodDiary = getFoodDiary;
 module.exports.addFood = addFood;
 module.exports.deleteFood = deleteFood;
