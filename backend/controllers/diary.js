@@ -146,7 +146,7 @@ const deleteFood = async (req, res, next) => {
 
   try {
     let user = await User.findOne({
-      _id: mongoose.Types.ObjectId(userId),
+      _id: userId,
       diary: {
         $elemMatch: {
           [meal]: {
@@ -168,6 +168,14 @@ const deleteFood = async (req, res, next) => {
 
     user.diary[index][meal].pull(foodId);
 
+    if (
+      !user.diary[index].breakfast.length &&
+      !user.diary[index].lunch.length &&
+      !user.diary[index].dinner.length &&
+      !user.diary[index].snack.length
+    ) {
+      user.diary.pull(user.diary[index]._id);
+    }
     await user.save();
 
     res.status(200).json({ status: "success", message: "food entry removed" });
