@@ -36,6 +36,9 @@ const addFood = async (req, res, next) => {
       });
     } else {
       const index = getIndex(user.diary, date);
+      if (index < 0) {
+        return next(new HttpError("Entry index not found", 404));
+      }
       user.diary[index][meal].push({ name, calories, carbs, protein, fat });
     }
 
@@ -73,25 +76,48 @@ function getIndex(diary, date) {
 
 const deleteFood = async (req, res, next) => {
   const userId = req.params.uid;
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
-    return next(new HttpError("Invalid user id", 400));
+  const foodId = req.params.fid;
+  if (
+    !mongoose.Types.ObjectId.isValid(userId) ||
+    !mongoose.Types.ObjectId.isValid(foodId)
+  ) {
+    return next(new HttpError("Invalid user or food id", 400));
   }
 
-  const foodId = req.params.fid;
+  const { error } = validateRemoval(req.body);
+  if (error) {
+    return next(new HttpError(error.details[0].message, 400));
+  }
+
   const { meal, date } = req.body;
+
   try {
     let user = await User.findOne({
       _id: mongoose.Types.ObjectId(userId),
       diary: {
         $elemMatch: {
-          _id: mongoose.Types.ObjectId("60f788d097ecf744a42145e5"),
+          [meal]: {
+            $elemMatch: {
+              _id: foodId,
+            },
+          },
         },
       },
     });
     if (!user) {
-      return next(new HttpError("Invalid user or food id", 404));
+      return next(new HttpError("user not found with food id", 404));
     }
+
     const index = getIndex(user.diary, date);
+    if (index < 0) {
+      return next(new HttpError("Entry index not found", 404));
+    }
+
+    user.diary[index][meal].pull(foodId);
+
+    await user.save();
+
+    res.status(200).json({ status: "success", message: "food entry removed" });
   } catch (ex) {
     return next(new HttpError(ex.message || "Internal server error", 500));
   }
