@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { editFood } = require("../controllers/diary");
+const { addFood } = require("../controllers/diary");
 
-router.put("/:uid", editFood);
+router.post("/:uid", addFood);
 
 module.exports = router;
