@@ -80,11 +80,97 @@ const User = mongoose.model(
           type: Date,
           required: true,
         },
-        meal: {
-          type: String,
-          required: true,
-        },
-        foods: [
+        breakfast: [
+          {
+            name: {
+              type: String,
+              minlength: 2,
+              maxLength: 1000,
+              required: true,
+            },
+            calories: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            carbs: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            protein: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            fat: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+          },
+        ],
+        lunch: [
+          {
+            name: {
+              type: String,
+              minlength: 2,
+              maxLength: 1000,
+              required: true,
+            },
+            calories: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            carbs: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            protein: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            fat: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+          },
+        ],
+        dinner: [
+          {
+            name: {
+              type: String,
+              minlength: 2,
+              maxLength: 1000,
+              required: true,
+            },
+            calories: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            carbs: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            protein: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            fat: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+          },
+        ],
+        snack: [
           {
             name: {
               type: String,

@@ -21,7 +21,6 @@ const addFood = async (req, res, next) => {
       _id: mongoose.Types.ObjectId(userId),
       diary: {
         $elemMatch: {
-          meal: meal,
           date: new Date(date),
         },
       },
@@ -33,12 +32,11 @@ const addFood = async (req, res, next) => {
       }
       user.diary.push({
         date: new Date(date),
-        meal: meal,
-        foods: [{ name, calories, carbs, protein, fat }],
+        [meal]: [{ name, calories, carbs, protein, fat }],
       });
     } else {
-      const index = getIndex(user.diary, { meal, date });
-      user.diary[index].foods.push({ name, calories, carbs, protein, fat });
+      const index = getIndex(user.diary, date);
+      user.diary[index][meal].push({ name, calories, carbs, protein, fat });
     }
 
     await user.save();
@@ -67,11 +65,9 @@ function validateFood(food) {
   return schema.validate(food);
 }
 
-function getIndex(diary, newEntry) {
+function getIndex(diary, date) {
   return diary.findIndex(
-    (entry) =>
-      entry.meal === newEntry.meal &&
-      new Date(entry.date).getTime() === new Date(newEntry.date).getTime()
+    (entry) => new Date(entry.date).getTime() === new Date(date).getTime()
   );
 }
 
