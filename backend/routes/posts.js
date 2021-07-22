@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { createPost, deletePost } = require("../controllers/posts");
+const { getPosts, createPost, deletePost } = require("../controllers/posts");
 
+router.get("/", getPosts);
 router.post("/:uid", createPost);
 router.put("/:uid/:pid", deletePost);
 

@@ -3,6 +3,24 @@ const HttpError = require("../models/HttpError");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
+const getPosts = async (req, res, next) => {
+  try {
+    let users = await User.find({ posts: { $elemMatch: { $exists: true } } });
+    if (!users.length) {
+      return next(new HttpError("No posts were found", 404));
+    }
+
+    let postsArr = [];
+    users.forEach((user) => {
+      postsArr = [...postsArr, ...user.posts];
+    });
+
+    res.json({ status: "success", posts: postsArr });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error.", 500));
+  }
+};
+
 const createPost = async (req, res, next) => {
   const userId = req.params.uid;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -63,5 +81,6 @@ const deletePost = async (req, res, next) => {
   }
 };
 
+module.exports.getPosts = getPosts;
 module.exports.createPost = createPost;
 module.exports.deletePost = deletePost;

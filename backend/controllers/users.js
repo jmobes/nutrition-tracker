@@ -42,5 +42,5 @@ const createUser = async (req, res, next) => {
   }
 };
 
-module.exports.getUsers = getUsers;
+module.exports.getUser = getUser;
 module.exports.createUser = createUser;
