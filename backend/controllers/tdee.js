@@ -8,13 +8,16 @@ const getTdee = async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     return next(new HttpError("invalid user id", 400));
   }
+  try {
+    let user = User.findById(userId);
+    if (!user) {
+      return next(new HttpError("Could not find user with the given ID", 404));
+    }
 
-  let user = User.findById(userId);
-  if (!user) {
-    return next(new HttpError("Could not find user with the given ID", 404));
+    res.status(200).json({ status: "success", tdee: user.tdee });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error.", 500));
   }
-
-  res.status(200).json({ status: "success", tdee: user.tdee });
 };
 
 const updateTdee = async (req, res, next) => {
