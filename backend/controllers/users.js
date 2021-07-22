@@ -3,15 +3,22 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, validate } = require("../models/user");
+const HttpError = require("../models/HttpError");
 
-const getUsers = async (req, res, next) => {
+const getUser = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid id", 400));
+  }
   try {
-    const users = await User.find();
-    return res.status(200).json(users);
+    const user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("Could not find user with the given ID", 404));
+    }
+
+    return res.status(200).json(user);
   } catch (ex) {
-    return res
-      .status(404)
-      .json({ status: "unsuccessful", message: ex.message });
+    return res.status(404).json({ status: "fail", message: ex.message });
   }
 };
 
@@ -35,5 +42,5 @@ const createUser = async (req, res, next) => {
   }
 };
 
-module.exports.getUsers = getUsers;
+module.exports.getUser = getUser;
 module.exports.createUser = createUser;

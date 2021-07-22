@@ -3,6 +3,24 @@ const HttpError = require("../models/HttpError");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
+const getGoals = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid user id", 400));
+  }
+
+  try {
+    let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("Could not find user with the given ID.", 404));
+    }
+
+    res.status(200).json({ status: "success", goals: user.goals });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error.", 500));
+  }
+};
+
 const setWeight = async (req, res, next) => {
   const userId = req.params.uid;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -92,5 +110,6 @@ function validateMacros(macros) {
   return schema.validate(macros);
 }
 
+module.exports.getGoals = getGoals;
 module.exports.setWeight = setWeight;
 module.exports.setMacros = setMacros;
