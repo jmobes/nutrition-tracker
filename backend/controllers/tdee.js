@@ -1,4 +1,4 @@
-const { User, validate } = require("../models/user");
+const { User } = require("../models/user");
 const HttpError = require("../models/HttpError");
 const Joi = require("joi");
 const mongoose = require("mongoose");
