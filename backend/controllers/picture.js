@@ -39,14 +39,30 @@ const uploadPicture = async (req, res, next) => {
   upload(req, res, (err) => {
     if (err) {
       return next(new HttpError(err.message, 400));
-    } else {
-      if (!req.file) {
-        return next(new HttpError("Please select a photo", 400));
-      } else {
-        res
-          .status(200)
-          .json({ status: "success", file: `uploads/${req.file.filename}` });
+    }
+    if (!req.file) {
+      return next(new HttpError("Please select a photo", 400));
+    }
+
+    const userId = req.params.uid;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return next(new HttpError("Invalid id", 400));
+    }
+
+    try {
+      let user = await User.findById(userId);
+      if (!user) {
+        return next(
+          new HttpError("User with the given id was not found.", 404)
+        );
       }
+      user.picture = req.file.filename;
+      await user.save();
+      res
+        .status(200)
+        .json({ status: "success", file: `uploads/${req.file.filename}` });
+    } catch (ex) {
+      return next(new HttpError(ex.message || "Internal server error.", 500));
     }
   });
 };
