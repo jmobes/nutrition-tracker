@@ -23,7 +23,7 @@ const upload = multer({
   },
 });
 
-function checkFileType() {
+function checkFileType(file, cb) {
   const fileTypes = /jpeg|jpg|png/;
   const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = fileTypes.test(file.mimetype);
@@ -36,14 +36,17 @@ function checkFileType() {
 }
 
 const uploadPicture = async (req, res, next) => {
-  //   upload(req, res, (err) => {
-  //     if (err) {
-  //       return next(new HttpError(err.message, 400));
-  //     }
-  //     if (!req.file) {
-  //       return next(new HttpError("Please select a photo", 400));
-  //     }
-  //   });
+  // upload(req, res, (err) => {
+  //   if (err) {
+  //     return next(new HttpError(err.message, 400));
+  //   }
+  //   if (!req.file) {
+  //     return next(new HttpError("Please select a photo", 400));
+  //   }
+  // });
+  if (!req.file) {
+    return next(new HttpError("Please select a photo", 400));
+  }
 
   const userId = req.params.uid;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
