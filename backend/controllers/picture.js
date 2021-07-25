@@ -36,14 +36,6 @@ function checkFileType(file, cb) {
 }
 
 const uploadPicture = async (req, res, next) => {
-  // upload(req, res, (err) => {
-  //   if (err) {
-  //     return next(new HttpError(err.message, 400));
-  //   }
-  //   if (!req.file) {
-  //     return next(new HttpError("Please select a photo", 400));
-  //   }
-  // });
   if (!req.file) {
     return next(new HttpError("Please select a photo", 400));
   }
@@ -68,5 +60,24 @@ const uploadPicture = async (req, res, next) => {
   }
 };
 
+const getPicture = async (req, res, next) => {
+  const userId = req.params.uid;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return next(new HttpError("Invalid id", 400));
+  }
+
+  try {
+    let user = await User.findById(userId);
+    if (!user) {
+      return next(new HttpError("Could not find user with the given ID.", 404));
+    }
+
+    res.json({ status: "success", picture: user.picture });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error.", 500));
+  }
+};
+
 module.exports.uploadPicture = uploadPicture;
 module.exports.upload = upload;
+module.exports.getPicture = getPicture;
