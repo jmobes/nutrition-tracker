@@ -59,5 +59,37 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new HttpError("Please enter an email and password", 400));
+  }
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      return next(new HttpError("Invalid email or password.", 401));
+    }
+
+    const authenticated = await bcrypt.compare(password, existingUser.password);
+    if (!authenticated) {
+      return next(new HttpError("Invalid email or password.", 401));
+    }
+
+    const token = jwt.sign(
+      { user: existingUser._id },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "12h" }
+    );
+
+    res.status(200).json({
+      user: existingUser._id,
+      token: token,
+    });
+  } catch (ex) {
+    return next(new HttpError(ex.message || "Internal server error.", 500));
+  }
+};
+
 module.exports.getUser = getUser;
 module.exports.createUser = createUser;
