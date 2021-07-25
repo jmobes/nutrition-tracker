@@ -36,14 +36,6 @@ function checkFileType(file, cb) {
 }
 
 const uploadPicture = async (req, res, next) => {
-  // upload(req, res, (err) => {
-  //   if (err) {
-  //     return next(new HttpError(err.message, 400));
-  //   }
-  //   if (!req.file) {
-  //     return next(new HttpError("Please select a photo", 400));
-  //   }
-  // });
   if (!req.file) {
     return next(new HttpError("Please select a photo", 400));
   }
@@ -68,5 +60,8 @@ const uploadPicture = async (req, res, next) => {
   }
 };
 
+const getPicture = async (req, res, next) => {};
+
 module.exports.uploadPicture = uploadPicture;
 module.exports.upload = upload;
+module.exports.getPicture = getPicture;
