@@ -21,6 +21,19 @@ mongoose
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type",
+    "token",
+    "Accept"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+
+  next();
+});
+
 app.use("/api/users", users);
 app.use("/api/goals", goals);
 app.use("/api/posts", posts);
@@ -37,7 +50,7 @@ app.use((error, req, res, next) => {
   if (res.headerSent) {
     return next(error);
   }
-  res.status(500).json({
+  res.status(error.code || 5000).json({
     status: "fail",
     error: error.message,
   });

@@ -13,6 +13,14 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetch("http://localhost:5000/api/users/login", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+      .catch((ex) => console.error(ex));
     console.log("Form data was submitted");
   };
 
@@ -28,7 +36,7 @@ const Login = (props) => {
           <input
             onChange={handleChange}
             value={password}
-            type="text"
+            type="password"
             id="password"
           />
         </div>
