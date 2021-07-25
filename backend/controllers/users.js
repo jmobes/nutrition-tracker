@@ -28,6 +28,7 @@ const createUser = async (req, res, next) => {
     return res
       .status(400)
       .json({ status: "fail", message: error.details[0].message });
+
   const { email, password, username } = req.body;
   try {
     let user = new User({
@@ -35,8 +36,24 @@ const createUser = async (req, res, next) => {
       password,
       username,
     });
-    user = await user.save();
-    return res.status(201).json(user);
+
+    let salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+
+    const savedUser = await user.save();
+
+    const token = jwt.sign(
+      {
+        user: savedUser._id,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "12hr" }
+    );
+    return res.status(201).json({
+      status: "success",
+      id: savedUser._id,
+      token: token,
+    });
   } catch (ex) {
     return res.status(400).json({ status: "fail", message: ex.message });
   }
