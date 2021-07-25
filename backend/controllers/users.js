@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, validate } = require("../models/user");
 const HttpError = require("../models/HttpError");
+require("dotenv").config();
 
 const getUser = async (req, res, next) => {
   const userId = req.params.uid;
@@ -93,3 +94,4 @@ const login = async (req, res, next) => {
 
 module.exports.getUser = getUser;
 module.exports.createUser = createUser;
+module.exports.login = login;
