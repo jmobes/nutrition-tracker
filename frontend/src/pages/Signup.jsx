@@ -1,13 +1,19 @@
+import { useState } from "react";
 import "./Signup.css";
 
 const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const handleChange = (e, id) => {
-    e.target.id === "email"
-      ? setEmail(e.target.value)
-      : setPassword(e.target.value);
+    if (e.target.id === "email") {
+      setEmail(e.target.value);
+    } else if (e.target.id === "password") {
+      setPassword(e.target.value);
+    } else {
+      setPasswordConfirm(e.target.value);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -40,8 +46,17 @@ const Signup = (props) => {
             id="password"
           />
         </div>
+        <div className="signup__password">
+          <label htmlFor="password">Confirm Password</label>
+          <input
+            onChange={handleChange}
+            value={passwordConfirm}
+            type="password"
+            id="confirm"
+          />
+        </div>
         <button type="submit" className="signup__submit">
-          Log In
+          Create Account
         </button>
       </form>
     </section>

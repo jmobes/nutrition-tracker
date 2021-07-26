@@ -1,0 +1,42 @@
+.signup {
+  padding: 1em;
+  font-size: 2rem;
+  margin-top: 5rem;
+}
+.signup__title {
+  text-align: center;
+  text-transform: uppercase;
+}
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+.signup__email input,
+.signup__password input {
+  display: block;
+  width: 100%;
+  padding: 0.25em;
+  font-size: 2rem;
+}
+.signup__submit {
+  padding: 0.25em;
+  font-size: 2rem;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+.signup__form > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
+  .signup__form {
+    width: 60%;
+  }
+}
+@media (min-width: 950px) {
+  .signup__form {
+    max-width: 500px;
+  }
+}
