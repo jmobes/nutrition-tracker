@@ -1,7 +1,6 @@
-import { useState } from "react";
-import "./Login.css";
+import "./Signup.css";
 
-const Login = (props) => {
+const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,14 +24,14 @@ const Login = (props) => {
   };
 
   return (
-    <section className="login">
-      <h2 className="login__title">Login</h2>
-      <form onSubmit={handleSubmit} className="login__form">
-        <div className="login__email">
+    <section className="signup">
+      <h2 className="signup__title">signup</h2>
+      <form onSubmit={handleSubmit} className="signup__form">
+        <div className="signup__email">
           <label htmlFor="email">Email</label>
           <input onChange={handleChange} value={email} type="text" id="email" />
         </div>
-        <div className="login__password">
+        <div className="signup__password">
           <label htmlFor="password">Password</label>
           <input
             onChange={handleChange}
@@ -41,18 +40,12 @@ const Login = (props) => {
             id="password"
           />
         </div>
-        <button type="submit" className="login__submit">
+        <button type="submit" className="signup__submit">
           Log In
         </button>
       </form>
-      <div className="login__extras">
-        <p className="forgot__password">Forgot password?</p>
-        <p className="login__signup">
-          Don't have an account? <span>Sign up now</span>
-        </p>
-      </div>
     </section>
   );
 };
 
-export default Login;
+export default Signup;
