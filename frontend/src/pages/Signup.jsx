@@ -2,15 +2,19 @@ import { useState } from "react";
 import "./Signup.css";
 
 const Signup = (props) => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [error, setError] = useState(null);
 
   const handleChange = (e, id) => {
     if (e.target.id === "email") {
       setEmail(e.target.value);
     } else if (e.target.id === "password") {
       setPassword(e.target.value);
+    } else if (e.target.id === "username") {
+      setUsername(e.target.value);
     } else {
       setPasswordConfirm(e.target.value);
     }
@@ -18,7 +22,11 @@ const Signup = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/users/login", {
+    if (password !== passwordConfirm) {
+      setError("Passwords do not match");
+      return;
+    }
+    fetch("http://localhost:5000/api/users", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -35,7 +43,23 @@ const Signup = (props) => {
       <form onSubmit={handleSubmit} className="signup__form">
         <div className="signup__email">
           <label htmlFor="email">Email</label>
-          <input onChange={handleChange} value={email} type="text" id="email" />
+          <input
+            onChange={handleChange}
+            value={email}
+            type="email"
+            id="email"
+            required
+          />
+        </div>
+        <div className="signup__username">
+          <label htmlFor="username">Username</label>
+          <input
+            onChange={handleChange}
+            value={username}
+            type="text"
+            id="username"
+            required
+          />
         </div>
         <div className="signup__password">
           <label htmlFor="password">Password</label>
@@ -44,6 +68,7 @@ const Signup = (props) => {
             value={password}
             type="password"
             id="password"
+            required
           />
         </div>
         <div className="signup__password">
@@ -53,6 +78,7 @@ const Signup = (props) => {
             value={passwordConfirm}
             type="password"
             id="confirm"
+            required
           />
         </div>
         <button type="submit" className="signup__submit">

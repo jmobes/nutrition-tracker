@@ -13,6 +13,7 @@
   width: 80%;
   margin: 0 auto;
 }
+.signup__username input,
 .signup__email input,
 .signup__password input {
   display: block;
