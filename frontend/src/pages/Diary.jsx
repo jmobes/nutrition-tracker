@@ -13,12 +13,12 @@ const Diary = () => {
       </p>
       <div className="diary__header">
         <div className="diary__header__calendar__icon">
-          <i class="far fa-calendar-alt"></i>
+          <i className="far fa-calendar-alt"></i>
         </div>
         <div className="diary__header__calendar__buttons">
-          <i class="diary__header__calendar__button fas fa-long-arrow-alt-left"></i>
+          <i className="diary__header__calendar__button fas fa-long-arrow-alt-left"></i>
           <p className="calendar__day">Thursday, July 8, 2021</p>
-          <i class="diary__header__calendar__button fas fa-long-arrow-alt-right"></i>
+          <i className="diary__header__calendar__button fas fa-long-arrow-alt-right"></i>
         </div>
         {/* <div className="diary__calendar">
           <Calendar />
@@ -54,7 +54,7 @@ const Diary = () => {
                 <td>7</td>
                 <td>16</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -64,7 +64,7 @@ const Diary = () => {
                 <td>1</td>
                 <td>0</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -74,7 +74,7 @@ const Diary = () => {
                 <td>10</td>
                 <td>8</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
             </tbody>
@@ -120,7 +120,7 @@ const Diary = () => {
                 <td>7</td>
                 <td>16</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -130,7 +130,7 @@ const Diary = () => {
                 <td>1</td>
                 <td>0</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -140,7 +140,7 @@ const Diary = () => {
                 <td>10</td>
                 <td>8</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
             </tbody>
@@ -186,7 +186,7 @@ const Diary = () => {
                 <td>7</td>
                 <td>16</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -196,7 +196,7 @@ const Diary = () => {
                 <td>1</td>
                 <td>0</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -206,7 +206,7 @@ const Diary = () => {
                 <td>10</td>
                 <td>8</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
             </tbody>
@@ -252,7 +252,7 @@ const Diary = () => {
                 <td>7</td>
                 <td>16</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -262,7 +262,7 @@ const Diary = () => {
                 <td>1</td>
                 <td>0</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
               <tr className="diary__meal__table__row">
@@ -272,7 +272,7 @@ const Diary = () => {
                 <td>10</td>
                 <td>8</td>
                 <td className="empty__col">
-                  <i class="fas fa-minus"></i>
+                  <i className="fas fa-minus"></i>
                 </td>
               </tr>
             </tbody>
@@ -292,33 +292,35 @@ const Diary = () => {
       </div>
       <div className="diary__summary">
         <table>
-          <tr>
-            <td>
-              <strong>Totals</strong>
-            </td>
-            <td>905</td>
-            <td>93</td>
-            <td>63</td>
-            <td>32</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Your Daily Goal</strong>
-            </td>
-            <td>1800</td>
-            <td>225</td>
-            <td>90</td>
-            <td>60</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Remaining</strong>
-            </td>
-            <td>895</td>
-            <td>132</td>
-            <td>27</td>
-            <td>28</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Totals</strong>
+              </td>
+              <td>905</td>
+              <td>93</td>
+              <td>63</td>
+              <td>32</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Your Daily Goal</strong>
+              </td>
+              <td>1800</td>
+              <td>225</td>
+              <td>90</td>
+              <td>60</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Remaining</strong>
+              </td>
+              <td>895</td>
+              <td>132</td>
+              <td>27</td>
+              <td>28</td>
+            </tr>
+          </tbody>
           <tfoot>
             <tr>
               <td className="empty__col"></td>
