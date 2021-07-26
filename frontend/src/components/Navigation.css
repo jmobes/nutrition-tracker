@@ -11,6 +11,9 @@
 ul {
   list-style: none;
 }
+ul a {
+  text-decoration: none;
+}
 .navigation__list li {
   color: #fff;
   font-size: 1.5rem;
