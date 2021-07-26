@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./Signup.css";
 
 const Signup = (props) => {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState(null);
@@ -20,26 +20,41 @@ const Signup = (props) => {
     }
   };
 
+  const resetInputs = () => {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirm("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== passwordConfirm) {
       setError("Passwords do not match");
+      resetInputs();
       return;
     }
     fetch("http://localhost:5000/api/users", {
       method: "post",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, username, password }),
     })
       .then((res) => res.json())
       .then((json) => console.log(json))
-      .catch((ex) => console.error(ex));
+      .catch((ex) => {
+        if (ex.message.toLowerCase() === "failed to fetch") {
+          setError("Connection error. Please try again.");
+        }
+      });
     console.log("Form data was submitted");
+
+    resetInputs();
   };
 
   return (
     <section className="signup">
       <h2 className="signup__title">signup</h2>
+      <p className="signup__error">{error}</p>
       <form onSubmit={handleSubmit} className="signup__form">
         <div className="signup__email">
           <label htmlFor="email">Email</label>
