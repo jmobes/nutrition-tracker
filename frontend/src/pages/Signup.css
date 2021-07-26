@@ -10,8 +10,8 @@
 .signup__error {
   text-align: center;
   color: rgb(236, 71, 71);
-  text-transform: capitalize;
   font-size: 1.6rem;
+  font-weight: 600;
 }
 .signup__form {
   display: flex;

@@ -40,10 +40,27 @@ const Signup = (props) => {
       body: JSON.stringify({ email, username, password }),
     })
       .then((res) => res.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        if (json.status === "fail") {
+          throw new Error(json.message);
+        }
+        console.log(json);
+      })
       .catch((ex) => {
         if (ex.message.toLowerCase() === "failed to fetch") {
           setError("Connection error. Please try again.");
+        } else if (
+          ex.message.toLowerCase() ===
+          `e11000 duplicate key error collection: nutrition-tracker.users index: email_1 dup key: { email: "${email}" }`
+        ) {
+          setError("Email already taken.");
+        } else if (
+          ex.message.toLowerCase() ===
+          `e11000 duplicate key error collection: nutrition-tracker.users index: username_1 dup key: { username: "${username}" }`
+        ) {
+          setError("Username already taken.");
+        } else {
+          setError(ex.message);
         }
       });
     console.log("Form data was submitted");
