@@ -47,11 +47,6 @@
 }
 @media (min-width: 950px) {
   .login__form {
-    width: 50%;
-  }
-}
-@media (min-width: 1200px) {
-  .login__form {
-    width: 40%;
+    max-width: 500px;
   }
 }
