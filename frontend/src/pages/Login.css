@@ -3,6 +3,10 @@
   font-size: 2rem;
   margin-top: 5rem;
 }
+.login__title {
+  text-align: center;
+  text-transform: uppercase;
+}
 .login__form {
   display: flex;
   flex-direction: column;
