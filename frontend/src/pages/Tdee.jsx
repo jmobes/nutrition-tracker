@@ -11,7 +11,32 @@ const Tdee = () => {
   const [activity, setActivity] = useState(null);
   const [error, setError] = useState(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    calculate();
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target);
+    if (e.target.type === "radio") {
+      setGender(e.target.value);
+    } else if (e.target.type === "number") {
+      if (e.target.placeholder === "years") {
+        setAge(e.target.value);
+      }
+      if (e.target.placeholder === "lbs") {
+        setWeight(e.target.value);
+      }
+      if (e.target.placeholder === "feet") {
+        setFeet(e.target.value);
+      }
+      if (e.target.placeholder === "inches") {
+        setInches(e.target.value);
+      }
+    }
+  };
+
+  const calculate = (gender) => {
     if (age < 1 || age > 120) {
       return;
     }
@@ -24,6 +49,13 @@ const Tdee = () => {
     if (inches < 0 || inches >= 12) {
       return;
     }
+
+    const kgs = weight * 0.45359237;
+    const height = feet * 30.48 + inches * 2.54;
+    const genderConstant = gender === "male" ? 88.362 : 447.593;
+    const bmr = genderConstant + 13.397 * kgs + 4.799 * height - age;
+
+    console.log(bmr);
   };
 
   return (
@@ -38,12 +70,18 @@ const Tdee = () => {
         dieting to figure out how many calories you should eat to reach your
         goals.
       </p>
-      <form className="tdee__form">
+      <form className="tdee__form" onSubmit={handleSubmit}>
         <div className="tdee__form__gender form__caption">
           <strong>Gender</strong>
-          <div className="tdee__form__gender__genders">
+          <div className="tdee__form__gender__genders" onChange={handleChange}>
             <label htmlFor="male">Male</label>
-            <input id="male" type="radio" name="gender" value="male" checked />
+            <input
+              id="male"
+              type="radio"
+              name="gender"
+              value="male"
+              defaultChecked
+            />
             <label htmlFor="female">Female</label>
             <input id="female" type="radio" name="gender" value="female" />
           </div>
@@ -51,30 +89,28 @@ const Tdee = () => {
         <div className="tdee__form__age form__caption">
           <strong>Age</strong>
           <label>
-            <input type="number" placeholder="years" />
+            <input type="number" placeholder="years" onChange={handleChange} />
           </label>
         </div>
         <div className="tdee__form__weight form__caption">
           <strong>Weight</strong>
           <label>
-            <input type="number" placeholder="lbs" />
+            <input type="number" placeholder="lbs" onChange={handleChange} />
           </label>
         </div>
         <div className="tdee__form__height form__caption">
           <strong>Height</strong>
           <label>
-            <input type="number" placeholder="feet" />
+            <input type="number" placeholder="feet" onChange={handleChange} />
           </label>
           <label>
-            <input type="number" placeholder="inches" />
+            <input type="number" placeholder="inches" onChange={handleChange} />
           </label>
         </div>
         <div className="tdee__form__activity">
           <strong>Activity</strong>
-          <select name="activity">
-            <option value="sedentary" selected>
-              Sedentary (office job)
-            </option>
+          <select name="activity" defaultValue="light">
+            <option value="sedentary">Sedentary (office job)</option>
             <option value="light">Light Exercise (1-2 days/week)</option>
             <option value="moderate">Moderate Exercise (3-5 days/week)</option>
             <option value="heavy">Heavy Exercise (6-7 days/week)</option>
