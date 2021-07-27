@@ -2,6 +2,30 @@ import "./Tdee.css";
 import { useState } from "react";
 
 const Tdee = () => {
+  const [calculated, setCalculated] = useState(false);
+  const [gender, setGender] = useState("male");
+  const [age, setAge] = useState(null);
+  const [weight, setWeight] = useState(null);
+  const [feet, setFeet] = useState(null);
+  const [inches, setInches] = useState(null);
+  const [activity, setActivity] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = () => {
+    if (age < 1 || age > 120) {
+      return;
+    }
+    if (weight <= 0 || weight > 1000) {
+      return;
+    }
+    if (feet <= 0 || feet > 8) {
+      return;
+    }
+    if (inches < 0 || inches >= 12) {
+      return;
+    }
+  };
+
   return (
     <div className="tdee">
       <h2 className="tdee__title">
