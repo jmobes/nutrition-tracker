@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Goals.css";
 
 const Goals = () => {
@@ -13,7 +14,11 @@ const Goals = () => {
         a week, you will either lose a pound or gain a pound.
       </p>
       <p className="goals__tdee">
-        Calculate your <strong>TDEE</strong> <a href="#">HERE</a>
+        Calculate your <strong>TDEE</strong>{" "}
+        <Link to="/tdee-calculator">HERE</Link>
+      </p>
+      <p className="goals__calculatedTDEE">
+        Your TDEE is: <span>2300 calories</span>
       </p>
       <div className="goals__tables">
         <div className="goals__tables__weight">
