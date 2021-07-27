@@ -6,7 +6,7 @@
 .logInOut__nav__item:first-child {
   margin-right: 0.5rem;
 }
-.logInOut__nav__item:first-child::after {
+.first::after {
   content: "|";
   color: rgba(0, 114, 188, 0.6);
   opacity: 0.5;

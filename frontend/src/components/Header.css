@@ -14,6 +14,12 @@
   max-width: 100rem;
   margin: 0 auto;
 }
+.header__top a {
+  text-decoration: none;
+}
+.header__top a:visited {
+  color: unset;
+}
 
 @media (min-width: 700px) {
   .header__top {
