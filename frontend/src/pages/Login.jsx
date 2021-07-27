@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 const Login = (props) => {
@@ -48,7 +49,10 @@ const Login = (props) => {
       <div className="login__extras">
         <p className="forgot__password">Forgot password?</p>
         <p className="login__signup">
-          Don't have an account? <span>Sign up now</span>
+          Don't have an account?{" "}
+          <Link to="/signup">
+            <span>Sign up now</span>
+          </Link>
         </p>
       </div>
     </section>
