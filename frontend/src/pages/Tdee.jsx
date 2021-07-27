@@ -4,11 +4,11 @@ import { useState } from "react";
 const Tdee = () => {
   const [calculated, setCalculated] = useState(false);
   const [gender, setGender] = useState("male");
-  const [age, setAge] = useState(null);
-  const [weight, setWeight] = useState(null);
-  const [feet, setFeet] = useState(null);
-  const [inches, setInches] = useState(null);
-  const [activity, setActivity] = useState(null);
+  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
+  const [feet, setFeet] = useState("");
+  const [inches, setInches] = useState("");
+  const [activity, setActivity] = useState("light");
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
@@ -17,7 +17,6 @@ const Tdee = () => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target);
     if (e.target.type === "radio") {
       setGender(e.target.value);
     } else if (e.target.type === "number") {
@@ -31,31 +30,58 @@ const Tdee = () => {
         setFeet(e.target.value);
       }
       if (e.target.placeholder === "inches") {
+        if (e.target.value > 11 || e.target.value < 0) {
+          return;
+        }
         setInches(e.target.value);
       }
+    } else {
+      setActivity(e.target.value);
     }
   };
 
-  const calculate = (gender) => {
-    if (age < 1 || age > 120) {
+  const calculate = () => {
+    if (age < 1 || age > 100) {
+      setError("Age must be in between 1 and 100 years.");
       return;
     }
-    if (weight <= 0 || weight > 1000) {
+    if (weight <= 50 || weight > 1000) {
+      setError("Weight must be in between 50 and 1000 lbs.");
       return;
     }
-    if (feet <= 0 || feet > 8) {
+    if (feet <= 2 || feet > 9) {
+      setError("Weight must be in between 2 and 9 feet.");
       return;
     }
     if (inches < 0 || inches >= 12) {
+      setError("Weight must be in between 0 and 11 inches.");
       return;
     }
 
     const kgs = weight * 0.45359237;
     const height = feet * 30.48 + inches * 2.54;
-    const genderConstant = gender === "male" ? 88.362 : 447.593;
-    const bmr = genderConstant + 13.397 * kgs + 4.799 * height - age;
+    const genderConstant = calculateConstants(gender);
+    const bmr =
+      genderConstant.constant +
+      genderConstant.weight * kgs +
+      genderConstant.height * height -
+      genderConstant.age * age;
 
-    console.log(bmr);
+    return bmr * calculateActivityConstant();
+  };
+
+  const calculateConstants = () => {
+    return gender === "male"
+      ? { constant: 88.362, weight: 13.397, height: 4.799, age: 5.677 }
+      : { constant: 447.593, weight: 9.247, height: 3.096, age: 4.33 };
+  };
+
+  const calculateActivityConstant = () => {
+    if (activity === "sedentary") return 1.2;
+    else if (activity === "light") return 1.375;
+    else if (activity === "moderate") return 1.55;
+    else if (activity === "heavy") return 1.725;
+    else return 1.9;
   };
 
   return (
@@ -73,7 +99,11 @@ const Tdee = () => {
       <form className="tdee__form" onSubmit={handleSubmit}>
         <div className="tdee__form__gender form__caption">
           <strong>Gender</strong>
-          <div className="tdee__form__gender__genders" onChange={handleChange}>
+          <div
+            className="tdee__form__gender__genders"
+            onChange={handleChange}
+            required
+          >
             <label htmlFor="male">Male</label>
             <input
               id="male"
@@ -89,27 +119,55 @@ const Tdee = () => {
         <div className="tdee__form__age form__caption">
           <strong>Age</strong>
           <label>
-            <input type="number" placeholder="years" onChange={handleChange} />
+            <input
+              type="number"
+              placeholder="years"
+              onChange={handleChange}
+              required
+              value={age}
+            />
           </label>
         </div>
         <div className="tdee__form__weight form__caption">
           <strong>Weight</strong>
           <label>
-            <input type="number" placeholder="lbs" onChange={handleChange} />
+            <input
+              type="number"
+              placeholder="lbs"
+              onChange={handleChange}
+              required
+              value={weight}
+            />
           </label>
         </div>
         <div className="tdee__form__height form__caption">
           <strong>Height</strong>
           <label>
-            <input type="number" placeholder="feet" onChange={handleChange} />
+            <input
+              type="number"
+              placeholder="feet"
+              onChange={handleChange}
+              required
+              value={feet}
+            />
           </label>
           <label>
-            <input type="number" placeholder="inches" onChange={handleChange} />
+            <input
+              type="number"
+              placeholder="inches"
+              onChange={handleChange}
+              value={inches}
+            />
           </label>
         </div>
         <div className="tdee__form__activity">
           <strong>Activity</strong>
-          <select name="activity" defaultValue="light">
+          <select
+            name="activity"
+            onChange={handleChange}
+            value={activity}
+            required
+          >
             <option value="sedentary">Sedentary (office job)</option>
             <option value="light">Light Exercise (1-2 days/week)</option>
             <option value="moderate">Moderate Exercise (3-5 days/week)</option>
