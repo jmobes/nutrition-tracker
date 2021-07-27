@@ -1,5 +1,6 @@
 :root {
   --color-primary: #0072bc;
+  --color-error: rgb(236, 71, 71);
 }
 *,
 *::before,
