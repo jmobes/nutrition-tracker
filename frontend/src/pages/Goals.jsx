@@ -1,7 +1,15 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Goals.css";
 
 const Goals = () => {
+  const [currentWeight, setCurrentWeight] = useState("");
+  const [goalWeight, setGoalWeight] = useState("");
+  const [calories, setCalories] = useState("");
+  const [carbs, setCarbs] = useState("");
+  const [protein, setProtein] = useState("");
+  const [fat, setFat] = useState("");
+
   return (
     <section className="goals">
       <h2 className="goals__title">Your Fitness Goals</h2>
