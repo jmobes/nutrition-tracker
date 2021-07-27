@@ -15,7 +15,13 @@
 .tdee__error {
   color: var(--color-error);
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
+}
+.tdee__success {
+  color: #51a351;
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.4rem;
 }
 .tdee__form {
   margin-top: 2rem;

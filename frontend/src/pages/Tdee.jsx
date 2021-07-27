@@ -1,8 +1,8 @@
 import "./Tdee.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Tdee = () => {
-  const [calculated, setCalculated] = useState(false);
+  const [calculated, setCalculated] = useState("");
   const [gender, setGender] = useState("male");
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
@@ -10,9 +10,38 @@ const Tdee = () => {
   const [inches, setInches] = useState("");
   const [activity, setActivity] = useState("light");
   const [error, setError] = useState(null);
+  const [updated, setUpdated] = useState(false);
+
+  const url = "http://localhost:5000/api";
+
+  useEffect(() => {
+    if (calculated) {
+      fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`, {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tdee: calculated }),
+      })
+        .then((result) => result.json())
+        .then((json) => {
+          if (json.status === "fail") {
+            throw new Error(json.message);
+          }
+          setError(null);
+          setUpdated(true);
+        })
+        .catch((ex) => {
+          if (ex.message.toLowerCase() === "failed to fetch") {
+            setError("Database connection error. Please try again.");
+          } else {
+            setError(ex.message);
+          }
+        });
+    }
+  }, [calculated]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setUpdated(false);
     calculate();
   };
 
@@ -67,8 +96,8 @@ const Tdee = () => {
       genderConstant.height * height -
       genderConstant.age * age;
 
-    setCalculated(bmr * calculateActivityConstant());
-    return bmr * calculateActivityConstant();
+    setCalculated(Math.ceil(bmr * calculateActivityConstant()));
+    return calculated;
   };
 
   const calculateConstants = () => {
@@ -178,6 +207,9 @@ const Tdee = () => {
           </select>
         </div>
         <button className="tdee__form__submit">Calculate</button>
+        {updated ? (
+          <p className="tdee__success">Your TDEE was updated.</p>
+        ) : null}
       </form>
       {calculated ? (
         <div className="tdee__results">
@@ -187,12 +219,12 @@ const Tdee = () => {
             </h3>
             <div className="tdee__results__maintenance__calories">
               <p className="tdee__results__maintenance__cpd">
-                <strong>{Math.ceil(calculated)}</strong>
+                <strong>{calculated}</strong>
                 <span>calories per day</span>
               </p>
               <div className="divider"></div>
               <p className="tdee__results__maintenance__cpw">
-                <strong>{`${Math.ceil(calculated * 7)}`}</strong>
+                <strong>{`${calculated * 7}`}</strong>
                 <span>calories per week</span>
               </p>
             </div>

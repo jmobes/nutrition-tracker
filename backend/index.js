@@ -29,7 +29,10 @@ app.use((req, res, next) => {
     "token",
     "Accept"
   );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE"
+  );
 
   next();
 });
