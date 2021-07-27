@@ -9,6 +9,22 @@ const Goals = () => {
   const [carbs, setCarbs] = useState("");
   const [protein, setProtein] = useState("");
   const [fat, setFat] = useState("");
+  const [tdee, setTdee] = useState("");
+  const [error, setError] = useState(null);
+
+  const url = "http://localhost:5000/api";
+
+  useEffect(() => {
+    fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`)
+      .then((result) => result.json())
+      .then((json) => {
+        if (json.status === "fail") {
+          throw new Error(json.message);
+        }
+        setTdee(json.tdee);
+      })
+      .catch((ex) => setError(ex.message));
+  }, []);
 
   return (
     <section className="goals">
@@ -25,9 +41,11 @@ const Goals = () => {
         Calculate your <strong>TDEE</strong>{" "}
         <Link to="/tdee-calculator">HERE</Link>
       </p>
-      <p className="goals__calculatedTDEE">
-        Your TDEE is: <span>2300 calories</span>
-      </p>
+      {tdee ? (
+        <p className="goals__calculatedTDEE">
+          Your TDEE is: <span>{tdee} calories</span>
+        </p>
+      ) : null}
       <div className="goals__tables">
         <div className="goals__tables__weight">
           <div className="goals__tables__weight__header">

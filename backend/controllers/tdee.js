@@ -6,10 +6,10 @@ const mongoose = require("mongoose");
 const getTdee = async (req, res, next) => {
   const userId = req.params.uid;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
-    return next(new HttpError("invalid user id", 400));
+    return next(new HttpError("Invalid user id", 400));
   }
   try {
-    let user = User.findById(userId);
+    let user = await User.findById(userId);
     if (!user) {
       return next(new HttpError("Could not find user with the given ID", 404));
     }
