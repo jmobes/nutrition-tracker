@@ -6,7 +6,7 @@ const LogInOut = () => {
     <nav className="logInOut">
       <ul className="logInOut__nav">
         <Link to="/login">
-          <li className="logInOut__nav__item">Log In</li>
+          <li className="logInOut__nav__item first">Log In</li>
         </Link>
         <Link to="/signup">
           <li className="logInOut__nav__item">Sign Up</li>
