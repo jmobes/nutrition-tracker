@@ -18,7 +18,8 @@ const Goals = () => {
   const [carbsInput, setCarbsInput] = useState("");
   const [proteinInput, setProteinInput] = useState("");
   const [fatInput, setFatInput] = useState("");
-
+  const [weightError, setWeightError] = useState(null);
+  const [macrosError, setMacrosError] = useState(null);
   const [error, setError] = useState(null);
 
   const url = "http://localhost:5000/api";
@@ -43,6 +44,23 @@ const Goals = () => {
   //   return () => abortCont.abort();
   // }, []);
 
+  const updateWeight = () => {
+    if (!Number(currentWeightInput) && !Number(goalWeightInput)) {
+      setWeightError("Update at least one value");
+      console.log("Update at least one value");
+      return;
+    }
+    if (
+      (Number(currentWeightInput) && Number(currentWeightInput) < 0) ||
+      (Number(goalWeightInput) && Number(goalWeightInput) < 0)
+    ) {
+      setWeightError("Please use positive numbers only");
+      console.log("Please use positive numbers only");
+      return;
+    }
+    console.log("not caught");
+  };
+
   const toggleEdit = (e) => {
     if (e.target.id === "button__weight") {
       setWeightEdit(true);
@@ -52,9 +70,15 @@ const Goals = () => {
     }
     if (e.target.id === "cancel__weight") {
       setWeightEdit(false);
+      setCurrentWeightInput("");
+      setGoalWeightInput("");
     }
     if (e.target.id === "cancel__macros") {
       setMacrosEdit(false);
+      setCaloriesInput("");
+      setCarbsInput("");
+      setProteinInput("");
+      setFatInput("");
     }
   };
 
@@ -107,7 +131,12 @@ const Goals = () => {
                 >
                   Cancel
                 </button>
-                <button className="goals__tables__button">Save</button>
+                <button
+                  className="goals__tables__button"
+                  onClick={updateWeight}
+                >
+                  Save
+                </button>
               </div>
             ) : (
               <button
