@@ -17,7 +17,8 @@
   font-size: 1.25rem;
 }
 .goals__calculatedTDEE {
-  font-size: 2.5rem;
+  padding-top: 1rem;
+  font-size: 2rem;
   font-weight: 500;
   text-align: center;
 }
@@ -72,6 +73,10 @@
 .goals__tables__calories,
 .goals__tables__micros {
   padding-top: 2rem;
+}
+.goals__tables__input {
+  width: 50px;
+  text-align: center;
 }
 
 @media (min-width: 500px) {

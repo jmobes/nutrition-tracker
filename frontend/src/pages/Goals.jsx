@@ -92,13 +92,29 @@ const Goals = () => {
             <p className="goals__tables__weight__key">
               <strong>Current Weight</strong>
             </p>
-            <p className="goals__tables__weight__value">170 lbs</p>
+            {weightEdit ? (
+              <input
+                type="number"
+                className="goals__tables__input"
+                placeholder="lbs"
+              />
+            ) : (
+              <p className="goals__tables__weight__value">160 lbs</p>
+            )}
           </div>
           <div className="goals__tables__weight__row">
             <p className="goals__tables__weight__key">
               <strong>Goal Weight</strong>
             </p>
-            <p className="goals__tables__weight__value">160 lbs</p>
+            {weightEdit ? (
+              <input
+                type="number"
+                className="goals__tables__input"
+                placeholder="lbs"
+              />
+            ) : (
+              <p className="goals__tables__weight__value">160 lbs</p>
+            )}
           </div>
         </div>
         <div className="goals__tables__calories">
@@ -131,25 +147,57 @@ const Goals = () => {
             <p className="goals__tables__calories__key">
               <strong>Calories</strong>
             </p>
-            <p className="goals__tables__calories__value">1800</p>
+            {macrosEdit ? (
+              <input
+                type="number"
+                className="goals__tables__input"
+                placeholder="kcal"
+              />
+            ) : (
+              <p className="goals__tables__calories__value">1800</p>
+            )}
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
               <strong>Carbohydrates</strong> <span>225 g</span>
             </p>
-            <p className="goals__tables__calories__value">50%</p>
+            {macrosEdit ? (
+              <input
+                type="number"
+                className="goals__tables__input"
+                placeholder="%"
+              />
+            ) : (
+              <p className="goals__tables__calories__value">50%</p>
+            )}
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
               <strong>Fat</strong> <span>60 g</span>
             </p>
-            <p className="goals__tables__calories__value">10%</p>
+            {macrosEdit ? (
+              <input
+                type="number"
+                className="goals__tables__input"
+                placeholder="%"
+              />
+            ) : (
+              <p className="goals__tables__calories__value">50%</p>
+            )}
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
               <strong>Protein</strong> <span>90 g</span>
             </p>
-            <p className="goals__tables__calories__value">40%</p>
+            {macrosEdit ? (
+              <input
+                type="number"
+                className="goals__tables__input"
+                placeholder="%"
+              />
+            ) : (
+              <p className="goals__tables__calories__value">50%</p>
+            )}
           </div>
         </div>
       </div>
