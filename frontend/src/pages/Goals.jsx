@@ -10,6 +10,8 @@ const Goals = () => {
   const [protein, setProtein] = useState("");
   const [fat, setFat] = useState("");
   const [tdee, setTdee] = useState("");
+  const [weightEdit, setWeightEdit] = useState(false);
+  const [macrosEdit, setMacrosEdit] = useState(false);
   const [error, setError] = useState(null);
 
   const url = "http://localhost:5000/api";
@@ -25,6 +27,15 @@ const Goals = () => {
       })
       .catch((ex) => setError(ex.message));
   }, []);
+
+  const toggleEdit = (e) => {
+    if (e.target.id === "button__weight") {
+      setWeightEdit(true);
+    }
+    if (e.target.id === "button__macros") {
+      setMacrosEdit(true);
+    }
+  };
 
   return (
     <section className="goals">
@@ -50,7 +61,20 @@ const Goals = () => {
         <div className="goals__tables__weight">
           <div className="goals__tables__weight__header">
             <h3 className="goals__tables__weight__header__title">Weight</h3>
-            <button className="goals__tables__button">Edit</button>
+            {weightEdit ? (
+              <div className="goals__tables__buttons">
+                <button className="goals__tables__button">Cancel</button>
+                <button className="goals__tables__button">Save</button>
+              </div>
+            ) : (
+              <button
+                className="goals__tables__button"
+                id="button__weight"
+                onClick={toggleEdit}
+              >
+                Edit
+              </button>
+            )}
           </div>
           <div className="goals__tables__weight__row">
             <p className="goals__tables__weight__key">
@@ -70,7 +94,13 @@ const Goals = () => {
             <h3 className="goals__tables__calories__header__title">
               Daily Nutrition Goals
             </h3>
-            <button className="goals__tables__button">Edit</button>
+            <button
+              className="goals__tables__button"
+              onClick={toggleEdit}
+              id="button__macros"
+            >
+              Edit
+            </button>
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
