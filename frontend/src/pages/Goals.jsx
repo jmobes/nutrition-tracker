@@ -58,7 +58,22 @@ const Goals = () => {
       console.log("Please use positive numbers only");
       return;
     }
-    console.log("not caught");
+    const options = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...(currentWeightInput && { currentWeight: currentWeightInput }),
+        ...(goalWeightInput && { goalWeight: goalWeightInput }),
+      }),
+    };
+    console.log(options.body);
+    fetch(`${url}/goals/weight/60fd1eceef841b3e8820c66f`, options)
+      .then((result) => result.json())
+      .then((json) => console.log(json))
+      .catch((ex) => {
+        setError(ex.message);
+        console.error(ex.message);
+      });
   };
 
   const toggleEdit = (e) => {

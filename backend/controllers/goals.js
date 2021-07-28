@@ -33,6 +33,11 @@ const setWeight = async (req, res, next) => {
   }
 
   const { currentWeight, goalWeight } = req.body;
+  console.log(req.body);
+  if (!currentWeight && !goalWeight) {
+    return next(new HttpError("Please update at least one field.", 400));
+  }
+
   try {
     let user = await User.findById(userId);
     if (!user) {
