@@ -35,6 +35,12 @@ const Goals = () => {
     if (e.target.id === "button__macros") {
       setMacrosEdit(true);
     }
+    if (e.target.id === "cancel__weight") {
+      setWeightEdit(false);
+    }
+    if (e.target.id === "cancel__macros") {
+      setMacrosEdit(false);
+    }
   };
 
   return (
@@ -63,7 +69,13 @@ const Goals = () => {
             <h3 className="goals__tables__weight__header__title">Weight</h3>
             {weightEdit ? (
               <div className="goals__tables__buttons">
-                <button className="goals__tables__button">Cancel</button>
+                <button
+                  className="goals__tables__button"
+                  id="cancel__weight"
+                  onClick={toggleEdit}
+                >
+                  Cancel
+                </button>
                 <button className="goals__tables__button">Save</button>
               </div>
             ) : (
@@ -92,15 +104,28 @@ const Goals = () => {
         <div className="goals__tables__calories">
           <div className="goals__tables__calories__header">
             <h3 className="goals__tables__calories__header__title">
-              Daily Nutrition Goals
+              Daily Nutrition
             </h3>
-            <button
-              className="goals__tables__button"
-              onClick={toggleEdit}
-              id="button__macros"
-            >
-              Edit
-            </button>
+            {macrosEdit ? (
+              <div className="goals__tables__buttons">
+                <button
+                  className="goals__tables__button"
+                  id="cancel__macros"
+                  onClick={toggleEdit}
+                >
+                  Cancel
+                </button>
+                <button className="goals__tables__button">Save</button>
+              </div>
+            ) : (
+              <button
+                className="goals__tables__button"
+                onClick={toggleEdit}
+                id="button__macros"
+              >
+                Edit
+              </button>
+            )}
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
