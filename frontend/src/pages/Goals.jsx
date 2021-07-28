@@ -12,21 +12,36 @@ const Goals = () => {
   const [tdee, setTdee] = useState("");
   const [weightEdit, setWeightEdit] = useState(false);
   const [macrosEdit, setMacrosEdit] = useState(false);
+  const [currentWeightInput, setCurrentWeightInput] = useState("");
+  const [goalWeightInput, setGoalWeightInput] = useState("");
+  const [caloriesInput, setCaloriesInput] = useState("");
+  const [carbsInput, setCarbsInput] = useState("");
+  const [proteinInput, setProteinInput] = useState("");
+  const [fatInput, setFatInput] = useState("");
+
   const [error, setError] = useState(null);
 
   const url = "http://localhost:5000/api";
 
-  useEffect(() => {
-    fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`)
-      .then((result) => result.json())
-      .then((json) => {
-        if (json.status === "fail") {
-          throw new Error(json.message);
-        }
-        setTdee(json.tdee);
-      })
-      .catch((ex) => setError(ex.message));
-  }, []);
+  // useEffect(() => {
+  //   const abortCont = new AbortController();
+
+  //   fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`, { signal: abortCont.signal })
+  //     .then((result) => result.json())
+  //     .then((json) => {
+  //       if (json.status === "fail") {
+  //         throw new Error(json.message);
+  //       }
+  //       setTdee(json.tdee);
+  //     })
+  //     .catch((ex) => {
+  //       if (ex.name !== "AbortError") {
+  //         setError(ex.message);
+  //       }
+  //     });
+
+  //   return () => abortCont.abort();
+  // }, []);
 
   const toggleEdit = (e) => {
     if (e.target.id === "button__weight") {
@@ -40,6 +55,22 @@ const Goals = () => {
     }
     if (e.target.id === "cancel__macros") {
       setMacrosEdit(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    if (e.target.id === "currentWeight") {
+      setCurrentWeightInput(e.target.value);
+    } else if (e.target.id === "goalWeight") {
+      setGoalWeightInput(e.target.value);
+    } else if (e.target.id === "calories") {
+      setCaloriesInput(e.target.value);
+    } else if (e.target.id === "carbs") {
+      setCarbsInput(e.target.value);
+    } else if (e.target.id === "protein") {
+      setProteinInput(e.target.value);
+    } else {
+      setFatInput(e.target.value);
     }
   };
 
@@ -97,6 +128,9 @@ const Goals = () => {
                 type="number"
                 className="goals__tables__input"
                 placeholder="lbs"
+                id="currentWeight"
+                onChange={handleChange}
+                value={currentWeightInput}
               />
             ) : (
               <p className="goals__tables__weight__value">160 lbs</p>
@@ -111,6 +145,9 @@ const Goals = () => {
                 type="number"
                 className="goals__tables__input"
                 placeholder="lbs"
+                id="goalWeight"
+                onChange={handleChange}
+                value={goalWeightInput}
               />
             ) : (
               <p className="goals__tables__weight__value">160 lbs</p>
@@ -152,6 +189,9 @@ const Goals = () => {
                 type="number"
                 className="goals__tables__input"
                 placeholder="kcal"
+                id="calories"
+                onChange={handleChange}
+                value={caloriesInput}
               />
             ) : (
               <p className="goals__tables__calories__value">1800</p>
@@ -166,20 +206,9 @@ const Goals = () => {
                 type="number"
                 className="goals__tables__input"
                 placeholder="%"
-              />
-            ) : (
-              <p className="goals__tables__calories__value">50%</p>
-            )}
-          </div>
-          <div className="goals__tables__calories__row">
-            <p className="goals__tables__calories__key">
-              <strong>Fat</strong> <span>60 g</span>
-            </p>
-            {macrosEdit ? (
-              <input
-                type="number"
-                className="goals__tables__input"
-                placeholder="%"
+                id="carbs"
+                onChange={handleChange}
+                value={carbsInput}
               />
             ) : (
               <p className="goals__tables__calories__value">50%</p>
@@ -194,6 +223,26 @@ const Goals = () => {
                 type="number"
                 className="goals__tables__input"
                 placeholder="%"
+                id="protein"
+                onChange={handleChange}
+                value={proteinInput}
+              />
+            ) : (
+              <p className="goals__tables__calories__value">50%</p>
+            )}
+          </div>
+          <div className="goals__tables__calories__row">
+            <p className="goals__tables__calories__key">
+              <strong>Fat</strong> <span>60 g</span>
+            </p>
+            {macrosEdit ? (
+              <input
+                type="number"
+                className="goals__tables__input"
+                placeholder="%"
+                id="fat"
+                onChange={handleChange}
+                value={fatInput}
               />
             ) : (
               <p className="goals__tables__calories__value">50%</p>
