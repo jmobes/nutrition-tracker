@@ -24,25 +24,39 @@ const Goals = () => {
 
   const url = "http://localhost:5000/api";
 
-  // useEffect(() => {
-  //   const abortCont = new AbortController();
+  useEffect(() => {
+    const abortCont = new AbortController();
 
-  //   fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`, { signal: abortCont.signal })
-  //     .then((result) => result.json())
-  //     .then((json) => {
-  //       if (json.status === "fail") {
-  //         throw new Error(json.message);
-  //       }
-  //       setTdee(json.tdee);
-  //     })
-  //     .catch((ex) => {
-  //       if (ex.name !== "AbortError") {
-  //         setError(ex.message);
-  //       }
-  //     });
+    fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`, { signal: abortCont.signal })
+      .then((result) => result.json())
+      .then((json) => {
+        if (json.status === "fail") {
+          throw new Error(json.message);
+        }
+        setTdee(json.tdee);
+      })
+      .catch((ex) => {
+        if (ex.name !== "AbortError") {
+          setError(ex.message);
+        }
+      });
 
-  //   return () => abortCont.abort();
-  // }, []);
+    fetch(`${url}/goals/60fd1eceef841b3e8820c66f`, { signal: abortCont.signal })
+      .then((result) => result.json())
+      .then((json) => {
+        setGoalWeight(json.goals.goalWeight);
+        setCurrentWeight(
+          json.goals.currentWeight[json.goals.currentWeight.length - 1].weight
+        );
+        setCalories(json.goals.calories);
+        setCarbs(json.goals.carbs);
+        setProtein(json.goals.protein);
+        setFat(json.goals.fat);
+      })
+      .catch((ex) => console.error(ex.message));
+
+    return () => abortCont.abort();
+  }, [currentWeight, goalWeight]);
 
   const updateWeight = () => {
     if (!Number(currentWeightInput) && !Number(goalWeightInput)) {
@@ -177,7 +191,9 @@ const Goals = () => {
                 value={currentWeightInput}
               />
             ) : (
-              <p className="goals__tables__weight__value">160 lbs</p>
+              <p className="goals__tables__weight__value">
+                {currentWeight} lbs
+              </p>
             )}
           </div>
           <div className="goals__tables__weight__row">
@@ -194,7 +210,7 @@ const Goals = () => {
                 value={goalWeightInput}
               />
             ) : (
-              <p className="goals__tables__weight__value">160 lbs</p>
+              <p className="goals__tables__weight__value">{goalWeight} lbs</p>
             )}
           </div>
         </div>
