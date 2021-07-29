@@ -29,6 +29,16 @@ const Diary = () => {
     }, 0);
   };
 
+  const getTotals = (macro) => {
+    if (!diary) return;
+    return (
+      findSum(diary.breakfast, macro) +
+      findSum(diary.lunch, macro) +
+      findSum(diary.dinner, macro) +
+      findSum(diary.snack, macro)
+    );
+  };
+
   return (
     <section className="diary">
       <h3 className="diary__title">Food Diary</h3>
@@ -132,36 +142,22 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.lunch.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td className="empty__col">
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
@@ -170,10 +166,10 @@ const Diary = () => {
                     <button>Add Food</button>
                   </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.lunch, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.lunch, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.lunch, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.lunch, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
@@ -200,36 +196,22 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.dinner.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td className="empty__col">
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
@@ -238,10 +220,10 @@ const Diary = () => {
                     <button>Add Food</button>
                   </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.dinner, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.dinner, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.dinner, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.dinner, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
@@ -268,36 +250,22 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.snack.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td className="empty__col">
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
@@ -306,10 +274,10 @@ const Diary = () => {
                     <button>Add Food</button>
                   </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.snack, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.snack, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.snack, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.snack, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
@@ -322,10 +290,10 @@ const Diary = () => {
               <td>
                 <strong>Totals</strong>
               </td>
-              <td>905</td>
-              <td>93</td>
-              <td>63</td>
-              <td>32</td>
+              <td>{diary ? getTotals("calories") : null}</td>
+              <td>{diary ? getTotals("carbs") : null}</td>
+              <td>{diary ? getTotals("protein") : null}</td>
+              <td>{diary ? getTotals("fat") : null}</td>
             </tr>
             <tr>
               <td>
