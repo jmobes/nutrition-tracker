@@ -79,6 +79,7 @@ i.fas {
 }
 .diary__meal__table__row {
   background-color: #f6f6f6;
+  text-transform: capitalize;
 }
 .empty__col {
   background-color: #fff;

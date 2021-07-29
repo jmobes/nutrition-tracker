@@ -6,6 +6,7 @@ import "react-calendar/dist/Calendar.css";
 
 const Diary = () => {
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [diary, setDiary] = useState(null);
 
   const url = "http://localhost:5000/api";
 
@@ -15,8 +16,17 @@ const Diary = () => {
 
     fetch(`${url}/diary/60fd1eceef841b3e8820c66f/${value.toDateString()}`)
       .then((result) => result.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log(json);
+        setDiary(json.diary);
+      })
       .catch((ex) => console.error(ex.message));
+  };
+
+  const findSum = (arr, macro) => {
+    return arr.reduce((sum, val) => {
+      return sum + val[macro];
+    }, 0);
   };
 
   return (
@@ -68,36 +78,22 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.breakfast.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td className="empty__col">
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
@@ -106,10 +102,10 @@ const Diary = () => {
                     <button>Add Food</button>
                   </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.breakfast, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.breakfast, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.breakfast, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.breakfast, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
