@@ -312,25 +312,54 @@ const Diary = () => {
               </td>
               <td>{goals ? goals.calories : null}</td>
               <td>
-                {goals ? Math.ceil(goals.calories * (goals.carbs / 100)) : null}
-              </td>
-              <td>
                 {goals
-                  ? Math.ceil(goals.calories * (goals.protein / 100))
+                  ? Math.ceil((goals.calories * (goals.carbs / 100)) / 4)
                   : null}
               </td>
               <td>
-                {goals ? Math.ceil(goals.calories * (goals.fat / 100)) : null}
+                {goals
+                  ? Math.ceil((goals.calories * (goals.protein / 100)) / 4)
+                  : null}
+              </td>
+              <td>
+                {goals
+                  ? Math.ceil((goals.calories * (goals.fat / 100)) / 9)
+                  : null}
               </td>
             </tr>
             <tr>
               <td>
                 <strong>Remaining</strong>
               </td>
-              <td>895</td>
-              <td>132</td>
-              <td>27</td>
-              <td>28</td>
+              <td>
+                {diary && goals
+                  ? Math.ceil(goals.calories - getTotals("calories"))
+                  : null}
+              </td>
+              <td>
+                {diary && goals
+                  ? Math.ceil(
+                      (goals.calories * (goals.carbs / 100)) / 4 -
+                        getTotals("carbs")
+                    )
+                  : null}
+              </td>
+              <td>
+                {diary && goals
+                  ? Math.ceil(
+                      (goals.calories * (goals.protein / 100)) / 4 -
+                        getTotals("protein")
+                    )
+                  : null}
+              </td>
+              <td>
+                {diary && goals
+                  ? Math.ceil(
+                      (goals.calories * (goals.fat / 100)) / 9 -
+                        getTotals("fat")
+                    )
+                  : null}
+              </td>
             </tr>
           </tbody>
           <tfoot>
