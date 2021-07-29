@@ -45,15 +45,15 @@ const User = mongoose.model(
       ],
       goalWeight: {
         type: Number,
-        default: null,
+        default: 0,
       },
       calories: {
         type: Number,
-        default: null,
+        default: 0,
       },
-      carbs: { type: Number, min: 0, max: 100, default: null },
-      protein: { type: Number, min: 0, max: 100, default: null },
-      fat: { type: Number, min: 0, max: 100, default: null },
+      carbs: { type: Number, min: 0, max: 100, default: 0 },
+      protein: { type: Number, min: 0, max: 100, default: 0 },
+      fat: { type: Number, min: 0, max: 100, default: 0 },
     },
     tdee: {
       type: Number,

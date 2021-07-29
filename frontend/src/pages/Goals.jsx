@@ -26,9 +26,8 @@ const Goals = () => {
 
   useEffect(() => {
     const abortCont1 = new AbortController();
-    const abortCont2 = new AbortController();
 
-    fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`, { signal: abortCont1.signal })
+    fetch(`${url}/tdee/610223e0278239453cb44407`, { signal: abortCont1.signal })
       .then((result) => result.json())
       .then((json) => {
         if (json.status === "fail") {
@@ -43,16 +42,25 @@ const Goals = () => {
         }
       });
 
-    fetch(`${url}/goals/60fd1eceef841b3e8820c66f`, {
+    return () => {
+      abortCont1.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    const abortCont2 = new AbortController();
+
+    fetch(`${url}/goals/610223e0278239453cb44407`, {
       signal: abortCont2.signal,
     })
       .then((result) => result.json())
       .then((json) => {
-        console.log(json);
+        console.log({ json });
         setGoalWeight(json.goals.goalWeight);
-        setCurrentWeight(
-          json.goals.currentWeight[json.goals.currentWeight.length - 1].weight
-        );
+        let weight = json.goals.currentWeight.length
+          ? json.goals.currentWeight[json.goals.currentWeight.length - 1].weight
+          : 0;
+        setCurrentWeight(weight);
         setCalories(json.goals.calories);
         setCarbs(json.goals.carbs);
         setProtein(json.goals.protein);
@@ -61,10 +69,9 @@ const Goals = () => {
       .catch((ex) => console.error(ex.message));
 
     return () => {
-      abortCont1.abort();
       abortCont2.abort();
     };
-  }, []);
+  }, [weightEdit, macrosEdit]);
 
   const updateWeight = () => {
     if (!Number(currentWeightInput) && !Number(goalWeightInput)) {
@@ -88,13 +95,24 @@ const Goals = () => {
         ...(goalWeightInput && { goalWeight: goalWeightInput }),
       }),
     };
-    fetch(`${url}/goals/weight/60fd1eceef841b3e8820c66f`, options)
+    fetch(`${url}/goals/weight/610223e0278239453cb44407`, options)
       .then((result) => result.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log({ response: json });
+        setGoalWeight(json.user.goalWeight);
+        let weight = json.user.currentWeight.length
+          ? json.user.currentWeight[json.user.currentWeight.length - 1].weight
+          : 0;
+        setCurrentWeight(weight);
+      })
       .catch((ex) => {
         setError(ex.message);
         console.error(ex.message);
       });
+
+    setWeightEdit(false);
+    setCurrentWeightInput("");
+    setGoalWeightInput("");
   };
 
   const updateMacros = () => {
@@ -148,10 +166,22 @@ const Goals = () => {
         ...(fatInput && { fat: fatInput }),
       }),
     };
-    fetch(`${url}/goals/macros/60fd1eceef841b3e8820c66f`, options)
+    fetch(`${url}/goals/macros/610223e0278239453cb44407`, options)
       .then((result) => result.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log(json);
+        setCalories(json.calories);
+        setCarbs(json.carbs);
+        setProtein(json.protein);
+        setFat(json.fat);
+      })
       .catch((ex) => console.error(ex.message));
+
+    setMacrosEdit(false);
+    setCaloriesInput("");
+    setCarbsInput("");
+    setProteinInput("");
+    setFatInput("");
   };
 
   const toggleEdit = (e) => {
