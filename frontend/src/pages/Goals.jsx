@@ -25,15 +25,17 @@ const Goals = () => {
   const url = "http://localhost:5000/api";
 
   useEffect(() => {
-    const abortCont = new AbortController();
+    const abortCont1 = new AbortController();
+    const abortCont2 = new AbortController();
 
-    fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`, { signal: abortCont.signal })
+    fetch(`${url}/tdee/60fd1eceef841b3e8820c66f`, { signal: abortCont1.signal })
       .then((result) => result.json())
       .then((json) => {
         if (json.status === "fail") {
           throw new Error(json.message);
         }
         setTdee(json.tdee);
+        console.log(json);
       })
       .catch((ex) => {
         if (ex.name !== "AbortError") {
@@ -41,9 +43,12 @@ const Goals = () => {
         }
       });
 
-    fetch(`${url}/goals/60fd1eceef841b3e8820c66f`, { signal: abortCont.signal })
+    fetch(`${url}/goals/60fd1eceef841b3e8820c66f`, {
+      signal: abortCont2.signal,
+    })
       .then((result) => result.json())
       .then((json) => {
+        console.log(json);
         setGoalWeight(json.goals.goalWeight);
         setCurrentWeight(
           json.goals.currentWeight[json.goals.currentWeight.length - 1].weight
@@ -55,8 +60,11 @@ const Goals = () => {
       })
       .catch((ex) => console.error(ex.message));
 
-    return () => abortCont.abort();
-  }, [currentWeight, goalWeight]);
+    return () => {
+      abortCont1.abort();
+      abortCont2.abort();
+    };
+  }, []);
 
   const updateWeight = () => {
     if (!Number(currentWeightInput) && !Number(goalWeightInput)) {
@@ -80,7 +88,6 @@ const Goals = () => {
         ...(goalWeightInput && { goalWeight: goalWeightInput }),
       }),
     };
-    console.log(options.body);
     fetch(`${url}/goals/weight/60fd1eceef841b3e8820c66f`, options)
       .then((result) => result.json())
       .then((json) => console.log(json))
@@ -88,6 +95,63 @@ const Goals = () => {
         setError(ex.message);
         console.error(ex.message);
       });
+  };
+
+  const updateMacros = () => {
+    if (
+      !Number(caloriesInput) &&
+      !Number(carbsInput) &&
+      !Number(proteinInput) &&
+      !Number(fatInput)
+    ) {
+      setMacrosError("Update at least one value");
+      console.log("Update at least one value");
+      return;
+    }
+    if (Number(caloriesInput) && Number(caloriesInput) < 1200) {
+      setMacrosError("Calories must be at least 1000 calories.");
+      console.log("Calories must be at least 1000 calories.");
+      return;
+    }
+    if (Number(carbsInput) && Number(carbsInput) < 0) {
+      setMacrosError("The percentage must be in between 0 and 100");
+      console.log("The percentage must be in between 0 and 100");
+      return;
+    }
+    if (Number(proteinInput) && Number(proteinInput) < 0) {
+      setMacrosError("The percentage must be in between 0 and 100");
+      console.log("The percentage must be in between 0 and 100");
+      return;
+    }
+    if (Number(fatInput) && Number(fatInput) < 0) {
+      setMacrosError("The percentage must be in between 0 and 100");
+      console.log("The percentage must be in between 0 and 100");
+      return;
+    }
+    if (Number(carbsInput) + Number(proteinInput) + Number(fatInput) !== 100) {
+      setMacrosError(
+        "The total sum percentage of carbs, protein, and fat must equal 100"
+      );
+      console.log(
+        "The total sum percentage of carbs, protein, and fat must equal 100"
+      );
+      return;
+    }
+
+    const options = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...(caloriesInput && { calories: caloriesInput }),
+        ...(carbsInput && { carbs: carbsInput }),
+        ...(proteinInput && { protein: proteinInput }),
+        ...(fatInput && { fat: fatInput }),
+      }),
+    };
+    fetch(`${url}/goals/macros/60fd1eceef841b3e8820c66f`, options)
+      .then((result) => result.json())
+      .then((json) => console.log(json))
+      .catch((ex) => console.error(ex.message));
   };
 
   const toggleEdit = (e) => {
@@ -228,7 +292,12 @@ const Goals = () => {
                 >
                   Cancel
                 </button>
-                <button className="goals__tables__button">Save</button>
+                <button
+                  className="goals__tables__button"
+                  onClick={updateMacros}
+                >
+                  Save
+                </button>
               </div>
             ) : (
               <button
@@ -254,12 +323,13 @@ const Goals = () => {
                 value={caloriesInput}
               />
             ) : (
-              <p className="goals__tables__calories__value">1800</p>
+              <p className="goals__tables__calories__value">{calories}</p>
             )}
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
-              <strong>Carbohydrates</strong> <span>225 g</span>
+              <strong>Carbohydrates</strong>{" "}
+              <span>{`${Math.round((carbs / 100) * calories)} g`}</span>
             </p>
             {macrosEdit ? (
               <input
@@ -271,12 +341,13 @@ const Goals = () => {
                 value={carbsInput}
               />
             ) : (
-              <p className="goals__tables__calories__value">50%</p>
+              <p className="goals__tables__calories__value">{`${carbs}%`}</p>
             )}
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
-              <strong>Protein</strong> <span>90 g</span>
+              <strong>Protein</strong>{" "}
+              <span>{`${Math.round((protein / 100) * calories)} g`}</span>
             </p>
             {macrosEdit ? (
               <input
@@ -288,12 +359,13 @@ const Goals = () => {
                 value={proteinInput}
               />
             ) : (
-              <p className="goals__tables__calories__value">50%</p>
+              <p className="goals__tables__calories__value">{`${protein}%`}</p>
             )}
           </div>
           <div className="goals__tables__calories__row">
             <p className="goals__tables__calories__key">
-              <strong>Fat</strong> <span>60 g</span>
+              <strong>Fat</strong>{" "}
+              <span>{`${Math.round((fat / 100) * calories)} g`}</span>
             </p>
             {macrosEdit ? (
               <input
@@ -305,7 +377,7 @@ const Goals = () => {
                 value={fatInput}
               />
             ) : (
-              <p className="goals__tables__calories__value">50%</p>
+              <p className="goals__tables__calories__value">{`${fat}%`}</p>
             )}
           </div>
         </div>
