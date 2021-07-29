@@ -34,11 +34,15 @@ const Goals = () => {
           throw new Error(json.message);
         }
         setTdee(json.tdee);
-        console.log(json);
+        setError(null);
       })
       .catch((ex) => {
         if (ex.name !== "AbortError") {
-          setError(ex.message);
+          if (ex.message === "Failed to fetch") {
+            setError("Database connection error. Could not retrieve goals.");
+          } else {
+            setError(ex.message);
+          }
         }
       });
 
@@ -55,7 +59,9 @@ const Goals = () => {
     })
       .then((result) => result.json())
       .then((json) => {
-        console.log({ json });
+        if (json.status === "fail") {
+          throw new Error(json.message);
+        }
         setGoalWeight(json.goals.goalWeight);
         let weight = json.goals.currentWeight.length
           ? json.goals.currentWeight[json.goals.currentWeight.length - 1].weight
@@ -65,8 +71,17 @@ const Goals = () => {
         setCarbs(json.goals.carbs);
         setProtein(json.goals.protein);
         setFat(json.goals.fat);
+        setError(null);
       })
-      .catch((ex) => console.error(ex.message));
+      .catch((ex) => {
+        if (ex.name !== "AbortError") {
+          if (ex.message === "Failed to fetch") {
+            setError("Database connection error. Could not retrieve goals.");
+          } else {
+            setError(ex.message);
+          }
+        }
+      });
 
     return () => {
       abortCont2.abort();
@@ -76,7 +91,6 @@ const Goals = () => {
   const updateWeight = () => {
     if (!Number(currentWeightInput) && !Number(goalWeightInput)) {
       setWeightError("Update at least one value");
-      console.log("Update at least one value");
       return;
     }
     if (
@@ -84,7 +98,6 @@ const Goals = () => {
       (Number(goalWeightInput) && Number(goalWeightInput) < 0)
     ) {
       setWeightError("Please use positive numbers only");
-      console.log("Please use positive numbers only");
       return;
     }
     const options = {
@@ -98,16 +111,22 @@ const Goals = () => {
     fetch(`${url}/goals/weight/610223e0278239453cb44407`, options)
       .then((result) => result.json())
       .then((json) => {
-        console.log({ response: json });
+        if (json.status === "fail") {
+          throw new Error(json.message);
+        }
         setGoalWeight(json.user.goalWeight);
         let weight = json.user.currentWeight.length
           ? json.user.currentWeight[json.user.currentWeight.length - 1].weight
           : 0;
         setCurrentWeight(weight);
+        setWeightError(null);
       })
       .catch((ex) => {
-        setError(ex.message);
-        console.error(ex.message);
+        if (ex.message === "Failed to fetch") {
+          setWeightError("Database connection error. Try again.");
+        } else {
+          setWeightError(ex.message);
+        }
       });
 
     setWeightEdit(false);
@@ -123,34 +142,29 @@ const Goals = () => {
       !Number(fatInput)
     ) {
       setMacrosError("Update at least one value");
-      console.log("Update at least one value");
       return;
     }
     if (Number(caloriesInput) && Number(caloriesInput) < 1200) {
-      setMacrosError("Calories must be at least 1000 calories.");
-      console.log("Calories must be at least 1000 calories.");
+      setMacrosError("Calories must be at least 1200 calories.");
       return;
     }
     if (Number(carbsInput) && Number(carbsInput) < 0) {
       setMacrosError("The percentage must be in between 0 and 100");
-      console.log("The percentage must be in between 0 and 100");
       return;
     }
     if (Number(proteinInput) && Number(proteinInput) < 0) {
       setMacrosError("The percentage must be in between 0 and 100");
-      console.log("The percentage must be in between 0 and 100");
       return;
     }
     if (Number(fatInput) && Number(fatInput) < 0) {
       setMacrosError("The percentage must be in between 0 and 100");
-      console.log("The percentage must be in between 0 and 100");
       return;
     }
-    if (Number(carbsInput) + Number(proteinInput) + Number(fatInput) !== 100) {
+    if (
+      (Number(carbsInput) || Number(proteinInput) || Number(fatInput)) &&
+      Number(carbsInput) + Number(proteinInput) + Number(fatInput) !== 100
+    ) {
       setMacrosError(
-        "The total sum percentage of carbs, protein, and fat must equal 100"
-      );
-      console.log(
         "The total sum percentage of carbs, protein, and fat must equal 100"
       );
       return;
@@ -169,13 +183,22 @@ const Goals = () => {
     fetch(`${url}/goals/macros/610223e0278239453cb44407`, options)
       .then((result) => result.json())
       .then((json) => {
-        console.log(json);
-        setCalories(json.calories);
-        setCarbs(json.carbs);
-        setProtein(json.protein);
-        setFat(json.fat);
+        if (json.status === "fail") {
+          throw new Error(json.message);
+        }
+        setCalories(json.user.calories);
+        setCarbs(json.user.carbs);
+        setProtein(json.user.protein);
+        setFat(json.user.fat);
+        setMacrosError(null);
       })
-      .catch((ex) => console.error(ex.message));
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setMacrosError("Database connection error. Try again.");
+        } else {
+          setMacrosError(ex.message);
+        }
+      });
 
     setMacrosEdit(false);
     setCaloriesInput("");
@@ -241,6 +264,7 @@ const Goals = () => {
           Your TDEE is: <span>{tdee} calories</span>
         </p>
       ) : null}
+      {error ? <p className="goals__error">{error}</p> : null}
       <div className="goals__tables">
         <div className="goals__tables__weight">
           <div className="goals__tables__weight__header">
@@ -308,6 +332,7 @@ const Goals = () => {
             )}
           </div>
         </div>
+        {weightError ? <p className="goals__error">{weightError}</p> : null}
         <div className="goals__tables__calories">
           <div className="goals__tables__calories__header">
             <h3 className="goals__tables__calories__header__title">
@@ -411,6 +436,7 @@ const Goals = () => {
             )}
           </div>
         </div>
+        {macrosError ? <p className="goals__error">{macrosError}</p> : null}
       </div>
     </section>
   );
