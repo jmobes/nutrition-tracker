@@ -13,6 +13,9 @@
   line-height: 1.5;
   padding-top: 1rem;
 }
+.diary__calendar {
+  margin-top: 1rem;
+}
 .diary__header__calendar__buttons {
   display: flex;
   justify-content: center;

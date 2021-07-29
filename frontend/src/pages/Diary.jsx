@@ -1,8 +1,12 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Diary.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 const Diary = () => {
+  const [calendarOpen, setCalendarOpen] = useState(false);
+
   return (
     <section className="diary">
       <h3 className="diary__title">Food Diary</h3>
@@ -13,16 +17,21 @@ const Diary = () => {
       </p>
       <div className="diary__header">
         <div className="diary__header__calendar__icon">
-          <i className="far fa-calendar-alt"></i>
+          <i
+            className="far fa-calendar-alt"
+            onClick={() => setCalendarOpen(!calendarOpen)}
+          ></i>
         </div>
         <div className="diary__header__calendar__buttons">
           <i className="diary__header__calendar__button fas fa-long-arrow-alt-left"></i>
           <p className="calendar__day">Thursday, July 8, 2021</p>
           <i className="diary__header__calendar__button fas fa-long-arrow-alt-right"></i>
         </div>
-        {/* <div className="diary__calendar">
-          <Calendar />
-        </div> */}
+        {calendarOpen ? (
+          <div className="diary__calendar">
+            <Calendar />
+          </div>
+        ) : null}
       </div>
       <div className="diary__meals">
         <div className="diary__meal">
@@ -81,7 +90,9 @@ const Diary = () => {
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
                 <td>900</td>
                 <td>93</td>
@@ -147,7 +158,9 @@ const Diary = () => {
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
                 <td>900</td>
                 <td>93</td>
@@ -213,7 +226,9 @@ const Diary = () => {
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
                 <td>900</td>
                 <td>93</td>
@@ -279,7 +294,9 @@ const Diary = () => {
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
                 <td>900</td>
                 <td>93</td>
