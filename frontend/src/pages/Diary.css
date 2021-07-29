@@ -50,6 +50,10 @@ i.diary__header__calendar__button {
   align-items: center;
   justify-content: center;
 }
+.diary button span {
+  color: var(--color-primary);
+  font-weight: 700;
+}
 .fa-calendar-alt {
   cursor: pointer;
 }

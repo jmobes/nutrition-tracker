@@ -7,6 +7,18 @@ import "react-calendar/dist/Calendar.css";
 const Diary = () => {
   const [calendarOpen, setCalendarOpen] = useState(false);
 
+  const url = "http://localhost:5000/api";
+
+  const handleDayClick = (value, event) => {
+    setCalendarOpen(false);
+    console.log(value.toDateString());
+
+    fetch(`${url}/diary/60fd1eceef841b3e8820c66f/${value.toDateString()}`)
+      .then((result) => result.json())
+      .then((json) => console.log(json))
+      .catch((ex) => console.error(ex.message));
+  };
+
   return (
     <section className="diary">
       <h3 className="diary__title">Food Diary</h3>
@@ -29,7 +41,7 @@ const Diary = () => {
         </div>
         {calendarOpen ? (
           <div className="diary__calendar">
-            <Calendar />
+            <Calendar onClickDay={handleDayClick} />
           </div>
         ) : null}
       </div>
