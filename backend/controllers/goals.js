@@ -33,6 +33,10 @@ const setWeight = async (req, res, next) => {
   }
 
   const { currentWeight, goalWeight } = req.body;
+  if (!currentWeight && !goalWeight) {
+    return next(new HttpError("Please update at least one field.", 400));
+  }
+
   try {
     let user = await User.findById(userId);
     if (!user) {
@@ -46,7 +50,7 @@ const setWeight = async (req, res, next) => {
       user.goals.goalWeight = goalWeight;
     }
     await user.save();
-    res.status(201).json({ status: "success", user: user });
+    res.status(201).json({ status: "success", user: user.goals });
   } catch (ex) {
     return next(new HttpError(ex.message, 500));
   }
@@ -93,7 +97,7 @@ const setMacros = async (req, res, next) => {
     }
 
     await user.save();
-    res.status(200).json({ status: "success", user: user });
+    res.status(200).json({ status: "success", user: user.goals });
   } catch (ex) {
     return next(new HttpError(ex.message, 500));
   }

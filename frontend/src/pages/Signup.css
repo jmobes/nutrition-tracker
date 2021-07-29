@@ -9,7 +9,7 @@
 }
 .signup__error {
   text-align: center;
-  color: rgb(236, 71, 71);
+  color: var(--color-error);
   font-size: 1.6rem;
   font-weight: 600;
 }
