@@ -7,8 +7,19 @@ import "react-calendar/dist/Calendar.css";
 const Diary = () => {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [diary, setDiary] = useState(null);
+  const [goals, setGoals] = useState(null);
 
   const url = "http://localhost:5000/api";
+
+  useEffect(() => {
+    fetch(`${url}/goals/60fd1eceef841b3e8820c66f`)
+      .then((result) => result.json())
+      .then((json) => {
+        console.log(json);
+        setGoals(json.goals);
+      })
+      .catch((ex) => console.error(ex.message));
+  }, []);
 
   const handleDayClick = (value, event) => {
     setCalendarOpen(false);
@@ -299,10 +310,18 @@ const Diary = () => {
               <td>
                 <strong>Your Daily Goal</strong>
               </td>
-              <td>1800</td>
-              <td>225</td>
-              <td>90</td>
-              <td>60</td>
+              <td>{goals ? goals.calories : null}</td>
+              <td>
+                {goals ? Math.ceil(goals.calories * (goals.carbs / 100)) : null}
+              </td>
+              <td>
+                {goals
+                  ? Math.ceil(goals.calories * (goals.protein / 100))
+                  : null}
+              </td>
+              <td>
+                {goals ? Math.ceil(goals.calories * (goals.fat / 100)) : null}
+              </td>
             </tr>
             <tr>
               <td>
