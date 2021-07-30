@@ -31,6 +31,18 @@ const Diary = () => {
       .catch((ex) => console.error(ex.message));
   }, []);
 
+  const handleArrowClick = (e) => {
+    const selectedDate = new Date(date);
+    if (e.target.id === "arrow-left") {
+      selectedDate.setDate(selectedDate.getDate() - 1);
+      setDate(selectedDate.toDateString());
+    } else {
+      selectedDate.setDate(selectedDate.getDate() + 1);
+      setDate(selectedDate.toDateString());
+    }
+    console.log(selectedDate.toDateString());
+  };
+
   const handleDayClick = (value, event) => {
     setCalendarOpen(false);
     setDate(value.toDateString());
@@ -77,9 +89,17 @@ const Diary = () => {
           ></i>
         </div>
         <div className="diary__header__calendar__buttons">
-          <i className="diary__header__calendar__button fas fa-long-arrow-alt-left"></i>
+          <i
+            className="diary__header__calendar__button fas fa-long-arrow-alt-left"
+            onClick={handleArrowClick}
+            id="arrow-left"
+          ></i>
           <p className="calendar__day">{date}</p>
-          <i className="diary__header__calendar__button fas fa-long-arrow-alt-right"></i>
+          <i
+            className="diary__header__calendar__button fas fa-long-arrow-alt-right"
+            onClick={handleArrowClick}
+            id="arrow-right"
+          ></i>
         </div>
         {calendarOpen ? (
           <div className="diary__calendar">
