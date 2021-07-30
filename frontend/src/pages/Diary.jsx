@@ -8,7 +8,7 @@ const Diary = () => {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [diary, setDiary] = useState(null);
   const [goals, setGoals] = useState(null);
-  const [date, setDate] = useState(new Date().toDateString());
+  const [theDate, setDate] = useState(new Date().toDateString());
 
   const url = "http://localhost:5000/api";
 
@@ -32,7 +32,7 @@ const Diary = () => {
   }, []);
 
   const handleArrowClick = (e) => {
-    const selectedDate = new Date(date);
+    const selectedDate = new Date(theDate);
     if (e.target.id === "arrow-left") {
       selectedDate.setDate(selectedDate.getDate() - 1);
       setDate(selectedDate.toDateString());
@@ -82,6 +82,12 @@ const Diary = () => {
     );
   };
 
+  const handleTile = ({ date, view }) => {
+    if (view === "month" && theDate === date.toDateString()) {
+      return "active__date";
+    }
+  };
+
   return (
     <section className="diary">
       <h3 className="diary__title">Food Diary</h3>
@@ -103,7 +109,7 @@ const Diary = () => {
             onClick={handleArrowClick}
             id="arrow-left"
           ></i>
-          <p className="calendar__day">{date}</p>
+          <p className="calendar__day">{theDate}</p>
           <i
             className="diary__header__calendar__button fas fa-long-arrow-alt-right"
             onClick={handleArrowClick}
@@ -112,7 +118,7 @@ const Diary = () => {
         </div>
         {calendarOpen ? (
           <div className="diary__calendar">
-            <Calendar onClickDay={handleDayClick} />
+            <Calendar onClickDay={handleDayClick} tileClassName={handleTile} />
           </div>
         ) : null}
       </div>

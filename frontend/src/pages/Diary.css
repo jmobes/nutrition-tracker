@@ -141,6 +141,9 @@ td.diary__summary__footer {
   color: rgba(255, 255, 255, 0.5);
   text-align: center;
 }
+button.active__date {
+  background-color: var(--color-date);
+}
 
 @media (min-width: 500px) {
   .diary span {
