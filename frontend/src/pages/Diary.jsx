@@ -8,6 +8,7 @@ const Diary = () => {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [diary, setDiary] = useState(null);
   const [goals, setGoals] = useState(null);
+  const [date, setDate] = useState(new Date().toDateString());
 
   const url = "http://localhost:5000/api";
 
@@ -19,10 +20,20 @@ const Diary = () => {
         setGoals(json.goals);
       })
       .catch((ex) => console.error(ex.message));
+
+    const today = new Date().toDateString();
+    fetch(`${url}/diary/60fd1eceef841b3e8820c66f/${today}`)
+      .then((result) => result.json())
+      .then((json) => {
+        console.log(json);
+        setDiary(json.diary);
+      })
+      .catch((ex) => console.error(ex.message));
   }, []);
 
   const handleDayClick = (value, event) => {
     setCalendarOpen(false);
+    setDate(value.toDateString());
     console.log(value.toDateString());
 
     fetch(`${url}/diary/60fd1eceef841b3e8820c66f/${value.toDateString()}`)
@@ -67,7 +78,7 @@ const Diary = () => {
         </div>
         <div className="diary__header__calendar__buttons">
           <i className="diary__header__calendar__button fas fa-long-arrow-alt-left"></i>
-          <p className="calendar__day">Thursday, July 8, 2021</p>
+          <p className="calendar__day">{date}</p>
           <i className="diary__header__calendar__button fas fa-long-arrow-alt-right"></i>
         </div>
         {calendarOpen ? (
@@ -313,17 +324,17 @@ const Diary = () => {
               <td>{goals ? goals.calories : null}</td>
               <td>
                 {goals
-                  ? Math.ceil((goals.calories * (goals.carbs / 100)) / 4)
+                  ? Math.floor((goals.calories * (goals.carbs / 100)) / 4)
                   : null}
               </td>
               <td>
                 {goals
-                  ? Math.ceil((goals.calories * (goals.protein / 100)) / 4)
+                  ? Math.floor((goals.calories * (goals.protein / 100)) / 4)
                   : null}
               </td>
               <td>
                 {goals
-                  ? Math.ceil((goals.calories * (goals.fat / 100)) / 9)
+                  ? Math.floor((goals.calories * (goals.fat / 100)) / 9)
                   : null}
               </td>
             </tr>
@@ -333,12 +344,12 @@ const Diary = () => {
               </td>
               <td>
                 {diary && goals
-                  ? Math.ceil(goals.calories - getTotals("calories"))
+                  ? Math.floor(goals.calories - getTotals("calories"))
                   : null}
               </td>
               <td>
                 {diary && goals
-                  ? Math.ceil(
+                  ? Math.floor(
                       (goals.calories * (goals.carbs / 100)) / 4 -
                         getTotals("carbs")
                     )
@@ -346,7 +357,7 @@ const Diary = () => {
               </td>
               <td>
                 {diary && goals
-                  ? Math.ceil(
+                  ? Math.floor(
                       (goals.calories * (goals.protein / 100)) / 4 -
                         getTotals("protein")
                     )
@@ -354,7 +365,7 @@ const Diary = () => {
               </td>
               <td>
                 {diary && goals
-                  ? Math.ceil(
+                  ? Math.floor(
                       (goals.calories * (goals.fat / 100)) / 9 -
                         getTotals("fat")
                     )
