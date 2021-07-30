@@ -41,6 +41,15 @@ const Diary = () => {
       setDate(selectedDate.toDateString());
     }
     console.log(selectedDate.toDateString());
+    fetch(
+      `${url}/diary/60fd1eceef841b3e8820c66f/${selectedDate.toDateString()}`
+    )
+      .then((result) => result.json())
+      .then((json) => {
+        console.log(json);
+        setDiary(json.diary);
+      })
+      .catch((ex) => console.error(ex.message));
   };
 
   const handleDayClick = (value, event) => {
