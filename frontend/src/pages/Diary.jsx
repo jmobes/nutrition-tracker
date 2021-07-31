@@ -66,7 +66,6 @@ const Diary = () => {
   };
 
   const handleDelete = (id, meal) => {
-    console.log({ foodID: id, meal: meal });
     console.log(diary[meal]);
     fetch(`${url}/diary/${user}/${id}`, {
       method: "PUT",
@@ -76,11 +75,8 @@ const Diary = () => {
       .then((result) => result.json())
       .then((json) => {
         console.log(json);
-        let oldDiary = diary;
         const newMealDiary = diary[meal].filter((entry) => entry._id !== id);
-        oldDiary[meal] = newMealDiary;
-        setDiary(oldDiary);
-        console.log(newMealDiary);
+        setDiary((prev) => ({ ...prev, [meal]: newMealDiary }));
       })
       .catch((ex) => console.error(ex.message));
   };
