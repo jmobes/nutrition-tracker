@@ -1,8 +1,129 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Diary.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 const Diary = () => {
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [diary, setDiary] = useState(null);
+  const [goals, setGoals] = useState(null);
+  const [theDate, setDate] = useState(new Date().toDateString());
+  const [user, setUser] = useState("60fd1eceef841b3e8820c66f");
+  const [error, setError] = useState(null);
+
+  const url = "http://localhost:5000/api";
+
+  useEffect(() => {
+    fetch(`${url}/goals/${user}`)
+      .then((result) => result.json())
+      .then((json) => {
+        setGoals(json.goals);
+      })
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
+
+    const today = new Date().toDateString();
+    fetch(`${url}/diary/${user}/${today}`)
+      .then((result) => result.json())
+      .then((json) => {
+        setDiary(json.diary);
+      })
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
+  }, []);
+
+  const handleArrowClick = (e) => {
+    const selectedDate = new Date(theDate);
+    if (e.target.id === "arrow-left") {
+      selectedDate.setDate(selectedDate.getDate() - 1);
+      setDate(selectedDate.toDateString());
+    } else {
+      selectedDate.setDate(selectedDate.getDate() + 1);
+      setDate(selectedDate.toDateString());
+    }
+    fetch(`${url}/diary/${user}/${selectedDate.toDateString()}`)
+      .then((result) => result.json())
+      .then((json) => {
+        setDiary(json.diary);
+      })
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
+  };
+
+  const handleDayClick = (value, event) => {
+    setCalendarOpen(false);
+    setDate(value.toDateString());
+
+    fetch(`${url}/diary/${user}/${value.toDateString()}`)
+      .then((result) => result.json())
+      .then((json) => {
+        setDiary(json.diary);
+      })
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
+  };
+
+  const handleDelete = (id, meal) => {
+    fetch(`${url}/diary/${user}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ meal: meal, date: theDate }),
+    })
+      .then((result) => result.json())
+      .then((json) => {
+        const newMealDiary = diary[meal].filter((entry) => entry._id !== id);
+        setDiary((prev) => ({ ...prev, [meal]: newMealDiary }));
+      })
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        }
+      });
+  };
+
+  const findSum = (arr, macro) => {
+    return arr.reduce((sum, val) => {
+      return sum + val[macro];
+    }, 0);
+  };
+
+  const getTotals = (macro) => {
+    if (!diary) return;
+    return (
+      findSum(diary.breakfast, macro) +
+      findSum(diary.lunch, macro) +
+      findSum(diary.dinner, macro) +
+      findSum(diary.snack, macro)
+    );
+  };
+
+  const handleTile = ({ date, view }) => {
+    if (view === "month" && theDate === date.toDateString()) {
+      return "active__date";
+    }
+  };
+
   return (
     <section className="diary">
       <h3 className="diary__title">Food Diary</h3>
@@ -11,18 +132,32 @@ const Diary = () => {
         consuming. Make it a habit to track your calories and reach your long
         term goals.
       </p>
+      {error ? <p className="diary__error">{error}</p> : null}
       <div className="diary__header">
         <div className="diary__header__calendar__icon">
-          <i className="far fa-calendar-alt"></i>
+          <i
+            className="far fa-calendar-alt"
+            onClick={() => setCalendarOpen(!calendarOpen)}
+          ></i>
         </div>
         <div className="diary__header__calendar__buttons">
-          <i className="diary__header__calendar__button fas fa-long-arrow-alt-left"></i>
-          <p className="calendar__day">Thursday, July 8, 2021</p>
-          <i className="diary__header__calendar__button fas fa-long-arrow-alt-right"></i>
+          <i
+            className="diary__header__calendar__button fas fa-long-arrow-alt-left"
+            onClick={handleArrowClick}
+            id="arrow-left"
+          ></i>
+          <p className="calendar__day">{theDate}</p>
+          <i
+            className="diary__header__calendar__button fas fa-long-arrow-alt-right"
+            onClick={handleArrowClick}
+            id="arrow-right"
+          ></i>
         </div>
-        {/* <div className="diary__calendar">
-          <Calendar />
-        </div> */}
+        {calendarOpen ? (
+          <div className="diary__calendar">
+            <Calendar onClickDay={handleDayClick} tileClassName={handleTile} />
+          </div>
+        ) : null}
       </div>
       <div className="diary__meals">
         <div className="diary__meal">
@@ -47,46 +182,37 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.breakfast.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "breakfast")}
+                        >
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.breakfast, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.breakfast, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.breakfast, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.breakfast, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
@@ -113,46 +239,37 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.lunch.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "lunch")}
+                        >
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.lunch, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.lunch, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.lunch, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.lunch, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
@@ -179,46 +296,37 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.dinner.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "dinner")}
+                        >
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.dinner, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.dinner, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.dinner, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.dinner, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
@@ -245,46 +353,37 @@ const Diary = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="diary__meal__table__row">
-                <td>Skippy Peanut Butter</td>
-                <td>190</td>
-                <td>7</td>
-                <td>7</td>
-                <td>16</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Celery</td>
-                <td>30</td>
-                <td>6</td>
-                <td>1</td>
-                <td>0</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
-              <tr className="diary__meal__table__row">
-                <td>Mashed Potatoes</td>
-                <td>300</td>
-                <td>50</td>
-                <td>10</td>
-                <td>8</td>
-                <td className="empty__col">
-                  <i className="fas fa-minus"></i>
-                </td>
-              </tr>
+              {diary
+                ? diary.snack.map((entry) => {
+                    return (
+                      <tr key={entry._id} className="diary__meal__table__row">
+                        <td>{entry.name}</td>
+                        <td>{entry.calories}</td>
+                        <td>{entry.carbs}</td>
+                        <td>{entry.protein}</td>
+                        <td>{entry.fat}</td>
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "snack")}
+                        >
+                          <i className="fas fa-minus"></i>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
             <tfoot>
               <tr className="diary__meal__table__footer">
                 <td>
-                  <button>Add Food</button>
+                  <Link to="/add-food">
+                    <button>Add Food</button>
+                  </Link>
                 </td>
-                <td>900</td>
-                <td>93</td>
-                <td>32</td>
-                <td>50</td>
+                <td>{diary ? findSum(diary.snack, "calories") : 0}</td>
+                <td>{diary ? findSum(diary.snack, "carbs") : 0}</td>
+                <td>{diary ? findSum(diary.snack, "protein") : 0}</td>
+                <td>{diary ? findSum(diary.snack, "fat") : 0}</td>
               </tr>
             </tfoot>
           </table>
@@ -297,28 +396,65 @@ const Diary = () => {
               <td>
                 <strong>Totals</strong>
               </td>
-              <td>905</td>
-              <td>93</td>
-              <td>63</td>
-              <td>32</td>
+              <td>{diary ? getTotals("calories") : null}</td>
+              <td>{diary ? getTotals("carbs") : null}</td>
+              <td>{diary ? getTotals("protein") : null}</td>
+              <td>{diary ? getTotals("fat") : null}</td>
             </tr>
             <tr>
               <td>
                 <strong>Your Daily Goal</strong>
               </td>
-              <td>1800</td>
-              <td>225</td>
-              <td>90</td>
-              <td>60</td>
+              <td>{goals ? goals.calories : null}</td>
+              <td>
+                {goals
+                  ? Math.floor((goals.calories * (goals.carbs / 100)) / 4)
+                  : null}
+              </td>
+              <td>
+                {goals
+                  ? Math.floor((goals.calories * (goals.protein / 100)) / 4)
+                  : null}
+              </td>
+              <td>
+                {goals
+                  ? Math.floor((goals.calories * (goals.fat / 100)) / 9)
+                  : null}
+              </td>
             </tr>
             <tr>
               <td>
                 <strong>Remaining</strong>
               </td>
-              <td>895</td>
-              <td>132</td>
-              <td>27</td>
-              <td>28</td>
+              <td>
+                {diary && goals
+                  ? Math.floor(goals.calories - getTotals("calories"))
+                  : null}
+              </td>
+              <td>
+                {diary && goals
+                  ? Math.floor(
+                      (goals.calories * (goals.carbs / 100)) / 4 -
+                        getTotals("carbs")
+                    )
+                  : null}
+              </td>
+              <td>
+                {diary && goals
+                  ? Math.floor(
+                      (goals.calories * (goals.protein / 100)) / 4 -
+                        getTotals("protein")
+                    )
+                  : null}
+              </td>
+              <td>
+                {diary && goals
+                  ? Math.floor(
+                      (goals.calories * (goals.fat / 100)) / 9 -
+                        getTotals("fat")
+                    )
+                  : null}
+              </td>
             </tr>
           </tbody>
           <tfoot>
