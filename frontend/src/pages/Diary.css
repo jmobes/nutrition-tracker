@@ -14,7 +14,8 @@
   padding-top: 1rem;
 }
 .diary__calendar {
-  margin-top: 1rem;
+  margin: 1rem auto 0 auto;
+  max-width: 350px;
 }
 .diary__header__calendar__buttons {
   display: flex;
@@ -144,6 +145,13 @@ td.diary__summary__footer {
 button.active__date {
   background-color: var(--color-date);
 }
+.diary__error {
+  color: var(--color-error);
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.25rem;
+  padding-top: 2rem;
+}
 
 @media (min-width: 500px) {
   .diary span {
@@ -182,5 +190,8 @@ button.active__date {
   }
   .diary span {
     font-size: 1.25rem;
+  }
+  .diary__error {
+    font-size: 2rem;
   }
 }

@@ -10,6 +10,7 @@ const Diary = () => {
   const [goals, setGoals] = useState(null);
   const [theDate, setDate] = useState(new Date().toDateString());
   const [user, setUser] = useState("60fd1eceef841b3e8820c66f");
+  const [error, setError] = useState(null);
 
   const url = "http://localhost:5000/api";
 
@@ -17,19 +18,29 @@ const Diary = () => {
     fetch(`${url}/goals/${user}`)
       .then((result) => result.json())
       .then((json) => {
-        console.log(json);
         setGoals(json.goals);
       })
-      .catch((ex) => console.error(ex.message));
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
 
     const today = new Date().toDateString();
     fetch(`${url}/diary/${user}/${today}`)
       .then((result) => result.json())
       .then((json) => {
-        console.log(json);
         setDiary(json.diary);
       })
-      .catch((ex) => console.error(ex.message));
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
   }, []);
 
   const handleArrowClick = (e) => {
@@ -41,32 +52,39 @@ const Diary = () => {
       selectedDate.setDate(selectedDate.getDate() + 1);
       setDate(selectedDate.toDateString());
     }
-    console.log(selectedDate.toDateString());
     fetch(`${url}/diary/${user}/${selectedDate.toDateString()}`)
       .then((result) => result.json())
       .then((json) => {
-        console.log(json);
         setDiary(json.diary);
       })
-      .catch((ex) => console.error(ex.message));
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
   };
 
   const handleDayClick = (value, event) => {
     setCalendarOpen(false);
     setDate(value.toDateString());
-    console.log(value.toDateString());
 
     fetch(`${url}/diary/${user}/${value.toDateString()}`)
       .then((result) => result.json())
       .then((json) => {
-        console.log(json);
         setDiary(json.diary);
       })
-      .catch((ex) => console.error(ex.message));
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        } else {
+          setError(ex.message);
+        }
+      });
   };
 
   const handleDelete = (id, meal) => {
-    console.log(diary[meal]);
     fetch(`${url}/diary/${user}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -74,11 +92,14 @@ const Diary = () => {
     })
       .then((result) => result.json())
       .then((json) => {
-        console.log(json);
         const newMealDiary = diary[meal].filter((entry) => entry._id !== id);
         setDiary((prev) => ({ ...prev, [meal]: newMealDiary }));
       })
-      .catch((ex) => console.error(ex.message));
+      .catch((ex) => {
+        if (ex.message === "Failed to fetch") {
+          setError("Connection lost. Could not perform operation.");
+        }
+      });
   };
 
   const findSum = (arr, macro) => {
@@ -111,6 +132,7 @@ const Diary = () => {
         consuming. Make it a habit to track your calories and reach your long
         term goals.
       </p>
+      {error ? <p className="diary__error">{error}</p> : null}
       <div className="diary__header">
         <div className="diary__header__calendar__icon">
           <i
