@@ -9,11 +9,12 @@ const Diary = () => {
   const [diary, setDiary] = useState(null);
   const [goals, setGoals] = useState(null);
   const [theDate, setDate] = useState(new Date().toDateString());
+  const [user, setUser] = useState("60fd1eceef841b3e8820c66f");
 
   const url = "http://localhost:5000/api";
 
   useEffect(() => {
-    fetch(`${url}/goals/60fd1eceef841b3e8820c66f`)
+    fetch(`${url}/goals/${user}`)
       .then((result) => result.json())
       .then((json) => {
         console.log(json);
@@ -22,7 +23,7 @@ const Diary = () => {
       .catch((ex) => console.error(ex.message));
 
     const today = new Date().toDateString();
-    fetch(`${url}/diary/60fd1eceef841b3e8820c66f/${today}`)
+    fetch(`${url}/diary/${user}/${today}`)
       .then((result) => result.json())
       .then((json) => {
         console.log(json);
@@ -41,9 +42,7 @@ const Diary = () => {
       setDate(selectedDate.toDateString());
     }
     console.log(selectedDate.toDateString());
-    fetch(
-      `${url}/diary/60fd1eceef841b3e8820c66f/${selectedDate.toDateString()}`
-    )
+    fetch(`${url}/diary/${user}/${selectedDate.toDateString()}`)
       .then((result) => result.json())
       .then((json) => {
         console.log(json);
@@ -57,11 +56,31 @@ const Diary = () => {
     setDate(value.toDateString());
     console.log(value.toDateString());
 
-    fetch(`${url}/diary/60fd1eceef841b3e8820c66f/${value.toDateString()}`)
+    fetch(`${url}/diary/${user}/${value.toDateString()}`)
       .then((result) => result.json())
       .then((json) => {
         console.log(json);
         setDiary(json.diary);
+      })
+      .catch((ex) => console.error(ex.message));
+  };
+
+  const handleDelete = (id, meal) => {
+    console.log({ foodID: id, meal: meal });
+    console.log(diary[meal]);
+    fetch(`${url}/diary/${user}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ meal: meal, date: theDate }),
+    })
+      .then((result) => result.json())
+      .then((json) => {
+        console.log(json);
+        let oldDiary = diary;
+        const newMealDiary = diary[meal].filter((entry) => entry._id !== id);
+        oldDiary[meal] = newMealDiary;
+        setDiary(oldDiary);
+        console.log(newMealDiary);
       })
       .catch((ex) => console.error(ex.message));
   };
@@ -154,7 +173,10 @@ const Diary = () => {
                         <td>{entry.carbs}</td>
                         <td>{entry.protein}</td>
                         <td>{entry.fat}</td>
-                        <td className="empty__col">
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "breakfast")}
+                        >
                           <i className="fas fa-minus"></i>
                         </td>
                       </tr>
@@ -208,7 +230,10 @@ const Diary = () => {
                         <td>{entry.carbs}</td>
                         <td>{entry.protein}</td>
                         <td>{entry.fat}</td>
-                        <td className="empty__col">
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "lunch")}
+                        >
                           <i className="fas fa-minus"></i>
                         </td>
                       </tr>
@@ -262,7 +287,10 @@ const Diary = () => {
                         <td>{entry.carbs}</td>
                         <td>{entry.protein}</td>
                         <td>{entry.fat}</td>
-                        <td className="empty__col">
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "dinner")}
+                        >
                           <i className="fas fa-minus"></i>
                         </td>
                       </tr>
@@ -316,7 +344,10 @@ const Diary = () => {
                         <td>{entry.carbs}</td>
                         <td>{entry.protein}</td>
                         <td>{entry.fat}</td>
-                        <td className="empty__col">
+                        <td
+                          className="empty__col"
+                          onClick={() => handleDelete(entry._id, "snack")}
+                        >
                           <i className="fas fa-minus"></i>
                         </td>
                       </tr>
