@@ -1,16 +1,16 @@
 const fetch = require("node-fetch");
+const HttpError = require("../models/HttpError");
 require("dotenv").config();
 
 async function foodSearch(foodString) {
-  const food_search_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${process.env.API_KEY}&query=${foodString}&dataType=Foundation,Survey%20%28FNDDS%29&pageSize=25&sortBy=dataType.keyword&sortOrder=asc`;
+  const food_search_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${process.env.API_KEY}&query=${foodString}&dataType=Foundation,Survey%20%28FNDDS%29&pageSize=10&sortBy=dataType.keyword&sortOrder=asc`;
   let list;
   try {
     const res = await fetch(food_search_url);
     list = await res.json();
-    console.log(list);
     return list;
   } catch (err) {
-    console.error(err);
+    return next(new HttpError(err.message, 500));
   }
 }
 
@@ -20,12 +20,11 @@ async function foodData(foodId) {
   try {
     const res = await fetch(food_data_url);
     nutrients = await res.json();
-    console.log(nutrients);
     return nutrients;
   } catch (err) {
-    console.error(err);
+    return next(new HttpError(err.message, 500));
   }
-  return nutrients;
 }
 
-console.log(foodSearch("steak"));
+module.exports.foodSearch = foodSearch;
+module.exports.foodData = foodData;

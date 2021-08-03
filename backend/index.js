@@ -8,6 +8,7 @@ const posts = require("./routes/posts");
 const tdee = require("./routes/tdee");
 const diary = require("./routes/diary");
 const picture = require("./routes/picture");
+const food = require("./routes/food");
 require("dotenv").config();
 
 mongoose
@@ -43,6 +44,7 @@ app.use("/api/posts", posts);
 app.use("/api/tdee", tdee);
 app.use("/api/diary", diary);
 app.use("/api/upload", picture);
+app.use("/api/food", food);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route", 404);

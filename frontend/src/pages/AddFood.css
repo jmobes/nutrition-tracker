@@ -57,6 +57,7 @@
 .add__matching__food__description {
   color: rgb(68, 68, 68);
   font-size: 1.3rem;
+  font-weight: 700;
 }
 .add__selected {
   background-color: rgb(246, 246, 246);
