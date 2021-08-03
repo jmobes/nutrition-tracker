@@ -28,4 +28,5 @@ async function foodData(foodId) {
   return nutrients;
 }
 
-console.log(foodSearch("steak"));
+module.exports.foodSearch = foodSearch;
+module.exports.foodData = foodData;
