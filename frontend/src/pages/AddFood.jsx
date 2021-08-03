@@ -26,7 +26,7 @@ const AddFood = () => {
       .then((result) => result.json())
       .then((list) => {
         console.log(list);
-        setFoodList(list);
+        setFoodList(list.foods.foods);
       })
       .catch((ex) => {
         console.error(ex.message);
@@ -44,7 +44,26 @@ const AddFood = () => {
         </label>
         <button onClick={handleSubmit}>Search</button>
       </div>
-      <div className="add__matching">
+      {foodList ? (
+        <div className="add__matching">
+          <h4 className="add__matching__title">Matching Foods:</h4>
+          <div className="add__matching__foods">
+            {foodList.map((food) => {
+              return (
+                <div className="add__matching__food">
+                  <h5 className="add__matching__food__name">
+                    {food.description}
+                  </h5>
+                  <p className="add__matching__food__description">
+                    {`100g, ${food.foodNutrients[0].nutrientNumber} calories`}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+      {/* <div className="add__matching">
         <h4 className="add__matching__title">Matching Foods:</h4>
         <div className="add__matching__foods">
           <div className="add__matching__food">
@@ -78,7 +97,7 @@ const AddFood = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="add__selected">
         <h4 className="add__selected__name">Sirloin Steak</h4>
         <div className="add__serving__size">
