@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const HttpError = require("../models/HttpError");
 require("dotenv").config();
 
 async function foodSearch(foodString) {
@@ -7,10 +8,9 @@ async function foodSearch(foodString) {
   try {
     const res = await fetch(food_search_url);
     list = await res.json();
-    console.log(list);
     return list;
   } catch (err) {
-    console.error(err);
+    return next(new HttpError(err.message, 500));
   }
 }
 
@@ -23,9 +23,8 @@ async function foodData(foodId) {
     console.log(nutrients);
     return nutrients;
   } catch (err) {
-    console.error(err);
+    return next(new HttpError(err.message, 500));
   }
-  return nutrients;
 }
 
 module.exports.foodSearch = foodSearch;

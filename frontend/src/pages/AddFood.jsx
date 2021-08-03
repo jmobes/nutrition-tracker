@@ -1,15 +1,48 @@
+import { useState, useEffect } from "react";
 import "./AddFood.css";
 
 const AddFood = () => {
+  const [search, setSearch] = useState("");
+  const [foodList, setFoodList] = useState(null);
+  const [error, setError] = useState(null);
+
+  const url = "http://localhost:5000/api/food";
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!search) {
+      setError("Please type in a food");
+      return;
+    }
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ food: search }),
+    })
+      .then((result) => result.json())
+      .then((list) => {
+        console.log(list);
+        setFoodList(list);
+      })
+      .catch((ex) => {
+        console.error(ex.message);
+        setError(ex.message);
+      });
+  };
+
   return (
     <section className="add">
       <h3 className="add__title">Add Food To Diary</h3>
       <div className="add__input">
         <strong>Search food by name</strong>
         <label>
-          <input type="text" />
+          <input type="text" onChange={handleChange} value={search} />
         </label>
-        <button>Search</button>
+        <button onClick={handleSubmit}>Search</button>
       </div>
       <div className="add__matching">
         <h4 className="add__matching__title">Matching Foods:</h4>
