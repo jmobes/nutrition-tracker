@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { searchFood } = require("../controllers/food");
+const { getFoods } = require("../controllers/food");
 
-router.get("/:foodString", searchFood);
+router.get("/", getFoods);
 
 module.exports = router;

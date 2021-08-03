@@ -2,29 +2,25 @@ const { User } = require("../models/user");
 const HttpError = require("../models/HttpError");
 const Joi = require("joi");
 const mongoose = require("mongoose");
-const { foodSearch, foodData } = require("../api/getData");
+const { foodSearch } = require("../api/getData");
 
-const searchFood = () => async (req, res, next) => {
-  const food = req.params.foodString;
-  const { error } = validateFood(food);
+const getFoods = async (req, res, next) => {
+  const { error } = validateSearch(req.body);
+  console.log(req.body);
   if (error) {
     return next(new HttpError(error.details[0].message, 400));
   }
-
-  try {
-    let foods = await foodSearch(food);
-    res.status(200).json({ status: "success", foods: foods });
-  } catch (ex) {
-    return next(new HttpError(ex.message || "Internal server error.", 500));
-  }
+  const food = req.body.food;
+  let results = await foodSearch(food);
+  res.status(200).json({ status: "success", foods: results });
 };
 
-function validateFood(food) {
+function validateSearch(foodString) {
   let schema = Joi.object({
     food: Joi.string().required(),
   });
 
-  return schema.validate(food);
+  return schema.validate(foodString);
 }
 
-module.exports.searchFood = searchFood;
+module.exports.getFoods = getFoods;
