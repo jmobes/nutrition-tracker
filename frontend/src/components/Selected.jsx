@@ -1,12 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Selected = (props) => {
   const [servings, setServings] = useState("1");
   const [meal, setMeal] = useState("breakfast");
+  const [macros, setMacros] = useState(null);
 
   const selected = props.selected;
+  const findMacros = () => {
+    let macrosArray = selected.foodNutrients;
+    let macrosObject = {};
+    macrosArray.forEach((macro) => {
+      console.log(macro);
+      if (macro.name.toLowerCase() === "energy") {
+        macrosObject.calories = Math.round(macro.amount);
+      } else if (macro.name.toLowerCase() === "carbohydrate, by difference") {
+        macrosObject.carbs = Math.round(macro.amount);
+      } else if (macro.name.toLowerCase() === "protein") {
+        macrosObject.protein = Math.round(macro.amount);
+      } else {
+        macrosObject.fat = Math.round(macro.amount);
+      }
+    });
+    setMacros(macrosObject);
+  };
 
-  return (
+  useEffect(() => {
+    findMacros();
+  }, [selected]);
+
+  return macros ? (
     <div className="add__selected">
       <h4 className="add__selected__name">{selected.description}</h4>
       <div className="add__serving__size">
@@ -16,19 +38,19 @@ const Selected = (props) => {
       <div className="add__selected__macros">
         <div className="add__selected__macro">
           <strong>Calories</strong>
-          <p>{`${Math.round(selected.foodNutrients[2].amount)} calories`}</p>
+          <p>{`${macros.calories} calories`}</p>
         </div>
         <div className="add__selected__macro">
           <strong>Carbs</strong>
-          <p>{`${Math.round(selected.foodNutrients[3].amount)}g`}</p>
+          <p>{`${macros.carbs}g`}</p>
         </div>
         <div className="add__selected__macro">
           <strong>Protein</strong>
-          <p>{`${Math.round(selected.foodNutrients[0].amount)}g`}</p>
+          <p>{`${macros.protein}g`}</p>
         </div>
         <div className="add__selected__macro">
           <strong>Fat</strong>
-          <p>{`${Math.round(selected.foodNutrients[1].amount)}g`}</p>
+          <p>{`${macros.fat}g`}</p>
         </div>
       </div>
       <form className="add__selected__form">
@@ -55,7 +77,7 @@ const Selected = (props) => {
         <button>Add To Diary</button>
       </form>
     </div>
-  );
+  ) : null;
 };
 
 export default Selected;
