@@ -5,6 +5,9 @@ const AddFood = () => {
   const [search, setSearch] = useState("");
   const [foodList, setFoodList] = useState(null);
   const [error, setError] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [servings, setServings] = useState("1");
+  const [meal, setMeal] = useState("breakfast");
 
   const url = "http://localhost:5000/api/food";
 
@@ -34,6 +37,19 @@ const AddFood = () => {
       });
   };
 
+  const handleClick = (foodId) => {
+    fetch(`${url}/${foodId}`)
+      .then((result) => result.json())
+      .then((info) => {
+        console.log(info);
+        setSelected(info.foodInfo);
+      })
+      .catch((ex) => {
+        console.error(ex.message);
+        setError(ex.message);
+      });
+  };
+
   return (
     <section className="add">
       <h3 className="add__title">Add Food To Diary</h3>
@@ -50,12 +66,18 @@ const AddFood = () => {
           <div className="add__matching__foods">
             {foodList.map((food) => {
               return (
-                <div className="add__matching__food">
+                <div
+                  key={food.fdcId}
+                  className="add__matching__food"
+                  onClick={() => handleClick(food.fdcId)}
+                >
                   <h5 className="add__matching__food__name">
                     {food.description}
                   </h5>
                   <p className="add__matching__food__description">
-                    {`100g, ${food.foodNutrients[0].nutrientNumber} calories`}
+                    {`100g, ${Math.round(
+                      food.foodNutrients[0].value
+                    )} calories`}
                   </p>
                 </div>
               );
@@ -63,42 +85,59 @@ const AddFood = () => {
           </div>
         </div>
       ) : null}
-      {/* <div className="add__matching">
-        <h4 className="add__matching__title">Matching Foods:</h4>
-        <div className="add__matching__foods">
-          <div className="add__matching__food">
-            <h5 className="add__matching__food__name">Steak</h5>
-            <p className="add__matching__food__description">
-              Deer Steak, 100g, 170 calories
-            </p>
+      {selected ? (
+        <div className="add__selected">
+          <h4 className="add__selected__name">{selected.description}</h4>
+          <div className="add__serving__size">
+            <strong>Serving Size: </strong>
+            <span>100g</span>
           </div>
-          <div className="add__matching__food">
-            <h5 className="add__matching__food__name">Steak</h5>
-            <p className="add__matching__food__description">
-              Elk Steak, 100g, 190 calories
-            </p>
+          <div className="add__selected__macros">
+            <div className="add__selected__macro">
+              <strong>Calories</strong>
+              <p>{`${Math.round(
+                selected.foodNutrients[3].amount
+              )} calories`}</p>
+            </div>
+            <div className="add__selected__macro">
+              <strong>Carbs</strong>
+              <p>{`${Math.round(selected.foodNutrients[2].amount)}g`}</p>
+            </div>
+            <div className="add__selected__macro">
+              <strong>Protein</strong>
+              <p>{`${Math.round(selected.foodNutrients[0].amount)}g`}</p>
+            </div>
+            <div className="add__selected__macro">
+              <strong>Fat</strong>
+              <p>{`${Math.round(selected.foodNutrients[1].amount)}g`}</p>
+            </div>
           </div>
-          <div className="add__matching__food">
-            <h5 className="add__matching__food__name">Steak</h5>
-            <p className="add__matching__food__description">
-              Ribeye Steak, 100g, 100 calories
-            </p>
-          </div>
-          <div className="add__matching__food">
-            <h5 className="add__matching__food__name">Steak</h5>
-            <p className="add__matching__food__description">
-              T-Bone Steak, 100g, 300 calories
-            </p>
-          </div>
-          <div className="add__matching__food">
-            <h5 className="add__matching__food__name">Steak</h5>
-            <p className="add__matching__food__description">
-              Sirloin Steak, 100g, 250 calories
-            </p>
-          </div>
+          <form className="add__selected__form">
+            <div className="add__selected__form__servings">
+              <strong>How many servings?</strong>
+              <label>
+                <input
+                  name="servings"
+                  type="number"
+                  value={servings}
+                  onChange={(e) => setServings(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="add__selected__form__meal">
+              <strong>To which meal?</strong>
+              <select name="meal" value={meal} onChange={(e) => e.target.value}>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snack">Snack</option>
+              </select>
+            </div>
+            <button>Add To Diary</button>
+          </form>
         </div>
-      </div> */}
-      <div className="add__selected">
+      ) : null}
+      {/* <div className="add__selected">
         <h4 className="add__selected__name">Sirloin Steak</h4>
         <div className="add__serving__size">
           <strong>Serving Size: </strong>
@@ -142,7 +181,7 @@ const AddFood = () => {
           </div>
           <button>Add To Diary</button>
         </form>
-      </div>
+      </div> */}
     </section>
   );
 };
